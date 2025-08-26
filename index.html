@@ -317,30 +317,46 @@
     </div>
 
     <script>
-        // Automatically detect PDFs by trying common names
+        // Get list of PDFs from a JSON file or detect them
         async function loadPapers() {
             const paperList = document.getElementById('paperList');
-            const commonPapers = ['wanderings', 'abstractions', 'thoughts', 'musings', 'reflections', 'essays', 'notes', 'writings'];
-            const foundPapers = [];
+            let foundPapers = [];
             
-            // Check each potential paper
-            for (const paper of commonPapers) {
-                try {
-                    const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, { 
-                        method: 'HEAD',
-                        cache: 'no-store'
-                    });
-                    if (response.ok) {
-                        foundPapers.push(paper);
-                    }
-                } catch (error) {
-                    // PDF doesn't exist, skip
+            // Try to load a papers list file first
+            try {
+                const response = await fetch('./pdfs/papers.json', { cache: 'no-store' });
+                if (response.ok) {
+                    const papersData = await response.json();
+                    foundPapers = papersData.papers || [];
                 }
-            }
-            
-            // If no common names found, fall back to known papers
-            if (foundPapers.length === 0) {
-                foundPapers.push('wanderings');
+            } catch (error) {
+                // Fall back to checking common names + some extras
+                const commonPapers = [
+                    'wanderings', 'abstractions', 'thoughts', 'musings', 'reflections', 
+                    'essays', 'notes', 'writings', 'paper', 'document', 'thesis', 
+                    'dissertation', 'research', 'study', 'analysis', 'report',
+                    'draft', 'manuscript', 'article', 'piece', 'work'
+                ];
+                
+                // Check each potential paper
+                for (const paper of commonPapers) {
+                    try {
+                        const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, { 
+                            method: 'HEAD',
+                            cache: 'no-store'
+                        });
+                        if (response.ok) {
+                            foundPapers.push(paper);
+                        }
+                    } catch (error) {
+                        // PDF doesn't exist, skip
+                    }
+                }
+                
+                // If still no papers found, fall back to known papers
+                if (foundPapers.length === 0) {
+                    foundPapers.push('wanderings');
+                }
             }
             
             foundPapers.forEach((paper, index) => {
@@ -349,9 +365,20 @@
                 listItem.style.animationDelay = `${index * 0.15}s`;
                 
                 const link = document.createElement('a');
-                link.href = `./pdfs/${paper}.pdf?v=${Date.now()}`;
+                
+                // Handle both object format {filename, displayName} and string format
+                let filename, displayName;
+                if (typeof paper === 'object' && paper.filename) {
+                    filename = paper.filename;
+                    displayName = paper.displayName || filename;
+                } else {
+                    filename = paper;
+                    displayName = filename;
+                }
+                
+                link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
                 link.className = 'paper-link';
-                link.textContent = paper;
+                link.textContent = displayName;
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
                 
