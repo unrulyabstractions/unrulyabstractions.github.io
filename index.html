@@ -210,30 +210,101 @@
 
 
         @media (max-width: 768px) {
+            html, body {
+                height: auto;
+                min-height: 100vh;
+                overflow: auto;
+            }
+            
             .container {
-                padding: 2rem;
-                grid-template-areas: 
-                    "papers"
-                    "."
-                    "title"
-                    "."
-                    "links";
-                grid-template-rows: auto 1fr auto 1fr auto;
-                grid-template-columns: 1fr;
-                gap: 2rem;
+                padding: 1.5rem;
+                height: auto;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 3rem;
+            }
+
+            .papers-section {
+                order: 1;
+                align-self: stretch;
+            }
+
+            .title-section {
+                order: 2;
+                align-self: center;
+                text-align: center;
             }
 
             .links-section {
-                justify-self: start;
+                order: 3;
+                align-self: stretch;
+                justify-self: stretch;
+            }
+
+            .paper-list {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+                max-width: none;
+            }
+
+            .paper-link {
+                font-size: 1.1rem;
+                padding: 0.75rem 0;
+                display: block;
+                text-align: left;
             }
 
             .external-links {
                 flex-direction: row;
-                gap: 3rem;
+                justify-content: center;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+
+            .external-link {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.9rem;
+                white-space: nowrap;
             }
 
             .main-title {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
+                letter-spacing: 2px;
+                line-height: 1.2;
+            }
+
+            .section-title {
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem;
+                letter-spacing: 1.5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+                gap: 2.5rem;
+            }
+
+            .main-title {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            .external-links {
+                gap: 1rem;
+            }
+
+            .external-link {
+                font-size: 0.85rem;
+                padding: 0.35rem 0.7rem;
+            }
+
+            .paper-link {
+                font-size: 1rem;
             }
         }
     </style>
