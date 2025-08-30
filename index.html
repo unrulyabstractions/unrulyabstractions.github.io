@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
@@ -20,6 +21,7 @@
             scroll-behavior: smooth;
         }
         
+        /* Full-screen layout with pink background */
         html, body {
             height: 100vh;
             width: 100vw;
@@ -29,6 +31,7 @@
             color: rgba(255, 255, 255, 0.95);
         }
 
+        /* Main grid container for desktop layout */
         .container {
             position: relative;
             height: 100vh;
@@ -43,6 +46,7 @@
             grid-template-columns: 1fr 1fr 1fr;
         }
 
+        /* Papers section - top left */
         .papers-section {
             grid-area: papers;
             align-self: start;
@@ -51,6 +55,7 @@
             animation: slideInFade 0.8s ease-out forwards;
         }
 
+        /* Main title - bottom left */
         .title-section {
             grid-area: title;
             align-self: end;
@@ -59,6 +64,7 @@
             animation: slideInFade 1.2s ease-out 0.8s forwards;
         }
 
+        /* External links - bottom right */
         .links-section {
             grid-area: links;
             align-self: end;
@@ -68,6 +74,7 @@
             animation: slideInFade 0.8s ease-out 1.2s forwards;
         }
 
+        /* Section headers styling */
         .section-title {
             font-size: 0.85rem;
             font-weight: 600;
@@ -80,6 +87,7 @@
             width: fit-content;
         }
 
+        /* Papers grid layout */
         .paper-list {
             list-style: none;
             display: grid;
@@ -92,27 +100,31 @@
             opacity: 1;
         }
 
+        /* Individual paper link styling */
         .paper-link {
             color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
             font-size: 1.15rem;
             font-weight: 400;
-            transition: color 0.1s ease;
+            transition: all 0.2s ease;
             display: inline-block;
-            padding: 0.5rem 0;
+            padding: 0.75rem 0;
             cursor: pointer;
+            border-radius: 4px;
         }
 
         .paper-link:hover {
             color: rgba(255, 255, 255, 1);
+            transform: translateX(4px);
         }
 
-        
         .paper-link:focus {
-            outline: 1px solid rgba(255, 255, 255, 0.6);
-            outline-offset: 2px;
+            outline: 2px solid rgba(255, 255, 255, 0.7);
+            outline-offset: 3px;
+            color: rgba(255, 255, 255, 1);
         }
 
+        /* Main site title with floating animation */
         .main-title {
             font-size: 3.2rem;
             font-weight: 600;
@@ -121,6 +133,7 @@
             animation: float 6s ease-in-out 2s infinite;
         }
 
+        /* External links container */
         .external-links {
             display: flex;
             gap: 2rem;
@@ -128,6 +141,7 @@
             align-items: flex-end;
         }
 
+        /* Individual external link styling with pill design */
         .external-link {
             color: rgba(255, 255, 255, 0.75);
             text-decoration: none;
@@ -152,10 +166,10 @@
 
         .external-link:hover {
             color: rgba(255, 255, 255, 1);
-            transform: translateX(0) translateY(-3px) scale(1.05);
-            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px) scale(1.03);
+            background: rgba(255, 255, 255, 0.12);
             border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
         }
 
         .external-link::after {
@@ -176,10 +190,13 @@
         }
         
         .external-link:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.6);
-            outline-offset: 4px;
+            outline: 2px solid rgba(255, 255, 255, 0.7);
+            outline-offset: 3px;
+            color: rgba(255, 255, 255, 1);
+            background: rgba(255, 255, 255, 0.1);
         }
 
+        /* Subtle gradient overlay for visual depth */
         /* Simplified background */
         body::before {
             content: '';
@@ -192,6 +209,7 @@
             pointer-events: none;
         }
 
+        /* Animation keyframes */
         @keyframes slideInFade {
             to {
                 transform: translateX(0) translateY(0);
@@ -209,6 +227,7 @@
         }
 
 
+        /* Mobile layout - switches from grid to flexbox */
         @media (max-width: 768px) {
             html, body {
                 height: auto;
@@ -233,8 +252,9 @@
 
             .title-section {
                 order: 2;
-                align-self: center;
+                align-self: flex-end;
                 text-align: center;
+                margin-bottom: 1rem;
             }
 
             .links-section {
@@ -251,7 +271,7 @@
 
             .paper-link {
                 font-size: 1.1rem;
-                padding: 0.75rem 0;
+                padding: 1rem 0;
                 display: block;
                 text-align: left;
             }
@@ -283,6 +303,7 @@
             }
         }
 
+        /* Small mobile adjustments */
         @media (max-width: 480px) {
             .container {
                 padding: 1rem;
@@ -333,12 +354,15 @@
     </div>
 
     <script>
-        // Get list of PDFs from a JSON file or detect them
+        /**
+         * Loads papers from JSON file or falls back to checking common names
+         * Creates clickable links in the papers section
+         */
         async function loadPapers() {
             const paperList = document.getElementById('paperList');
             let foundPapers = [];
             
-            // Try to load a papers list file first
+            // First attempt: load papers from JSON configuration file
             try {
                 const response = await fetch('./pdfs/papers.json');
                 if (response.ok) {
@@ -346,15 +370,7 @@
                     foundPapers = papersData.papers || [];
                 }
             } catch (error) {
-                // Fall back to checking common names + some extras
-                const commonPapers = [
-                    'wanderings', 'abstractions', 'thoughts', 'musings', 'reflections', 
-                    'essays', 'notes', 'writings', 'paper', 'document', 'thesis', 
-                    'dissertation', 'research', 'study', 'analysis', 'report',
-                    'draft', 'manuscript', 'article', 'piece', 'work'
-                ];
-                
-                // Only check a few common papers to avoid too many requests
+                // Fallback: check for priority papers if JSON fails
                 const priorityPapers = ['wanderings', 'abstractions', 'thoughts', 'essays'];
                 
                 for (const paper of priorityPapers) {
@@ -366,23 +382,24 @@
                             foundPapers.push(paper);
                         }
                     } catch (error) {
-                        // PDF doesn't exist, skip
+                        // PDF doesn't exist, continue to next
                     }
                 }
                 
-                // If still no papers found, fall back to known papers
+                // Final fallback: ensure at least one paper is displayed
                 if (foundPapers.length === 0) {
                     foundPapers.push('wanderings');
                 }
             }
             
+            // Generate HTML elements for each found paper
             foundPapers.forEach((paper, index) => {
                 const listItem = document.createElement('li');
                 listItem.className = 'paper-item';
                 
                 const link = document.createElement('a');
                 
-                // Handle both object format {filename, displayName} and string format
+                // Support both string format and object format with custom display names
                 let filename, displayName;
                 if (typeof paper === 'object' && paper.filename) {
                     filename = paper.filename;
@@ -403,7 +420,7 @@
             });
         }
 
-        // Load papers when page loads
+        // Initialize papers loading when DOM is ready
         document.addEventListener('DOMContentLoaded', loadPapers);
     </script>
 </body>

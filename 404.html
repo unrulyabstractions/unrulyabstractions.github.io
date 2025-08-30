@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found - Unruly Abstractions</title>
+    <script>
+        // Handle redirects for 404 pages
+        (function() {
+            const path = window.location.pathname;
+            
+            // Check if it's a PDF request to /pdf/ or /papers/ - redirect to /pdfs/
+            if (path.match(/^\/(pdf|papers)\/(.+\.pdf)$/)) {
+                const filename = path.match(/^\/(pdf|papers)\/(.+)$/)[2];
+                setTimeout(() => window.location.replace('/pdfs/' + filename), 100);
+                return;
+            }
+            
+            // All other 404s (including non-existent PDFs in /pdfs/) redirect to home
+            setTimeout(() => window.location.replace('/'), 100);
+        })();
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
