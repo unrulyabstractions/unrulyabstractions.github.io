@@ -375,7 +375,7 @@
                 
                 for (const paper of priorityPapers) {
                     try {
-                        const response = await fetch(`./pdfs/${paper}.pdf`, { 
+                        const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, { 
                             method: 'HEAD'
                         });
                         if (response.ok) {
@@ -409,7 +409,7 @@
                     displayName = filename;
                 }
                 
-                link.href = `./pdfs/${filename}.pdf`;
+                link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
                 link.className = 'paper-link';
                 link.textContent = displayName;
                 link.target = '_blank';
