@@ -3,6 +3,10 @@
     {
       "filename": "wanderings",
       "displayName": "Category-Theoretic Wanderings into Interpretability"
+    },
+    {
+      "filename": "xenorepod",
+      "displayName": "Xenoreproduction: New AI Safety objective"
     }
   ]
 }
