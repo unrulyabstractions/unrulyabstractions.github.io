@@ -2,11 +2,21 @@
   "papers": [
     {
       "filename": "wanderings",
-      "displayName": "Category-Theoretic Wanderings into Interpretability"
+      "displayName": "Category-Theoretic Wanderings into Interpretability",
+      "category": "technical autotheory"
     },
     {
       "filename": "xenoreprod",
-      "displayName": "Xenoreproduction: New AI Safety Objective"
+      "displayName": "Xenoreproduction: New AI Safety Objective",
+      "category": "theoretical"
     }
+  ],
+
+  "labNotes": [
+    {
+      "url": "https://unruly-intimacies.notion.site/identifiability-toy-study-27a9b6affeb480488078d78bc8447082",
+      "displayName": "Identifiability Toy Study",
+      "category": "empirical"
+    },
   ]
 }

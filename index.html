@@ -25,7 +25,7 @@
         html, body {
             height: 100vh;
             width: 100vw;
-            background-color: #C85D76;
+            background-color: rgba(200, 93, 118, 0.85);
             overflow: hidden;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: rgba(255, 255, 255, 0.95);
@@ -121,6 +121,43 @@
         .paper-link:focus {
             outline: 2px solid rgba(255, 255, 255, 0.7);
             outline-offset: 3px;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        /* Category header styling */
+        .category-header {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-header:first-child {
+            margin-top: 0;
+        }
+
+        .category-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Lab notes styling */
+        .lab-note-item {
+            opacity: 0.9;
+        }
+
+        .lab-note-link {
+            font-style: italic;
+            opacity: 0.85;
+        }
+
+        .lab-note-link:hover {
+            opacity: 1;
             color: rgba(255, 255, 255, 1);
         }
 
@@ -355,27 +392,29 @@
 
     <script>
         /**
-         * Loads papers from JSON file or falls back to checking common names
+         * Loads papers and lab notes from JSON file, organizing by category
          * Creates clickable links in the papers section
          */
         async function loadPapers() {
             const paperList = document.getElementById('paperList');
             let foundPapers = [];
-            
+            let labNotes = [];
+
             // First attempt: load papers from JSON configuration file
             try {
                 const response = await fetch('./pdfs/papers.json');
                 if (response.ok) {
                     const papersData = await response.json();
                     foundPapers = papersData.papers || [];
+                    labNotes = papersData.labNotes || [];
                 }
             } catch (error) {
                 // Fallback: check for priority papers if JSON fails
                 const priorityPapers = ['wanderings', 'abstractions', 'thoughts', 'essays'];
-                
+
                 for (const paper of priorityPapers) {
                     try {
-                        const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, { 
+                        const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, {
                             method: 'HEAD'
                         });
                         if (response.ok) {
@@ -385,38 +424,89 @@
                         // PDF doesn't exist, continue to next
                     }
                 }
-                
+
                 // Final fallback: ensure at least one paper is displayed
                 if (foundPapers.length === 0) {
                     foundPapers.push('wanderings');
                 }
             }
-            
-            // Generate HTML elements for each found paper
-            foundPapers.forEach((paper, index) => {
-                const listItem = document.createElement('li');
-                listItem.className = 'paper-item';
-                
-                const link = document.createElement('a');
-                
-                // Support both string format and object format with custom display names
-                let filename, displayName;
-                if (typeof paper === 'object' && paper.filename) {
-                    filename = paper.filename;
-                    displayName = paper.displayName || filename;
-                } else {
-                    filename = paper;
-                    displayName = filename;
+
+            // Group papers by category
+            const papersByCategory = {};
+            foundPapers.forEach(paper => {
+                const category = (typeof paper === 'object' && paper.category) ? paper.category : 'uncategorized';
+                if (!papersByCategory[category]) {
+                    papersByCategory[category] = [];
                 }
-                
-                link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
-                link.className = 'paper-link';
-                link.textContent = displayName;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                
-                listItem.appendChild(link);
-                paperList.appendChild(listItem);
+                papersByCategory[category].push(paper);
+            });
+
+            // Group lab notes by category
+            const labNotesByCategory = {};
+            labNotes.forEach(note => {
+                const category = note.category || 'uncategorized';
+                if (!labNotesByCategory[category]) {
+                    labNotesByCategory[category] = [];
+                }
+                labNotesByCategory[category].push(note);
+            });
+
+            // Combine all categories
+            const allCategories = new Set([...Object.keys(papersByCategory), ...Object.keys(labNotesByCategory)]);
+
+            // Generate HTML elements organized by category
+            Array.from(allCategories).sort().forEach(category => {
+                // Create category header
+                const categoryHeader = document.createElement('li');
+                categoryHeader.className = 'category-header';
+                categoryHeader.innerHTML = `<div class="category-title">${category}</div>`;
+                paperList.appendChild(categoryHeader);
+
+                // Add papers in this category
+                if (papersByCategory[category]) {
+                    papersByCategory[category].forEach(paper => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'paper-item';
+
+                        const link = document.createElement('a');
+
+                        let filename, displayName;
+                        if (typeof paper === 'object' && paper.filename) {
+                            filename = paper.filename;
+                            displayName = paper.displayName || filename;
+                        } else {
+                            filename = paper;
+                            displayName = filename;
+                        }
+
+                        link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
+                        link.className = 'paper-link';
+                        link.textContent = displayName;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+
+                        listItem.appendChild(link);
+                        paperList.appendChild(listItem);
+                    });
+                }
+
+                // Add lab notes in this category
+                if (labNotesByCategory[category]) {
+                    labNotesByCategory[category].forEach(note => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'paper-item lab-note-item';
+
+                        const link = document.createElement('a');
+                        link.href = note.url;
+                        link.className = 'paper-link lab-note-link';
+                        link.textContent = note.displayName;
+                        link.target = '_blank';
+                        link.rel = 'noopener noreferrer';
+
+                        listItem.appendChild(link);
+                        paperList.appendChild(listItem);
+                    });
+                }
             });
         }
 
