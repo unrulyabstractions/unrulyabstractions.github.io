@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Papers - AI Safety & Interpretability Research | Unruly Abstractions</title>
+    <meta name="description" content="Research papers on AI safety, mechanistic interpretability, AI alignment, category theory, and technical autotheory. Exploring queer perspectives on AI safety and alignment research.">
+    <meta name="keywords" content="AI Safety Papers, Interpretability Research, Category Theory, Xenoreproduction, AI Alignment, Machine Learning Safety, Technical Autotheory, Anthropic Research, OpenAI Research">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="canonical" href="https://unrulyabstractions.com/papers.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        html, body {
+            min-height: 100vh;
+            background-color: rgba(215, 130, 110, 0.85);
+            overflow-y: auto;
+            font-family: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 30%;
+            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
+            transition: all 0.3s ease;
+            font-family: 'Roboto Mono', monospace;
+            filter: none;
+            z-index: 1;
+        }
+
+        .back-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 30%;
+            background: var(--smudge-gradient, radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%));
+            filter: blur(var(--smudge-blur, 1.5px));
+            z-index: -1;
+        }
+
+        .back-button:hover {
+            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
+            color: rgba(255, 255, 255, 0.95);
+            transform: translateX(-3px);
+        }
+
+        .back-button:focus {
+            outline: none;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            font-family: 'Roboto Mono', monospace;
+            text-align: center;
+        }
+
+        .paper-list {
+            list-style: none;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .paper-item {
+            opacity: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .paper-link {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            font-size: 1.15rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-family: 'Roboto Mono', monospace;
+            flex: 1;
+        }
+
+        .paper-link:hover {
+            color: rgba(255, 255, 255, 1);
+            transform: translateX(4px);
+        }
+
+        .paper-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+            min-width: 150px;
+        }
+
+        .category-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+            text-align: right;
+        }
+
+        .date-label {
+            font-size: 0.55rem;
+            font-weight: 400;
+            opacity: 0.5;
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+            text-align: right;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 3rem 1.5rem;
+            }
+
+            .back-button {
+                top: 1rem;
+                left: 1rem;
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .paper-item {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+
+            .paper-link {
+                font-size: 1.1rem;
+            }
+
+            .paper-meta {
+                align-items: flex-start;
+                min-width: auto;
+            }
+
+            .category-label,
+            .date-label {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-button">← home</a>
+
+    <div class="container">
+        <h1 class="page-title">papers</h1>
+        <ul class="paper-list" id="paperList">
+            <!-- Papers will be loaded dynamically -->
+        </ul>
+    </div>
+
+    <script>
+        async function loadPapers() {
+            const paperList = document.getElementById('paperList');
+            let foundPapers = [];
+
+            try {
+                const response = await fetch('./pdfs/papers.json');
+                if (response.ok) {
+                    const papersData = await response.json();
+                    foundPapers = papersData.papers || [];
+                }
+            } catch (error) {
+                foundPapers.push('wanderings');
+            }
+
+            // Sort papers by date (newest first)
+            foundPapers.sort((a, b) => {
+                const dateA = a.date ? new Date(a.date) : new Date(0);
+                const dateB = b.date ? new Date(b.date) : new Date(0);
+                return dateB - dateA;
+            });
+
+            // Render papers
+            foundPapers.forEach(paper => {
+                const listItem = document.createElement('li');
+                listItem.className = 'paper-item';
+
+                const link = document.createElement('a');
+
+                let filename, displayName, category, date;
+                if (typeof paper === 'object' && paper.filename) {
+                    filename = paper.filename;
+                    displayName = paper.displayName || filename;
+                    category = paper.category || 'uncategorized';
+                    date = paper.date;
+                } else {
+                    filename = paper;
+                    displayName = filename;
+                    category = 'uncategorized';
+                }
+
+                link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
+                link.className = 'paper-link';
+                link.textContent = displayName;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+
+                const meta = document.createElement('div');
+                meta.className = 'paper-meta';
+
+                const categoryLabel = document.createElement('div');
+                categoryLabel.className = 'category-label';
+                categoryLabel.textContent = category;
+                meta.appendChild(categoryLabel);
+
+                if (date) {
+                    const dateLabel = document.createElement('div');
+                    dateLabel.className = 'date-label';
+                    const [year, month, day] = date.split('-');
+                    const dateObj = new Date(year, month - 1, day);
+                    dateLabel.textContent = dateObj.toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    meta.appendChild(dateLabel);
+                }
+
+                listItem.appendChild(link);
+                listItem.appendChild(meta);
+                paperList.appendChild(listItem);
+            });
+        }
+
+        function randomizeButtonSmudge() {
+            const button = document.querySelector('.back-button');
+            if (button) {
+                const randomBlur = 1.2 + Math.random() * 0.8; // 1.2-2.0px blur for ::before only
+                const randomEllipseX = 110 + Math.random() * 20;
+                const randomEllipseY = 90 + Math.random() * 20;
+                const randomPosX = 40 + Math.random() * 15;
+                const randomPosY = 45 + Math.random() * 10;
+
+                button.style.setProperty('--smudge-blur', `${randomBlur}px`);
+                const gradient = `radial-gradient(ellipse ${randomEllipseX}% ${randomEllipseY}% at ${randomPosX}% ${randomPosY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
+                button.style.background = gradient;
+                button.style.setProperty('--smudge-gradient', gradient);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPapers();
+            randomizeButtonSmudge();
+        });
+    </script>
+</body>
+</html>

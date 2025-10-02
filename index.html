@@ -3,12 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Unruly Abstractions</title>
-    <meta name="description" content="Papers and writings on complex systems, philosophy, and abstract thinking">
+    <title>Unruly Abstractions - AI Safety, Interpretability & Alignment Research</title>
+    <meta name="description" content="Research on AI safety, interpretability, alignment, and category theory. Work on mechanistic interpretability, AI alignment theory, and technical autotheory. Based in SF, exploring queer perspectives on AI safety research.">
+    <meta name="keywords" content="AI Safety, AI Alignment, Interpretability, Mechanistic Interpretability, Category Theory, AI Research, Anthropic, OpenAI, Claude, ChatGPT, Technical Autotheory, Queer Tech, Trans in Tech, SF Tech, AI Engineering, Machine Learning Safety, Xenoreproduction, Identifiability">
+    <meta name="author" content="Unruly Abstractions">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    <link rel="canonical" href="https://unrulyabstractions.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         /* Reset and base styles */
         * {
@@ -27,7 +30,7 @@
             width: 100vw;
             background-color: rgba(200, 93, 118, 0.85);
             overflow: hidden;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
             color: rgba(255, 255, 255, 0.95);
         }
 
@@ -38,12 +41,12 @@
             width: 100vw;
             padding: 4rem;
             display: grid;
-            grid-template-areas: 
-                "papers . ."
-                ". center ."
+            grid-template-areas:
+                "papers notes ."
                 "title . links";
-            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: 1fr auto;
             grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
         }
 
         /* Papers section - top left */
@@ -53,6 +56,19 @@
             opacity: 0;
             transform: translateX(-20px);
             animation: slideInFade 0.8s ease-out forwards;
+            overflow-y: auto;
+            max-height: calc(100vh - 12rem);
+        }
+
+        /* Research notes section - top right */
+        .notes-section {
+            grid-area: notes;
+            align-self: start;
+            opacity: 0;
+            transform: translateX(20px);
+            animation: slideInFade 0.8s ease-out 0.2s forwards;
+            overflow-y: auto;
+            max-height: calc(100vh - 12rem);
         }
 
         /* Main title - bottom left */
@@ -79,12 +95,12 @@
             font-size: 0.85rem;
             font-weight: 600;
             opacity: 0.6;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 0.5rem;
-            width: fit-content;
+            padding-bottom: 0;
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
         }
 
         /* Papers grid layout */
@@ -93,7 +109,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem 2rem;
-            max-width: 600px;
+            max-width: 95%;
         }
 
         .paper-item {
@@ -107,10 +123,13 @@
             font-size: 1.15rem;
             font-weight: 400;
             transition: all 0.2s ease;
-            display: inline-block;
-            padding: 0.75rem 0;
+            display: block;
+            padding: 0.1rem 0;
             cursor: pointer;
             border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            word-wrap: break-word;
+            line-height: 1.3;
         }
 
         .paper-link:hover {
@@ -119,15 +138,14 @@
         }
 
         .paper-link:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.7);
-            outline-offset: 3px;
+            outline: none;
             color: rgba(255, 255, 255, 1);
         }
 
         /* Category header styling */
         .category-header {
             margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
         }
 
         .category-header:first-child {
@@ -135,65 +153,70 @@
         }
 
         .category-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            opacity: 0.7;
+            font-size: 0.65rem;
+            font-weight: 500;
+            opacity: 0.5;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: rgba(255, 255, 255, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.1rem;
+            margin-bottom: 0;
+            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
         }
 
-        /* Lab notes styling */
-        .lab-note-item {
-            opacity: 0.9;
-        }
-
-        .lab-note-link {
-            font-style: italic;
-            opacity: 0.85;
-        }
-
-        .lab-note-link:hover {
-            opacity: 1;
-            color: rgba(255, 255, 255, 1);
-        }
 
         /* Main site title with floating animation */
         .main-title {
             font-size: 3.2rem;
-            font-weight: 600;
-            letter-spacing: 3px;
+            font-weight: 400;
+            letter-spacing: 2px;
             text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
             animation: float 6s ease-in-out 2s infinite;
+            font-family: 'Roboto Mono', monospace;
         }
 
         /* External links container */
         .external-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             flex-direction: column;
             align-items: flex-end;
         }
 
-        /* Individual external link styling with pill design */
+        /* Individual external link styling with smudge design */
         .external-link {
-            color: rgba(255, 255, 255, 0.75);
+            color: rgba(255, 255, 255, 0.85);
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.4s ease;
             position: relative;
-            padding: 0.3rem 0.8rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0.4rem 0.9rem;
+            border: none;
+            border-radius: 30%;
+            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
             letter-spacing: 0.5px;
             opacity: 0;
             transform: translateX(20px);
             animation: slideInFade 0.8s ease-out forwards;
+            box-shadow: none;
+            filter: none;
+            will-change: transform, opacity;
+            z-index: 1;
+        }
+
+        .external-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 30%;
+            background: var(--smudge-gradient, radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%));
+            filter: blur(var(--smudge-blur, 1.5px));
+            z-index: -1;
         }
 
         .external-link:nth-child(1) { animation-delay: 1.4s; }
@@ -202,35 +225,15 @@
         .external-link:nth-child(4) { animation-delay: 2.0s; }
 
         .external-link:hover {
-            color: rgba(255, 255, 255, 1);
+            color: rgba(255, 255, 255, 0.95);
             transform: translateY(-2px) scale(1.03);
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.08);
+            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
         }
 
-        .external-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.8);
-            transition: width 0.4s ease;
-        }
-
-        .external-link:hover::after,
-        .external-link:focus::after {
-            width: 80%;
-        }
-        
         .external-link:focus {
-            outline: 2px solid rgba(255, 255, 255, 0.7);
-            outline-offset: 3px;
+            outline: none;
             color: rgba(255, 255, 255, 1);
-            background: rgba(255, 255, 255, 0.1);
+            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
         }
 
         /* Subtle gradient overlay for visual depth */
@@ -271,7 +274,7 @@
                 min-height: 100vh;
                 overflow: auto;
             }
-            
+
             .container {
                 padding: 1.5rem;
                 height: auto;
@@ -285,17 +288,24 @@
             .papers-section {
                 order: 1;
                 align-self: stretch;
+                max-height: none;
+            }
+
+            .notes-section {
+                order: 2;
+                align-self: stretch;
+                max-height: none;
             }
 
             .title-section {
-                order: 2;
+                order: 3;
                 align-self: flex-end;
                 text-align: center;
                 margin-bottom: 1rem;
             }
 
             .links-section {
-                order: 3;
+                order: 4;
                 align-self: stretch;
                 justify-self: stretch;
             }
@@ -370,9 +380,16 @@
 <body>
     <div class="container">
         <div class="papers-section">
-            <div class="section-title">papers</div>
+            <a href="/papers.html" class="section-title" style="text-decoration: none; cursor: pointer; display: block; color: inherit;">papers</a>
             <ul class="paper-list" id="paperList">
                 <!-- Papers will be loaded dynamically -->
+            </ul>
+        </div>
+
+        <div class="notes-section">
+            <a href="/notes.html" class="section-title" style="text-decoration: none; cursor: pointer; display: block; color: inherit;">research notes</a>
+            <ul class="paper-list" id="researchNotesList">
+                <!-- Research notes will be loaded dynamically -->
             </ul>
         </div>
 
@@ -393,43 +410,40 @@
     <script>
         /**
          * Loads papers and lab notes from JSON file, organizing by category
-         * Creates clickable links in the papers section
+         * Creates clickable links in separate sections, sorted by date (newest first)
          */
         async function loadPapers() {
             const paperList = document.getElementById('paperList');
+            const researchNotesList = document.getElementById('researchNotesList');
             let foundPapers = [];
-            let labNotes = [];
+            let notes = [];
 
-            // First attempt: load papers from JSON configuration file
+            // Load papers from JSON configuration file
             try {
-                const response = await fetch('./pdfs/papers.json');
+                const response = await fetch('./pdfs/papers.json', { cache: 'force-cache' });
                 if (response.ok) {
                     const papersData = await response.json();
                     foundPapers = papersData.papers || [];
-                    labNotes = papersData.labNotes || [];
+                    notes = papersData.notes || papersData.labNotes || [];
                 }
             } catch (error) {
-                // Fallback: check for priority papers if JSON fails
-                const priorityPapers = ['wanderings', 'abstractions', 'thoughts', 'essays'];
-
-                for (const paper of priorityPapers) {
-                    try {
-                        const response = await fetch(`./pdfs/${paper}.pdf?v=${Date.now()}`, {
-                            method: 'HEAD'
-                        });
-                        if (response.ok) {
-                            foundPapers.push(paper);
-                        }
-                    } catch (error) {
-                        // PDF doesn't exist, continue to next
-                    }
-                }
-
-                // Final fallback: ensure at least one paper is displayed
-                if (foundPapers.length === 0) {
-                    foundPapers.push('wanderings');
-                }
+                // Fallback
+                foundPapers.push('wanderings');
             }
+
+            // Sort papers by date (newest first)
+            foundPapers.sort((a, b) => {
+                const dateA = a.date ? new Date(a.date) : new Date(0);
+                const dateB = b.date ? new Date(b.date) : new Date(0);
+                return dateB - dateA;
+            });
+
+            // Sort research notes by date (newest first)
+            notes.sort((a, b) => {
+                const dateA = a.date ? new Date(a.date) : new Date(0);
+                const dateB = b.date ? new Date(b.date) : new Date(0);
+                return dateB - dateA;
+            });
 
             // Group papers by category
             const papersByCategory = {};
@@ -441,21 +455,19 @@
                 papersByCategory[category].push(paper);
             });
 
-            // Group lab notes by category
-            const labNotesByCategory = {};
-            labNotes.forEach(note => {
+            // Group research notes by category
+            const notesByCategory = {};
+            notes.forEach(note => {
                 const category = note.category || 'uncategorized';
-                if (!labNotesByCategory[category]) {
-                    labNotesByCategory[category] = [];
+                if (!notesByCategory[category]) {
+                    notesByCategory[category] = [];
                 }
-                labNotesByCategory[category].push(note);
+                notesByCategory[category].push(note);
             });
 
-            // Combine all categories
-            const allCategories = new Set([...Object.keys(papersByCategory), ...Object.keys(labNotesByCategory)]);
-
-            // Generate HTML elements organized by category
-            Array.from(allCategories).sort().forEach(category => {
+            // Render papers
+            const paperCategories = Object.keys(papersByCategory).sort();
+            paperCategories.forEach(category => {
                 // Create category header
                 const categoryHeader = document.createElement('li');
                 categoryHeader.className = 'category-header';
@@ -463,55 +475,149 @@
                 paperList.appendChild(categoryHeader);
 
                 // Add papers in this category
-                if (papersByCategory[category]) {
-                    papersByCategory[category].forEach(paper => {
-                        const listItem = document.createElement('li');
-                        listItem.className = 'paper-item';
+                papersByCategory[category].forEach(paper => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'paper-item';
 
-                        const link = document.createElement('a');
+                    const link = document.createElement('a');
 
-                        let filename, displayName;
-                        if (typeof paper === 'object' && paper.filename) {
-                            filename = paper.filename;
-                            displayName = paper.displayName || filename;
-                        } else {
-                            filename = paper;
-                            displayName = filename;
+                    let filename, displayName;
+                    if (typeof paper === 'object' && paper.filename) {
+                        filename = paper.filename;
+                        displayName = paper.displayName || filename;
+                    } else {
+                        filename = paper;
+                        displayName = filename;
+                    }
+
+                    link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
+                    link.className = 'paper-link';
+
+                    // Smart line breaking logic
+                    let finalDisplayName = displayName;
+
+                    // Rule 1: Break after colon
+                    if (finalDisplayName.includes(':')) {
+                        finalDisplayName = finalDisplayName.replace(':', ':<br>');
+                    }
+                    // Rule 2: Break when capital transitions to lowercase after 50% of estimated width
+                    else {
+                        const words = displayName.split(' ');
+                        const threshold = displayName.length * 0.5;
+
+                        for (let i = 0; i < words.length - 1; i++) {
+                            // Calculate position after adding the next word
+                            const textWithNext = words.slice(0, i + 2).join(' ');
+
+                            if (textWithNext.length > threshold) {
+                                const currentWord = words[i];
+                                const nextWord = words[i + 1];
+
+                                // Check if current word starts with capital and next starts with lowercase
+                                if (currentWord && nextWord &&
+                                    /[A-Z]/.test(currentWord.charAt(0)) &&
+                                    /[a-z]/.test(nextWord.charAt(0))) {
+                                    words[i] = words[i] + '<br>';
+                                    break;
+                                }
+                            }
                         }
+                        finalDisplayName = words.join(' ');
+                    }
 
-                        link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
-                        link.className = 'paper-link';
-                        link.textContent = displayName;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
+                    link.innerHTML = finalDisplayName;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
 
-                        listItem.appendChild(link);
-                        paperList.appendChild(listItem);
-                    });
-                }
+                    listItem.appendChild(link);
+                    paperList.appendChild(listItem);
+                });
+            });
 
-                // Add lab notes in this category
-                if (labNotesByCategory[category]) {
-                    labNotesByCategory[category].forEach(note => {
-                        const listItem = document.createElement('li');
-                        listItem.className = 'paper-item lab-note-item';
+            // Render research notes
+            const researchNoteCategories = Object.keys(notesByCategory).sort();
+            researchNoteCategories.forEach(category => {
+                // Create category header
+                const categoryHeader = document.createElement('li');
+                categoryHeader.className = 'category-header';
+                categoryHeader.innerHTML = `<div class="category-title">${category}</div>`;
+                researchNotesList.appendChild(categoryHeader);
 
-                        const link = document.createElement('a');
-                        link.href = note.url;
-                        link.className = 'paper-link lab-note-link';
-                        link.textContent = note.displayName;
-                        link.target = '_blank';
-                        link.rel = 'noopener noreferrer';
+                // Add research notes in this category
+                notesByCategory[category].forEach(note => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'paper-item';
 
-                        listItem.appendChild(link);
-                        paperList.appendChild(listItem);
-                    });
-                }
+                    const link = document.createElement('a');
+                    link.href = note.url;
+                    link.className = 'paper-link';
+
+                    // Smart line breaking logic
+                    const displayName = note.displayName || '';
+                    let finalDisplayName = displayName;
+
+                    // Rule 1: Break after colon
+                    if (finalDisplayName.includes(':')) {
+                        finalDisplayName = finalDisplayName.replace(':', ':<br>');
+                    }
+                    // Rule 2: Break when capital transitions to lowercase after 50% of estimated width
+                    else {
+                        const words = displayName.split(' ');
+                        const threshold = displayName.length * 0.5;
+
+                        for (let i = 0; i < words.length - 1; i++) {
+                            // Calculate position after adding the next word
+                            const textWithNext = words.slice(0, i + 2).join(' ');
+
+                            if (textWithNext.length > threshold) {
+                                const currentWord = words[i];
+                                const nextWord = words[i + 1];
+
+                                // Check if current word starts with capital and next starts with lowercase
+                                if (currentWord && nextWord &&
+                                    /[A-Z]/.test(currentWord.charAt(0)) &&
+                                    /[a-z]/.test(nextWord.charAt(0))) {
+                                    words[i] = words[i] + '<br>';
+                                    break;
+                                }
+                            }
+                        }
+                        finalDisplayName = words.join(' ');
+                    }
+
+                    link.innerHTML = finalDisplayName;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+
+                    listItem.appendChild(link);
+                    researchNotesList.appendChild(listItem);
+                });
+            });
+        }
+
+        // Apply random blur/smudge to buttons on load
+        function randomizeButtonSmudge() {
+            const buttons = document.querySelectorAll('.external-link');
+            buttons.forEach(button => {
+                const randomBlur = 1.2 + Math.random() * 0.8; // 1.2-2.0px blur for ::before only
+                const randomEllipseX = 110 + Math.random() * 20; // 110-130%
+                const randomEllipseY = 90 + Math.random() * 20; // 90-110%
+                const randomPosX = 40 + Math.random() * 15; // 40-55%
+                const randomPosY = 45 + Math.random() * 10; // 45-55%
+
+                // Set CSS custom properties that ::before can use
+                button.style.setProperty('--smudge-blur', `${randomBlur}px`);
+                const gradient = `radial-gradient(ellipse ${randomEllipseX}% ${randomEllipseY}% at ${randomPosX}% ${randomPosY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
+                button.style.background = gradient;
+                button.style.setProperty('--smudge-gradient', gradient);
             });
         }
 
         // Initialize papers loading when DOM is ready
-        document.addEventListener('DOMContentLoaded', loadPapers);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPapers();
+            setTimeout(randomizeButtonSmudge, 1600); // After animations complete
+        });
     </script>
 </body>
 </html>
