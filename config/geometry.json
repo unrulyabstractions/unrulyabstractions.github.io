@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "description": "Layout, color, and motion tokens for the Unruly Abstractions homepage. Adjust values here to restyle the grid without touching HTML.",
+    "updated": "2025-01-01"
+  },
+  "columns": [
+    {
+      "id": "papers",
+      "label": "papers",
+      "dataset": "papers",
+      "weight": 1.0,
+      "detailPage": "./papers.html",
+      "entry": {
+        "type": "pdf",
+        "filenameField": "filename",
+        "displayField": "displayName",
+        "categoryField": "category",
+        "dateField": "date",
+        "basePath": "./pdfs",
+        "cacheBust": true
+      }
+    },
+    {
+      "id": "notes",
+      "label": "research notes",
+      "dataset": "notes",
+      "weight": 1.0,
+      "detailPage": "./notes.html",
+      "entry": {
+        "type": "external",
+        "urlField": "url",
+        "displayField": "displayName",
+        "categoryField": "category",
+        "dateField": "date"
+      }
+    }
+  ],
+  "designTokens": {
+    "colors": {
+      "background": "rgba(200, 93, 118, 0.85)",
+      "textPrimary": "rgba(255, 255, 255, 0.95)",
+      "textAccent": "rgba(255, 250, 245, 1)",
+      "textHighlight": "rgba(255, 255, 255, 1)",
+      "textDark": "rgba(0, 0, 0, 1)",
+      "textMuted": "rgba(255, 250, 245, 0.7)",
+      "categoryBorder": "rgba(255, 255, 255, 0.2)",
+      "sectionTitleBackgroundOpacity": 0.25
+    },
+    "layout": {
+      "containerPaddingRem": 4,
+      "gridGapRem": 3,
+      "maxHeightOffsetRem": 12,
+      "maxListWidthPercent": 76,
+      "minColumnWidthPx": 160,
+      "auxColumnFr": 1
+    },
+    "typography": {
+      "siteTitle": {
+        "fontSizeRem": 3.8,
+        "fontWeight": 700,
+        "letterSpacingPx": 2.5
+      },
+      "sectionTitle": {
+        "fontSizeRem": 0.85,
+        "fontWeight": 600,
+        "letterSpacingPx": 2
+      },
+      "categoryLabel": {
+        "fontSizeRem": 0.6,
+        "fontWeight": 500,
+        "letterSpacingPx": 1.2,
+        "opacity": 0.5
+      },
+      "entryLink": {
+        "fontSizeRem": 1.05,
+        "fontWeight": 400,
+        "lineHeight": 1.4
+      },
+      "externalLink": {
+        "fontSizeRem": 0.595,
+        "fontWeight": 400,
+        "letterSpacingPx": 0.35
+      }
+    },
+    "spacing": {
+      "sectionTitlePaddingVerticalRem": 0.5,
+      "sectionTitlePaddingHorizontalRem": 1,
+      "sectionTitleMarginBottomRem": 3,
+      "categoryIndentEm": 2.5,
+      "categoryPaddingBottomRem": 0.15,
+      "categoryMarginTopRem": 2,
+      "categoryMarginBottomRem": 0.45,
+      "entryPaddingVerticalRem": 0.15,
+      "externalLinkPaddingVerticalRem": 0.28,
+      "externalLinkPaddingHorizontalRem": 0.63,
+      "externalLinkGapRem": 1
+    },
+    "motion": {
+      "slideInDurationSec": 0.8,
+      "slideInSlowDurationSec": 1.2,
+      "hoverDurationSec": 0.2,
+      "hoverSlowDurationSec": 0.4,
+      "floatDurationSec": 6,
+      "floatDelaySec": 2,
+      "columnDelayStepSec": 0.2,
+      "titleDelaySec": 0.8,
+      "linksDelaySec": 1.2
+    },
+    "hover": {
+      "linkTranslatePx": 4,
+      "externalLinkTranslateYPx": -2,
+      "externalLinkScale": 1.03,
+      "titleTranslateYPx": -8,
+      "entranceTranslatePx": 20
+    },
+    "effects": {
+      "titleShadow": "0 0 30px rgba(255, 255, 255, 0.3)",
+      "gradientOverlay": "linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%)",
+      "smudgeBase": "radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)",
+      "smudgeHover": "radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%)",
+      "smudgeBlurPx": 1.5
+    }
+  }
+}

@@ -7,617 +7,852 @@
     <meta name="description" content="Research on AI safety, interpretability, alignment, and category theory. Work on mechanistic interpretability, AI alignment theory, and technical autotheory. Based in SF, exploring queer perspectives on AI safety research.">
     <meta name="keywords" content="AI Safety, AI Alignment, Interpretability, Mechanistic Interpretability, Category Theory, AI Research, Anthropic, OpenAI, Claude, ChatGPT, Technical Autotheory, Queer Tech, Trans in Tech, SF Tech, AI Engineering, Machine Learning Safety, Xenoreproduction, Identifiability">
     <meta name="author" content="Unruly Abstractions">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://unrulyabstractions.com">
+    <meta property="og:title" content="Unruly Abstractions - AI Safety & Interpretability Research">
+    <meta property="og:description" content="Research on AI safety, interpretability, alignment, and category theory. Exploring mechanistic interpretability and AI alignment from queer perspectives.">
+    <meta property="og:site_name" content="Unruly Abstractions">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@unrulyabstract">
+    <meta name="twitter:creator" content="@unrulyabstract">
+    <meta name="twitter:title" content="Unruly Abstractions - AI Safety Research">
+    <meta name="twitter:description" content="Research on AI safety, interpretability, alignment, and category theory.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <link rel="canonical" href="https://unrulyabstractions.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Reset and base styles */
+        :root {
+            --ua-color-background: rgba(200, 93, 118, 0.85);
+            --ua-color-text-primary: rgba(255, 255, 255, 0.95);
+            --ua-color-text-accent: rgba(255, 250, 245, 1);
+            --ua-color-text-highlight: rgba(255, 255, 255, 1);
+            --ua-color-text-dark: rgba(0, 0, 0, 1);
+            --ua-color-text-muted: rgba(255, 250, 245, 0.7);
+            --ua-color-category-border: rgba(255, 255, 255, 0.2);
+            --ua-color-section-title-bg-opacity: 0.25;
+
+            --ua-font-family-primary: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
+            --ua-font-family-secondary: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+            --ua-layout-container-padding: 4rem;
+            --ua-layout-grid-gap: 3rem;
+            --ua-layout-max-height-offset: 12rem;
+            --ua-layout-list-max-width: 76%;
+            --ua-layout-column-min-width: 160px;
+
+            --ua-grid-column-aux: 1fr;
+
+            --ua-type-site-title-size: 3.8rem;
+            --ua-type-site-title-weight: 700;
+            --ua-type-site-title-letter-spacing: 2.5px;
+            --ua-type-section-title-size: 0.85rem;
+            --ua-type-section-title-weight: 600;
+            --ua-type-section-title-letter-spacing: 2px;
+            --ua-type-category-size: 0.6rem;
+            --ua-type-category-weight: 500;
+            --ua-type-category-letter-spacing: 1.2px;
+            --ua-type-category-opacity: 0.5;
+            --ua-type-entry-size: 1.05rem;
+            --ua-type-entry-weight: 400;
+            --ua-type-entry-line-height: 1.4;
+            --ua-type-external-size: 0.595rem;
+            --ua-type-external-weight: 400;
+            --ua-type-external-letter-spacing: 0.35px;
+
+            --ua-spacing-section-title-padding-y: 0.5rem;
+            --ua-spacing-section-title-padding-x: 1rem;
+            --ua-spacing-section-title-margin-bottom: 3rem;
+            --ua-spacing-category-indent: 2.5em;
+            --ua-spacing-category-padding-bottom: 0.15rem;
+            --ua-spacing-category-margin-top: 2rem;
+            --ua-spacing-category-margin-bottom: 0.45rem;
+            --ua-spacing-entry-padding-y: 0.15rem;
+            --ua-spacing-external-padding-y: 0.28rem;
+            --ua-spacing-external-padding-x: 0.63rem;
+            --ua-spacing-external-gap: 1rem;
+
+            --ua-motion-slide-in-duration: 0.8s;
+            --ua-motion-slide-in-slow-duration: 1.2s;
+            --ua-motion-hover-duration: 0.2s;
+            --ua-motion-hover-slow-duration: 0.4s;
+            --ua-motion-float-duration: 6s;
+            --ua-motion-float-delay: 2s;
+            --ua-motion-column-delay-step: 0.2s;
+            --ua-motion-title-delay: 0.8s;
+            --ua-motion-links-delay: 1.2s;
+
+            --ua-hover-link-translate: 4px;
+            --ua-hover-external-translate-y: -2px;
+            --ua-hover-external-scale: 1.03;
+            --ua-hover-title-translate-y: -8px;
+            --ua-hover-entrance-translate: 20px;
+
+            --ua-effect-title-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            --ua-effect-gradient-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+            --ua-effect-smudge-base: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
+            --ua-effect-smudge-hover: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
+            --ua-effect-smudge-blur: 1.5px;
+
+            --ua-column-scale: 1;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            hyphens: none;
         }
-        
+
         html {
             scroll-behavior: smooth;
         }
-        
-        /* Full-screen layout with pink background */
+
         html, body {
-            height: 100vh;
-            width: 100vw;
-            background-color: rgba(200, 93, 118, 0.85);
+            height: 100%;
+            width: 100%;
+            background-color: var(--ua-color-background);
+            color: var(--ua-color-text-primary);
+            font-family: var(--ua-font-family-primary);
             overflow: hidden;
-            font-family: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
-            color: rgba(255, 255, 255, 0.95);
         }
 
-        /* Main grid container for desktop layout */
-        .container {
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: var(--ua-effect-gradient-overlay);
+            opacity: 1;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .ua-layout {
             position: relative;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            grid-template-columns: var(--ua-grid-column-papers, 1fr) var(--ua-grid-column-notes, 1fr) var(--ua-grid-column-aux);
+            grid-template-areas:
+                "col-papers col-notes spacer"
+                "brand spacer links";
+            gap: var(--ua-layout-grid-gap);
+            padding: var(--ua-layout-container-padding);
             height: 100vh;
             width: 100vw;
-            padding: 4rem;
+        }
+
+        .ua-column {
+            grid-area: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-height: calc(100vh - var(--ua-layout-max-height-offset));
+            overflow-y: auto;
+            scrollbar-width: thin;
+            opacity: 0;
+            transform: translateX(calc(var(--ua-hover-entrance-translate) * var(--ua-motion-direction, -1)));
+            animation: ua-slide-in var(--ua-motion-slide-in-duration) ease-out forwards;
+        }
+
+        .ua-column--from-right {
+            --ua-motion-direction: 1;
+        }
+
+        .ua-column__title {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--ua-type-section-title-size);
+            font-weight: var(--ua-type-section-title-weight);
+            letter-spacing: var(--ua-type-section-title-letter-spacing);
+            text-transform: uppercase;
+            padding: var(--ua-spacing-section-title-padding-y) calc(var(--ua-spacing-section-title-padding-x) * var(--ua-column-scale, 1));
+            margin-bottom: var(--ua-spacing-section-title-margin-bottom);
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--ua-color-text-dark);
+            background: rgba(255, 255, 255, var(--ua-color-section-title-bg-opacity));
+            white-space: nowrap;
+        }
+
+        .ua-column__list {
+            list-style: none;
             display: grid;
-            grid-template-areas:
-                "papers notes ."
-                "title . links";
-            grid-template-rows: 1fr auto;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(var(--ua-layout-column-min-width), 1fr));
+            gap: var(--ua-spacing-entry-padding-y) var(--ua-layout-grid-gap);
+            max-width: calc(var(--ua-layout-list-max-width) * var(--ua-column-scale, 1));
         }
 
-        /* Papers section - top left */
-        .papers-section {
-            grid-area: papers;
-            align-self: start;
-            opacity: 0;
-            transform: translateX(-20px);
-            animation: slideInFade 0.8s ease-out forwards;
-            overflow-y: auto;
-            max-height: calc(100vh - 12rem);
+        .ua-category {
+            margin-top: calc(var(--ua-spacing-category-margin-top) * var(--ua-column-scale, 1));
+            margin-bottom: calc(var(--ua-spacing-category-margin-bottom) * var(--ua-column-scale, 1));
         }
 
-        /* Research notes section - top right */
-        .notes-section {
-            grid-area: notes;
-            align-self: start;
-            opacity: 0;
-            transform: translateX(20px);
-            animation: slideInFade 0.8s ease-out 0.2s forwards;
-            overflow-y: auto;
-            max-height: calc(100vh - 12rem);
+        .ua-category:first-of-type {
+            margin-top: 0;
         }
 
-        /* Main title - bottom left */
-        .title-section {
-            grid-area: title;
+        .ua-category__label {
+            display: inline-block;
+            font-size: var(--ua-type-category-size);
+            font-weight: var(--ua-type-category-weight);
+            letter-spacing: var(--ua-type-category-letter-spacing);
+            opacity: var(--ua-type-category-opacity);
+            color: var(--ua-color-text-muted);
+            border-bottom: 1px solid var(--ua-color-category-border);
+            padding-bottom: var(--ua-spacing-category-padding-bottom);
+            padding-left: calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1));
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .ua-entry {
+            opacity: 1;
+        }
+
+        .ua-entry__link {
+            display: block;
+            font-size: calc(var(--ua-type-entry-size) * var(--ua-column-scale, 1));
+            font-weight: var(--ua-type-entry-weight);
+            line-height: var(--ua-type-entry-line-height);
+            color: var(--ua-color-text-accent);
+            text-decoration: none;
+            padding: calc(var(--ua-spacing-entry-padding-y) * var(--ua-column-scale, 1)) 0 calc(var(--ua-spacing-entry-padding-y) * var(--ua-column-scale, 1)) calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1));
+            transition: transform var(--ua-motion-hover-duration) ease, color var(--ua-motion-hover-duration) ease;
+            border-radius: 4px;
+        }
+
+        .ua-entry__link:hover,
+        .ua-entry__link:focus {
+            transform: translateX(var(--ua-hover-link-translate));
+            color: var(--ua-color-text-highlight);
+        }
+
+        .ua-brand {
+            grid-area: brand;
             align-self: end;
+            justify-self: start;
             opacity: 0;
-            transform: translateY(20px);
-            animation: slideInFade 1.2s ease-out 0.8s forwards;
+            transform: translateY(var(--ua-hover-title-translate-y));
+            animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
         }
 
-        /* External links - bottom right */
-        .links-section {
+        .ua-brand__title {
+            font-size: var(--ua-type-site-title-size);
+            font-weight: var(--ua-type-site-title-weight);
+            letter-spacing: var(--ua-type-site-title-letter-spacing);
+            text-transform: lowercase;
+            text-shadow: var(--ua-effect-title-shadow);
+            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        }
+
+        .ua-links {
             grid-area: links;
             align-self: end;
             justify-self: end;
             opacity: 0;
-            transform: translateX(20px);
-            animation: slideInFade 0.8s ease-out 1.2s forwards;
+            transform: translateX(var(--ua-hover-entrance-translate));
+            animation: ua-slide-in-right var(--ua-motion-slide-in-duration) ease-out var(--ua-motion-links-delay) forwards;
         }
 
-        /* Section headers styling */
-        .section-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            opacity: 0.6;
-            margin-bottom: 3rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding-bottom: 0;
-            text-align: center;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        /* Papers grid layout */
-        .paper-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem 2rem;
-            max-width: 95%;
-        }
-
-        .paper-item {
-            opacity: 1;
-        }
-
-        /* Individual paper link styling */
-        .paper-link {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-size: 1.15rem;
-            font-weight: 400;
-            transition: all 0.2s ease;
-            display: block;
-            padding: 0.1rem 0;
-            cursor: pointer;
-            border-radius: 4px;
-            font-family: 'Roboto Mono', monospace;
-            word-wrap: break-word;
-            line-height: 1.3;
-        }
-
-        .paper-link:hover {
-            color: rgba(255, 255, 255, 1);
-            transform: translateX(4px);
-        }
-
-        .paper-link:focus {
-            outline: none;
-            color: rgba(255, 255, 255, 1);
-        }
-
-        /* Category header styling */
-        .category-header {
-            margin-top: 2rem;
-            margin-bottom: 0;
-        }
-
-        .category-header:first-child {
-            margin-top: 0;
-        }
-
-        .category-title {
-            font-size: 0.65rem;
-            font-weight: 500;
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.7);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 0.1rem;
-            margin-bottom: 0;
-            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
-        }
-
-
-        /* Main site title with floating animation */
-        .main-title {
-            font-size: 3.2rem;
-            font-weight: 400;
-            letter-spacing: 2px;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            animation: float 6s ease-in-out 2s infinite;
-            font-family: 'Roboto Mono', monospace;
-        }
-
-        /* External links container */
-        .external-links {
+        .ua-links__list {
             display: flex;
-            gap: 1rem;
             flex-direction: column;
             align-items: flex-end;
+            gap: var(--ua-spacing-external-gap);
         }
 
-        /* Individual external link styling with smudge design */
-        .external-link {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.4s ease;
+        .ua-external-link {
             position: relative;
-            padding: 0.4rem 0.9rem;
-            border: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--ua-spacing-external-padding-y) var(--ua-spacing-external-padding-x);
             border-radius: 30%;
-            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
-            letter-spacing: 0.5px;
-            opacity: 0;
-            transform: translateX(20px);
-            animation: slideInFade 0.8s ease-out forwards;
-            box-shadow: none;
-            filter: none;
-            will-change: transform, opacity;
-            z-index: 1;
+            font-size: var(--ua-type-external-size);
+            font-weight: var(--ua-type-external-weight);
+            letter-spacing: var(--ua-type-external-letter-spacing);
+            color: var(--ua-color-text-accent);
+            text-decoration: none;
+            background: var(--ua-effect-smudge-base);
+            transition: transform var(--ua-motion-hover-slow-duration) ease, background var(--ua-motion-hover-slow-duration) ease;
         }
 
-        .external-link::before {
-            content: '';
+        .ua-external-link::before {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             border-radius: 30%;
-            background: var(--smudge-gradient, radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%));
-            filter: blur(var(--smudge-blur, 1.5px));
+            background: var(--ua-effect-smudge-base);
+            filter: blur(var(--ua-effect-smudge-blur));
             z-index: -1;
         }
 
-        .external-link:nth-child(1) { animation-delay: 1.4s; }
-        .external-link:nth-child(2) { animation-delay: 1.6s; }
-        .external-link:nth-child(3) { animation-delay: 1.8s; }
-        .external-link:nth-child(4) { animation-delay: 2.0s; }
-
-        .external-link:hover {
-            color: rgba(255, 255, 255, 0.95);
-            transform: translateY(-2px) scale(1.03);
-            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
+        .ua-external-link:hover,
+        .ua-external-link:focus {
+            transform: translateY(var(--ua-hover-external-translate-y)) scale(var(--ua-hover-external-scale));
+            background: var(--ua-effect-smudge-hover);
         }
 
-        .external-link:focus {
-            outline: none;
-            color: rgba(255, 255, 255, 1);
-            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
+        .ua-spacer {
+            grid-area: spacer;
         }
 
-        /* Subtle gradient overlay for visual depth */
-        /* Simplified background */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
-            pointer-events: none;
-        }
-
-        /* Animation keyframes */
-        @keyframes slideInFade {
+        @keyframes ua-slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(calc(var(--ua-hover-entrance-translate) * var(--ua-motion-direction, -1)));
+            }
             to {
-                transform: translateX(0) translateY(0);
                 opacity: 1;
+                transform: translateX(0);
             }
         }
 
-        @keyframes float {
-            0%, 100% { 
-                transform: translateY(0px);
+        @keyframes ua-slide-in-right {
+            from {
+                opacity: 0;
+                transform: translateX(var(--ua-hover-entrance-translate));
             }
-            50% { 
-                transform: translateY(-8px);
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
+        @keyframes ua-slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(var(--ua-hover-title-translate-y));
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        /* Mobile layout - switches from grid to flexbox */
-        @media (max-width: 768px) {
-            html, body {
+        @keyframes ua-float {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(var(--ua-hover-title-translate-y));
+            }
+        }
+
+        @media (max-width: 1024px) {
+            html,
+            body {
+                overflow-y: auto;
+            }
+
+            .ua-layout {
+                grid-auto-flow: row;
+                grid-template-columns: minmax(0, 1fr);
+                grid-template-areas: none;
                 height: auto;
                 min-height: 100vh;
-                overflow: auto;
+                overflow-y: auto;
+                gap: 2rem;
             }
 
-            .container {
-                padding: 1.5rem;
-                height: auto;
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                gap: 3rem;
-            }
-
-            .papers-section {
-                order: 1;
-                align-self: stretch;
+            .ua-column {
                 max-height: none;
+                overflow: visible;
             }
 
-            .notes-section {
-                order: 2;
-                align-self: stretch;
-                max-height: none;
+            .ua-brand,
+            .ua-links,
+            .ua-spacer {
+                grid-area: auto !important;
             }
 
-            .title-section {
-                order: 3;
-                align-self: flex-end;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            .links-section {
-                order: 4;
-                align-self: stretch;
-                justify-self: stretch;
-            }
-
-            .paper-list {
-                grid-template-columns: 1fr;
-                gap: 0.5rem;
-                max-width: none;
-            }
-
-            .paper-link {
-                font-size: 1.1rem;
-                padding: 1rem 0;
-                display: block;
-                text-align: left;
-            }
-
-            .external-links {
-                flex-direction: row;
-                justify-content: center;
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                align-items: center;
-            }
-
-            .external-link {
-                font-size: 0.9rem;
-                padding: 0.4rem 0.9rem;
-                white-space: nowrap;
-            }
-
-            .main-title {
-                font-size: 2.2rem;
-                letter-spacing: 2px;
-                line-height: 1.2;
-            }
-
-            .section-title {
-                font-size: 0.8rem;
-                margin-bottom: 1.5rem;
-                letter-spacing: 1.5px;
-            }
-        }
-
-        /* Small mobile adjustments */
-        @media (max-width: 480px) {
-            .container {
-                padding: 1rem;
-                gap: 2.5rem;
-            }
-
-            .main-title {
-                font-size: 1.8rem;
-                letter-spacing: 1px;
-            }
-
-            .external-links {
-                gap: 1rem;
-            }
-
-            .external-link {
-                font-size: 0.85rem;
-                padding: 0.35rem 0.7rem;
-            }
-
-            .paper-link {
-                font-size: 1rem;
+            .ua-links {
+                justify-self: start;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="papers-section">
-            <a href="/papers.html" class="section-title" style="text-decoration: none; cursor: pointer; display: block; color: inherit;">papers</a>
-            <ul class="paper-list" id="paperList">
-                <!-- Papers will be loaded dynamically -->
-            </ul>
-        </div>
-
-        <div class="notes-section">
-            <a href="/notes.html" class="section-title" style="text-decoration: none; cursor: pointer; display: block; color: inherit;">research notes</a>
-            <ul class="paper-list" id="researchNotesList">
-                <!-- Research notes will be loaded dynamically -->
-            </ul>
-        </div>
-
-        <div class="title-section">
-            <h1 class="main-title">unruly abstractions</h1>
-        </div>
-
-        <div class="links-section">
-            <div class="external-links">
-                <a href="mailto:ian@unrulyabstractions.com" class="external-link">email</a>
-                <a href="https://x.com/unrulyabstract" class="external-link" target="_blank" rel="noopener noreferrer">twitter</a>
-                <a href="https://unrulyabstractions.substack.com/about" class="external-link" target="_blank" rel="noopener noreferrer">substack</a>
-                <a href="https://www.lesswrong.com/users/unruly-abstractions" class="external-link" target="_blank" rel="noopener noreferrer">lesswrong</a>
+    <main class="ua-layout" id="layoutGrid">
+        <div class="ua-spacer" data-grid-area="spacer" aria-hidden="true"></div>
+        <section class="ua-brand" data-grid-area="brand">
+            <h1 class="ua-brand__title">unruly abstractions</h1>
+        </section>
+        <section class="ua-links" data-grid-area="links">
+            <div class="ua-links__list">
+                <a href="mailto:ian@unrulyabstractions.com" class="ua-external-link">email</a>
+                <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
+                <a href="https://unrulyabstractions.substack.com/about" class="ua-external-link" target="_blank" rel="noopener noreferrer">substack</a>
+                <a href="https://www.lesswrong.com/users/unruly-abstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">lesswrong</a>
             </div>
-        </div>
-    </div>
-
+        </section>
+    </main>
     <script>
-        /**
-         * Loads papers and lab notes from JSON file, organizing by category
-         * Creates clickable links in separate sections, sorted by date (newest first)
-         */
-        async function loadPapers() {
-            const paperList = document.getElementById('paperList');
-            const researchNotesList = document.getElementById('researchNotesList');
-            let foundPapers = [];
-            let notes = [];
+        (function () {
+            'use strict';
 
-            // Load papers from JSON configuration file
-            try {
-                const response = await fetch('./pdfs/papers.json', { cache: 'force-cache' });
-                if (response.ok) {
-                    const papersData = await response.json();
-                    foundPapers = papersData.papers || [];
-                    notes = papersData.notes || papersData.labNotes || [];
+            const geometryPath = './config/geometry.json';
+            const contentPath = './config/content.json';
+
+            const TOKEN_MAP = {
+                colors: {
+                    background: { var: '--ua-color-background' },
+                    textPrimary: { var: '--ua-color-text-primary' },
+                    textAccent: { var: '--ua-color-text-accent' },
+                    textHighlight: { var: '--ua-color-text-highlight' },
+                    textDark: { var: '--ua-color-text-dark' },
+                    textMuted: { var: '--ua-color-text-muted' },
+                    categoryBorder: { var: '--ua-color-category-border' },
+                    sectionTitleBackgroundOpacity: { var: '--ua-color-section-title-bg-opacity' }
+                },
+                layout: {
+                    containerPaddingRem: { var: '--ua-layout-container-padding', unit: 'rem' },
+                    gridGapRem: { var: '--ua-layout-grid-gap', unit: 'rem' },
+                    maxHeightOffsetRem: { var: '--ua-layout-max-height-offset', unit: 'rem' },
+                    maxListWidthPercent: { var: '--ua-layout-list-max-width', unit: 'percent' },
+                    minColumnWidthPx: { var: '--ua-layout-column-min-width', unit: 'px' },
+                    auxColumnFr: { var: '--ua-grid-column-aux', unit: 'fr' }
+                },
+                typography: {
+                    siteTitle: {
+                        fontSizeRem: { var: '--ua-type-site-title-size', unit: 'rem' },
+                        fontWeight: { var: '--ua-type-site-title-weight' },
+                        letterSpacingPx: { var: '--ua-type-site-title-letter-spacing', unit: 'px' }
+                    },
+                    sectionTitle: {
+                        fontSizeRem: { var: '--ua-type-section-title-size', unit: 'rem' },
+                        fontWeight: { var: '--ua-type-section-title-weight' },
+                        letterSpacingPx: { var: '--ua-type-section-title-letter-spacing', unit: 'px' }
+                    },
+                    categoryLabel: {
+                        fontSizeRem: { var: '--ua-type-category-size', unit: 'rem' },
+                        fontWeight: { var: '--ua-type-category-weight' },
+                        letterSpacingPx: { var: '--ua-type-category-letter-spacing', unit: 'px' },
+                        opacity: { var: '--ua-type-category-opacity' }
+                    },
+                    entryLink: {
+                        fontSizeRem: { var: '--ua-type-entry-size', unit: 'rem' },
+                        fontWeight: { var: '--ua-type-entry-weight' },
+                        lineHeight: { var: '--ua-type-entry-line-height' }
+                    },
+                    externalLink: {
+                        fontSizeRem: { var: '--ua-type-external-size', unit: 'rem' },
+                        fontWeight: { var: '--ua-type-external-weight' },
+                        letterSpacingPx: { var: '--ua-type-external-letter-spacing', unit: 'px' }
+                    }
+                },
+                spacing: {
+                    sectionTitlePaddingVerticalRem: { var: '--ua-spacing-section-title-padding-y', unit: 'rem' },
+                    sectionTitlePaddingHorizontalRem: { var: '--ua-spacing-section-title-padding-x', unit: 'rem' },
+                    sectionTitleMarginBottomRem: { var: '--ua-spacing-section-title-margin-bottom', unit: 'rem' },
+                    categoryIndentEm: { var: '--ua-spacing-category-indent', unit: 'em' },
+                    categoryPaddingBottomRem: { var: '--ua-spacing-category-padding-bottom', unit: 'rem' },
+                    categoryMarginTopRem: { var: '--ua-spacing-category-margin-top', unit: 'rem' },
+                    categoryMarginBottomRem: { var: '--ua-spacing-category-margin-bottom', unit: 'rem' },
+                    entryPaddingVerticalRem: { var: '--ua-spacing-entry-padding-y', unit: 'rem' },
+                    externalLinkPaddingVerticalRem: { var: '--ua-spacing-external-padding-y', unit: 'rem' },
+                    externalLinkPaddingHorizontalRem: { var: '--ua-spacing-external-padding-x', unit: 'rem' },
+                    externalLinkGapRem: { var: '--ua-spacing-external-gap', unit: 'rem' }
+                },
+                motion: {
+                    slideInDurationSec: { var: '--ua-motion-slide-in-duration', unit: 's' },
+                    slideInSlowDurationSec: { var: '--ua-motion-slide-in-slow-duration', unit: 's' },
+                    hoverDurationSec: { var: '--ua-motion-hover-duration', unit: 's' },
+                    hoverSlowDurationSec: { var: '--ua-motion-hover-slow-duration', unit: 's' },
+                    floatDurationSec: { var: '--ua-motion-float-duration', unit: 's' },
+                    floatDelaySec: { var: '--ua-motion-float-delay', unit: 's' },
+                    columnDelayStepSec: { var: '--ua-motion-column-delay-step', unit: 's' },
+                    titleDelaySec: { var: '--ua-motion-title-delay', unit: 's' },
+                    linksDelaySec: { var: '--ua-motion-links-delay', unit: 's' }
+                },
+                hover: {
+                    linkTranslatePx: { var: '--ua-hover-link-translate', unit: 'px' },
+                    externalLinkTranslateYPx: { var: '--ua-hover-external-translate-y', unit: 'px' },
+                    externalLinkScale: { var: '--ua-hover-external-scale' },
+                    titleTranslateYPx: { var: '--ua-hover-title-translate-y', unit: 'px' },
+                    entranceTranslatePx: { var: '--ua-hover-entrance-translate', unit: 'px' }
+                },
+                effects: {
+                    titleShadow: { var: '--ua-effect-title-shadow' },
+                    gradientOverlay: { var: '--ua-effect-gradient-overlay' },
+                    smudgeBase: { var: '--ua-effect-smudge-base' },
+                    smudgeHover: { var: '--ua-effect-smudge-hover' },
+                    smudgeBlurPx: { var: '--ua-effect-smudge-blur', unit: 'px' }
                 }
-            } catch (error) {
-                // Fallback
-                foundPapers.push('wanderings');
+            };
+
+            document.addEventListener('DOMContentLoaded', () => {
+                bootstrap().catch(error => {
+                    console.error('Failed to initialize homepage:', error);
+                });
+            });
+
+            async function bootstrap() {
+                const [geometry, content] = await Promise.all([
+                    fetchJson(geometryPath),
+                    fetchJson(contentPath)
+                ]);
+
+                const designTokens = geometry.designTokens || {};
+                const columns = normalizeColumns(geometry.columns);
+
+                applyDesignTokens(designTokens);
+                buildLayout(columns, designTokens.motion);
+                renderColumns(columns, content, designTokens.motion);
+                applyTextScaling();
+                window.addEventListener('resize', applyTextScaling);
+                window.setTimeout(randomizeButtonSmudge, 1600);
             }
 
-            // Sort papers by date (newest first)
-            foundPapers.sort((a, b) => {
-                const dateA = a.date ? new Date(a.date) : new Date(0);
-                const dateB = b.date ? new Date(b.date) : new Date(0);
-                return dateB - dateA;
-            });
-
-            // Sort research notes by date (newest first)
-            notes.sort((a, b) => {
-                const dateA = a.date ? new Date(a.date) : new Date(0);
-                const dateB = b.date ? new Date(b.date) : new Date(0);
-                return dateB - dateA;
-            });
-
-            // Group papers by category
-            const papersByCategory = {};
-            foundPapers.forEach(paper => {
-                const category = (typeof paper === 'object' && paper.category) ? paper.category : 'uncategorized';
-                if (!papersByCategory[category]) {
-                    papersByCategory[category] = [];
+            async function fetchJson(path) {
+                const response = await fetch(path, { cache: 'no-store' });
+                if (!response.ok) {
+                    throw new Error(`Unable to load ${path}: ${response.status} ${response.statusText}`);
                 }
-                papersByCategory[category].push(paper);
-            });
+                return response.json();
+            }
 
-            // Group research notes by category
-            const notesByCategory = {};
-            notes.forEach(note => {
-                const category = note.category || 'uncategorized';
-                if (!notesByCategory[category]) {
-                    notesByCategory[category] = [];
+            function normalizeColumns(input) {
+                if (!Array.isArray(input)) {
+                    return [];
                 }
-                notesByCategory[category].push(note);
-            });
 
-            // Render papers
-            const paperCategories = Object.keys(papersByCategory).sort();
-            paperCategories.forEach(category => {
-                // Create category header
-                const categoryHeader = document.createElement('li');
-                categoryHeader.className = 'category-header';
-                categoryHeader.innerHTML = `<div class="category-title">${category}</div>`;
-                paperList.appendChild(categoryHeader);
+                return input
+                    .map(column => {
+                        if (!column || typeof column !== 'object') {
+                            return null;
+                        }
+                        const id = typeof column.id === 'string' ? column.id.trim() : '';
+                        const dataset = typeof column.dataset === 'string' ? column.dataset.trim() : id;
+                        if (!id || !dataset) {
+                            return null;
+                        }
+                        const weight = sanitizePositiveNumber(column.weight, 1);
+                        const detailPage = typeof column.detailPage === 'string' ? column.detailPage : null;
+                        const entry = normalizeEntryConfig(column.entry);
+                        return {
+                            id,
+                            label: typeof column.label === 'string' ? column.label : id,
+                            dataset,
+                            weight,
+                            detailPage,
+                            entry
+                        };
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) => b.weight - a.weight);
+            }
 
-                // Add papers in this category
-                papersByCategory[category].forEach(paper => {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'paper-item';
+            function normalizeEntryConfig(entry) {
+                if (!entry || typeof entry !== 'object') {
+                    return { type: 'external', urlField: 'url', displayField: 'displayName', categoryField: 'category', dateField: 'date' };
+                }
+                const type = entry.type === 'pdf' ? 'pdf' : 'external';
+                const base = {
+                    type,
+                    displayField: entry.displayField || 'displayName',
+                    categoryField: entry.categoryField || 'category',
+                    dateField: entry.dateField || 'date'
+                };
+                if (type === 'pdf') {
+                    base.filenameField = entry.filenameField || 'filename';
+                    base.basePath = entry.basePath || './pdfs';
+                    base.cacheBust = Boolean(entry.cacheBust);
+                } else {
+                    base.urlField = entry.urlField || 'url';
+                }
+                return base;
+            }
 
-                    const link = document.createElement('a');
+            function applyDesignTokens(tokens) {
+                const root = document.documentElement;
+                Object.entries(TOKEN_MAP).forEach(([groupName, groupMap]) => {
+                    const groupValue = tokens[groupName];
+                    if (!groupValue) {
+                        return;
+                    }
+                    applyTokenGroup(root, groupValue, groupMap);
+                });
+            }
 
-                    let filename, displayName;
-                    if (typeof paper === 'object' && paper.filename) {
-                        filename = paper.filename;
-                        displayName = paper.displayName || filename;
+            function applyTokenGroup(root, value, map) {
+                Object.entries(map).forEach(([key, descriptor]) => {
+                    const tokenValue = value[key];
+                    if (tokenValue == null) {
+                        return;
+                    }
+                    if (descriptor.var) {
+                        const formatted = formatTokenValue(tokenValue, descriptor.unit);
+                        root.style.setProperty(descriptor.var, formatted);
                     } else {
-                        filename = paper;
-                        displayName = filename;
+                        applyTokenGroup(root, tokenValue, descriptor);
                     }
-
-                    link.href = `./pdfs/${filename}.pdf?v=${Date.now()}`;
-                    link.className = 'paper-link';
-
-                    // Smart line breaking logic
-                    let finalDisplayName = displayName;
-
-                    // Rule 1: Break after colon
-                    if (finalDisplayName.includes(':')) {
-                        finalDisplayName = finalDisplayName.replace(':', ':<br>');
-                    }
-                    // Rule 2: Break when capital transitions to lowercase after 50% of estimated width
-                    else {
-                        const words = displayName.split(' ');
-                        const threshold = displayName.length * 0.5;
-
-                        for (let i = 0; i < words.length - 1; i++) {
-                            // Calculate position after adding the next word
-                            const textWithNext = words.slice(0, i + 2).join(' ');
-
-                            if (textWithNext.length > threshold) {
-                                const currentWord = words[i];
-                                const nextWord = words[i + 1];
-
-                                // Check if current word starts with capital and next starts with lowercase
-                                if (currentWord && nextWord &&
-                                    /[A-Z]/.test(currentWord.charAt(0)) &&
-                                    /[a-z]/.test(nextWord.charAt(0))) {
-                                    words[i] = words[i] + '<br>';
-                                    break;
-                                }
-                            }
-                        }
-                        finalDisplayName = words.join(' ');
-                    }
-
-                    link.innerHTML = finalDisplayName;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-
-                    listItem.appendChild(link);
-                    paperList.appendChild(listItem);
                 });
-            });
+            }
 
-            // Render research notes
-            const researchNoteCategories = Object.keys(notesByCategory).sort();
-            researchNoteCategories.forEach(category => {
-                // Create category header
-                const categoryHeader = document.createElement('li');
-                categoryHeader.className = 'category-header';
-                categoryHeader.innerHTML = `<div class="category-title">${category}</div>`;
-                researchNotesList.appendChild(categoryHeader);
+            function formatTokenValue(value, unit) {
+                if (unit === 'percent') {
+                    return `${value}%`;
+                }
+                if (unit === 'rem' || unit === 'px' || unit === 'em' || unit === 'fr' || unit === 's') {
+                    return `${value}${unit}`;
+                }
+                return String(value);
+            }
 
-                // Add research notes in this category
-                notesByCategory[category].forEach(note => {
+            function buildLayout(columns, motionTokens = {}) {
+                const layoutGrid = document.getElementById('layoutGrid');
+                if (!layoutGrid) {
+                    return;
+                }
+
+                const root = document.documentElement;
+                const spacer = layoutGrid.querySelector('[data-grid-area="spacer"]');
+                const columnAreas = [];
+                const templateColumns = [];
+
+                const baseWeight = columns.length > 0 ? columns[0].weight : 1;
+                const safeBase = baseWeight > 0 ? baseWeight : 1;
+
+                columns.forEach((column, index) => {
+                    const weight = Math.max(column.weight, 0);
+                    const areaName = `col${index + 1}`;
+                    const frValue = weight > 0 ? weight : 0.0001;
+                    const rawScale = weight > 0 ? weight / safeBase : 0;
+                    const scale = Math.max(rawScale, 0.25);
+                    columnAreas.push(areaName);
+                    templateColumns.push(`var(--ua-grid-column-${column.id}, 1fr)`);
+                    root.style.setProperty(`--ua-grid-column-${column.id}`, `${frValue}fr`);
+                    root.style.setProperty(`--ua-weight-${column.id}`, weight.toString());
+                    root.style.setProperty(`--ua-scale-${column.id}`, scale.toString());
+                    column._grid = { areaName, scale };
+                    column._animationDelay = computeColumnDelay(index, motionTokens.columnDelayStepSec);
+                    column._fromRight = index % 2 === 1;
+                });
+
+                templateColumns.push('var(--ua-grid-column-aux, 1fr)');
+                if (templateColumns.length > 0) {
+                    layoutGrid.style.gridTemplateColumns = templateColumns.join(' ');
+                }
+
+                if (columnAreas.length > 0) {
+                    const topRow = `${columnAreas.join(' ')} spacer`;
+                    const secondRowAreas = [
+                        'brand',
+                        ...Array(Math.max(columnAreas.length - 1, 0)).fill('spacer'),
+                        'links'
+                    ];
+                    // Align brand to first column and links to last column by applying explicit column indices
+                    const brandColumnIndex = 1;
+                    const linksColumnIndex = Math.max(columnAreas.length + 1, 2);
+                    layoutGrid.style.gridTemplateAreas = `"${topRow}" "${secondRowAreas.join(' ')}"`;
+                    const brandSection = layoutGrid.querySelector('[data-grid-area="brand"]');
+                    if (brandSection) {
+                        brandSection.style.gridColumn = brandColumnIndex.toString();
+                    }
+                    const linksSection = layoutGrid.querySelector('[data-grid-area="links"]');
+                    if (linksSection) {
+                        linksSection.style.gridColumn = linksColumnIndex.toString();
+                    }
+                }
+
+                if (spacer) {
+                    layoutGrid.appendChild(spacer);
+                }
+            }
+
+            function computeColumnDelay(index, step) {
+                const numericStep = sanitizePositiveNumber(step, 0.2);
+                return index * numericStep;
+            }
+
+            function renderColumns(columns, content, motionTokens = {}) {
+                const layoutGrid = document.getElementById('layoutGrid');
+                if (!layoutGrid) {
+                    return;
+                }
+
+                const spacer = layoutGrid.querySelector('[data-grid-area="spacer"]');
+                const columnDelayStep = sanitizePositiveNumber(motionTokens.columnDelayStepSec, 0.2);
+
+                columns.forEach((column, index) => {
+                    const columnElement = document.createElement('section');
+                    columnElement.className = 'ua-column';
+                    columnElement.dataset.columnId = column.id;
+                    columnElement.style.gridArea = column._grid.areaName;
+                    columnElement.style.gridRow = '1';
+                    columnElement.style.gridColumn = (index + 1).toString();
+                    columnElement.style.setProperty('--ua-column-scale', column._grid.scale.toString());
+                    columnElement.style.animationDelay = `${columnDelayStep * index}s`;
+                    if (column._fromRight) {
+                        columnElement.classList.add('ua-column--from-right');
+                    }
+
+                    const titleLink = document.createElement('a');
+                    titleLink.className = 'ua-column__title';
+                    titleLink.textContent = column.label;
+                    if (column.detailPage) {
+                        titleLink.href = column.detailPage;
+                    } else {
+                        titleLink.href = '#';
+                    }
+                    columnElement.appendChild(titleLink);
+
+                    const list = document.createElement('ul');
+                    list.className = 'ua-column__list';
+                    list.setAttribute('role', 'list');
+                    columnElement.appendChild(list);
+
+                    const dataset = Array.isArray(content[column.dataset]) ? [...content[column.dataset]] : [];
+                    const sorted = dataset.sort((a, b) => toSortableDate(b, column.entry) - toSortableDate(a, column.entry));
+                    renderEntries(sorted, column.entry, list);
+
+                    if (spacer) {
+                        layoutGrid.insertBefore(columnElement, spacer);
+                    } else {
+                        layoutGrid.appendChild(columnElement);
+                    }
+                });
+            }
+
+            function renderEntries(entries, entryConfig, listElement) {
+                let lastCategory = null;
+                entries.forEach(entry => {
+                    const category = resolveField(entry, entryConfig.categoryField) || 'uncategorized';
+                    if (category !== lastCategory) {
+                        listElement.appendChild(createCategoryElement(category));
+                        lastCategory = category;
+                    }
+                    const link = createEntryLink(entry, entryConfig);
+                    if (!link) {
+                        return;
+                    }
                     const listItem = document.createElement('li');
-                    listItem.className = 'paper-item';
-
-                    const link = document.createElement('a');
-                    link.href = note.url;
-                    link.className = 'paper-link';
-
-                    // Smart line breaking logic
-                    const displayName = note.displayName || '';
-                    let finalDisplayName = displayName;
-
-                    // Rule 1: Break after colon
-                    if (finalDisplayName.includes(':')) {
-                        finalDisplayName = finalDisplayName.replace(':', ':<br>');
-                    }
-                    // Rule 2: Break when capital transitions to lowercase after 50% of estimated width
-                    else {
-                        const words = displayName.split(' ');
-                        const threshold = displayName.length * 0.5;
-
-                        for (let i = 0; i < words.length - 1; i++) {
-                            // Calculate position after adding the next word
-                            const textWithNext = words.slice(0, i + 2).join(' ');
-
-                            if (textWithNext.length > threshold) {
-                                const currentWord = words[i];
-                                const nextWord = words[i + 1];
-
-                                // Check if current word starts with capital and next starts with lowercase
-                                if (currentWord && nextWord &&
-                                    /[A-Z]/.test(currentWord.charAt(0)) &&
-                                    /[a-z]/.test(nextWord.charAt(0))) {
-                                    words[i] = words[i] + '<br>';
-                                    break;
-                                }
-                            }
-                        }
-                        finalDisplayName = words.join(' ');
-                    }
-
-                    link.innerHTML = finalDisplayName;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-
+                    listItem.className = 'ua-entry';
                     listItem.appendChild(link);
-                    researchNotesList.appendChild(listItem);
+                    listElement.appendChild(listItem);
                 });
-            });
-        }
+            }
 
-        // Apply random blur/smudge to buttons on load
-        function randomizeButtonSmudge() {
-            const buttons = document.querySelectorAll('.external-link');
-            buttons.forEach(button => {
-                const randomBlur = 1.2 + Math.random() * 0.8; // 1.2-2.0px blur for ::before only
-                const randomEllipseX = 110 + Math.random() * 20; // 110-130%
-                const randomEllipseY = 90 + Math.random() * 20; // 90-110%
-                const randomPosX = 40 + Math.random() * 15; // 40-55%
-                const randomPosY = 45 + Math.random() * 10; // 45-55%
+            function createCategoryElement(label) {
+                const item = document.createElement('li');
+                item.className = 'ua-category';
+                const span = document.createElement('div');
+                span.className = 'ua-category__label';
+                span.textContent = label;
+                item.appendChild(span);
+                return item;
+            }
 
-                // Set CSS custom properties that ::before can use
-                button.style.setProperty('--smudge-blur', `${randomBlur}px`);
-                const gradient = `radial-gradient(ellipse ${randomEllipseX}% ${randomEllipseY}% at ${randomPosX}% ${randomPosY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
-                button.style.background = gradient;
-                button.style.setProperty('--smudge-gradient', gradient);
-            });
-        }
+            function createEntryLink(entry, entryConfig) {
+                const display = resolveField(entry, entryConfig.displayField) || resolveField(entry, entryConfig.filenameField) || resolveField(entry, entryConfig.urlField) || 'Untitled';
+                const href = resolveEntryHref(entry, entryConfig);
+                if (!href) {
+                    return null;
+                }
+                const link = document.createElement('a');
+                link.className = 'ua-entry__link';
+                link.textContent = display;
+                link.href = href;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                return link;
+            }
 
-        // Initialize papers loading when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPapers();
-            setTimeout(randomizeButtonSmudge, 1600); // After animations complete
-        });
+            function resolveEntryHref(entry, entryConfig) {
+                if (entryConfig.type === 'pdf') {
+                    const filename = resolveField(entry, entryConfig.filenameField);
+                    if (!filename) {
+                        return null;
+                    }
+                    const basePath = entryConfig.basePath || './pdfs';
+                    const normalizedBase = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+                    const cacheBust = entryConfig.cacheBust ? `?v=${Date.now()}` : '';
+                    return `${normalizedBase}/${filename}.pdf${cacheBust}`;
+                }
+                if (entryConfig.type === 'external') {
+                    return resolveField(entry, entryConfig.urlField);
+                }
+                return null;
+            }
+
+            function resolveField(entry, fieldName) {
+                if (!entry || typeof entry !== 'object' || !fieldName) {
+                    return null;
+                }
+                return entry[fieldName] || null;
+            }
+
+            function toSortableDate(entry, entryConfig) {
+                const value = resolveField(entry, entryConfig.dateField);
+                if (!value) {
+                    return 0;
+                }
+                if (typeof value === 'string') {
+                    const normalized = value.trim().toLowerCase();
+                    if (normalized === 'ongoing' || normalized === 'current') {
+                        return Number.MAX_SAFE_INTEGER;
+                    }
+                }
+                const timestamp = Date.parse(value);
+                return Number.isFinite(timestamp) ? timestamp : 0;
+            }
+
+            function applyTextScaling() {
+                const links = document.querySelectorAll('.ua-entry__link');
+                links.forEach(link => {
+                    link.style.fontSize = '';
+                    const computed = window.getComputedStyle(link);
+                    const originalFontSize = parseFloat(computed.fontSize);
+                    const lineHeight = parseFloat(computed.lineHeight);
+                    if (!originalFontSize || !lineHeight) {
+                        return;
+                    }
+                    const tolerance = lineHeight * 1.2;
+                    if (link.scrollHeight <= tolerance) {
+                        return;
+                    }
+                    let currentSize = originalFontSize;
+                    const minSize = originalFontSize * 0.85;
+                    while (link.scrollHeight > tolerance && currentSize > minSize) {
+                        currentSize -= 0.5;
+                        link.style.fontSize = `${currentSize}px`;
+                    }
+                });
+            }
+
+            function randomizeButtonSmudge() {
+                const links = document.querySelectorAll('.ua-external-link');
+                links.forEach(link => {
+                    const blur = randomBetween(1.2, 2.0);
+                    const ellipseX = randomBetween(110, 130);
+                    const ellipseY = randomBetween(90, 110);
+                    const posX = randomBetween(40, 55);
+                    const posY = randomBetween(45, 55);
+                    const gradient = `radial-gradient(ellipse ${ellipseX}% ${ellipseY}% at ${posX}% ${posY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
+                    link.style.setProperty('--ua-effect-smudge-blur', `${blur}px`);
+                    link.style.background = gradient;
+                    link.style.setProperty('--ua-effect-smudge-base', gradient);
+                });
+            }
+
+            function randomBetween(min, max) {
+                return min + Math.random() * (max - min);
+            }
+
+            function sanitizePositiveNumber(value, fallback) {
+                const numeric = Number.parseFloat(value);
+                if (!Number.isFinite(numeric) || numeric <= 0) {
+                    return fallback;
+                }
+                return numeric;
+            }
+        })();
     </script>
 </body>
 </html>

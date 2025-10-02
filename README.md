@@ -1,72 +1,63 @@
 # Unruly Abstractions
 
-A minimal, elegant portfolio website for academic papers and writings on complex systems, philosophy, and abstract thinking.
+Personal research website for AI safety, interpretability, and alignment projects. The homepage is a single HTML document that hydrates itself with JSON configuration and design tokens so layout changes never require touching markup.
 
-## Features
+## Local Development
 
-- **Responsive Design**: Optimized for both desktop and mobile viewing
-- **Dynamic Paper Loading**: Automatically loads available papers from JSON configuration or by scanning for common filenames
-- **404 Redirects**: Smart redirects for legacy URLs (pdf/ and papers/ paths redirect to pdfs/)
-- **Minimal Design**: Clean pink (#C85D76) aesthetic with subtle animations
-- **Performance Optimized**: Single-page application with smooth transitions
+- Install the only runtime dependency once: `npm install -g browser-sync`
+- Start the live server: `./refresh-local.sh`
+  - Serves the site at `http://localhost:3000`
+  - Watches `*.html`, `config/*.json`, `*.css`, and `pdfs/*.pdf`
+  - Performs hard reloads so geometry/content changes apply immediately
 
-## Structure
+## Repository Layout
 
 ```
-/
-├── index.html          # Main page with embedded CSS and JavaScript
-├── 404.html           # Custom 404 page with redirect logic
-├── CNAME              # GitHub Pages custom domain configuration
-└── pdfs/              # Directory containing PDF papers
-    ├── papers.json    # Paper configuration file (optional)
-    └── *.pdf          # Paper files
+.
+├── index.html              # Homepage (dynamic columns + design token loader)
+├── papers.html             # Full paper list (static styling)
+├── notes.html              # Full research notes list (static styling)
+├── config/
+│   ├── content.json        # Data for papers and notes
+│   └── geometry.json       # Column definitions + design tokens
+├── pdfs/                   # Paper PDFs
+├── refresh-local.sh        # BrowserSync helper
+└── robots.txt / sitemap.xml
 ```
 
-## Configuration
+## Editing Content (`config/content.json`)
 
-### Adding Papers
+Supply data only—no layout metadata lives here. Each array is consumed by its matching column definition.
 
-Papers can be added in two ways:
-
-1. **JSON Configuration** (recommended): Edit `pdfs/papers.json`:
 ```json
 {
   "papers": [
-    {
-      "filename": "wanderings",
-      "displayName": "Category-Theoretic Wanderings into Interpretability"
-    }
+    { "filename": "wanderings", "displayName": "Category-Theoretic Wanderings into Interpretability", "category": "technical autotheory", "date": "2025-09-16" }
+  ],
+  "notes": [
+    { "url": "https://…", "displayName": "Identifiability Toy Study", "category": "empirical", "date": "ongoing" }
   ]
 }
 ```
 
-2. **Automatic Detection**: Place PDF files in `pdfs/` directory. The system will check for common paper names: `wanderings`, `abstractions`, `thoughts`, `essays`.
+- `date` accepts ISO strings or keywords like `ongoing` (these float to the top).
+- Papers must have a matching `pdfs/<filename>.pdf` file.
 
-### Styling
+## Editing Layout (`config/geometry.json`)
 
-The website uses a single HTML file with embedded CSS. Key design elements:
+The homepage reads this file first, hydrates CSS custom properties, then renders columns in weight order. Only the `designTokens` section should require tweaks unless you are adding a new column.
 
-- **Color Scheme**: Pink background (#C85D76) with white text
-- **Typography**: Inter font family with varied weights
-- **Layout**: CSS Grid for desktop, Flexbox for mobile
-- **Animations**: Subtle slide-in animations and floating effects
+- `columns`: choose which dataset to render, the display label, weight, and detail page target. Weights drive both column width and ordering.
+- `designTokens.colors`: background and text palette; `sectionTitleBackgroundOpacity` controls the translucent chips.
+- `designTokens.layout`: container padding, grid gap, max list width, and auxiliary column width (`auxColumnFr`).
+- `designTokens.typography` / `spacing`: font sizes, weights, and padding for titles, category labels, entries, and external links.
+- `designTokens.motion` / `hover`: animation durations and offsets.
+- `designTokens.effects`: gradients, glow, and smudge defaults for the link buttons.
 
-## Deployment
+Add a column by inserting a new object into `columns` with a unique `id`, `dataset` pointing at a key in `content.json`, and an `entry` block describing how to derive URLs (pdf vs external link).
 
-This site is designed for GitHub Pages deployment:
+## Workflow Tips
 
-1. Push to a GitHub repository
-2. Enable GitHub Pages in repository settings
-3. Set custom domain in CNAME file (optional)
-
-The site works as a static site on any web server.
-
-## Browser Support
-
-- Modern browsers with CSS Grid support
-- Mobile-responsive (tested on iOS and Android)
-- Progressive enhancement for older browsers
-
-## License
-
-This project is open source. Feel free to use as a template for your own academic portfolio.
+1. Update `geometry.json`, save, and let BrowserSync reload. Reordering weights takes effect instantly.
+2. Run `jq . config/content.json` after large edits to catch syntax errors.
+3. Before commit, open the local site and verify PDF links resolve and typography scales cleanly on resize.

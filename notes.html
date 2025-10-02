@@ -12,51 +12,212 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
+        /* ============================================
+           CSS CUSTOM PROPERTIES (Design Tokens)
+           ============================================ */
+        :root {
+            /* === COLOR PALETTE === */
+            /* Background color - purple/mauve */
+            --color-background: rgba(180, 100, 150, 0.85);
+
+            /* Primary text color - off-white */
+            --color-text-primary: rgba(255, 255, 255, 0.95);
+
+            /* Link text color - slightly muted white */
+            --color-text-link: rgba(255, 255, 255, 0.85);
+
+            /* Bright white for hover states */
+            --color-text-bright: rgba(255, 255, 255, 1);
+
+            /* Category/date label text color */
+            --color-text-label: rgba(255, 255, 255, 0.7);
+
+            /* Muted text for date labels */
+            --color-text-muted: rgba(255, 255, 255, 0.6);
+
+            /* Border color for note items */
+            --color-border-item: rgba(255, 255, 255, 0.1);
+
+            /* === TYPOGRAPHY === */
+            /* Page title (RESEARCH NOTES) */
+            --font-size-page-title: 2.5rem;
+            --font-weight-page-title: 600;
+            --letter-spacing-page-title: 2px;
+            --margin-page-title-bottom: 3rem;
+
+            /* Note link text */
+            --font-size-note-link: 1.15rem;
+            --font-weight-note-link: 400;
+
+            /* Category label text */
+            --font-size-category-label: 0.65rem;
+            --font-weight-category-label: 500;
+            --letter-spacing-category-label: 1px;
+            --opacity-category-label: 0.6;
+
+            /* Date label text */
+            --font-size-date-label: 0.55rem;
+            --font-weight-date-label: 400;
+            --opacity-date-label: 0.5;
+
+            /* Back button */
+            --font-size-back-button: 1rem;
+            --font-weight-back-button: 400; /* Regular weight, not bold */
+            --padding-back-button-vertical: 0.5rem;
+            --padding-back-button-horizontal: 1rem;
+            --border-radius-back-button: 30%; /* Organic shape */
+
+            /* === LAYOUT & SPACING === */
+            /* Container max width and padding */
+            --max-width-container: 800px;
+            --padding-container-vertical: 4rem;
+            --padding-container-horizontal: 2rem;
+
+            /* Gap between note items in list */
+            --gap-note-list: 1.5rem;
+
+            /* Padding for individual note items */
+            --padding-note-item-vertical: 0.75rem;
+            --padding-note-item-horizontal: 0;
+
+            /* Gap between link and metadata */
+            --gap-note-item: 2rem;
+
+            /* Gap within metadata column */
+            --gap-note-meta: 0.3rem;
+
+            /* Minimum width for metadata column */
+            --min-width-note-meta: 150px;
+
+            /* Back button position */
+            --position-back-button-top: 2rem;
+            --position-back-button-left: 2rem;
+
+            /* Border width for note items */
+            --border-width-note-item: 1px;
+
+            /* === EFFECTS === */
+            /* Gradient overlay for visual depth */
+            --gradient-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
+
+            /* Smudge effect gradient for back button - center-focused radial gradient */
+            --gradient-smudge-base: radial-gradient(
+                ellipse 120% 100% at 45% 50%,
+                rgba(255, 255, 255, 0.18) 0%,
+                rgba(255, 255, 255, 0.10) 20%,
+                rgba(255, 255, 255, 0.04) 40%,
+                rgba(255, 255, 255, 0.01) 60%,
+                rgba(255, 255, 255, 0) 75%
+            );
+
+            /* Smudge effect gradient on hover - brighter */
+            --gradient-smudge-hover: radial-gradient(
+                ellipse 120% 100% at 45% 50%,
+                rgba(255, 255, 255, 0.24) 0%,
+                rgba(255, 255, 255, 0.14) 20%,
+                rgba(255, 255, 255, 0.06) 40%,
+                rgba(255, 255, 255, 0.02) 60%,
+                rgba(255, 255, 255, 0) 75%
+            );
+
+            /* Blur amount for smudge effect (randomized via JS) */
+            --blur-smudge: 1.5px;
+
+            /* === ANIMATION TIMINGS === */
+            /* Hover transition duration */
+            --duration-hover: 0.2s;
+
+            /* Back button hover transition duration (slower for smudge effect) */
+            --duration-hover-slow: 0.3s;
+
+            /* === HOVER TRANSFORMS === */
+            /* Horizontal translation for note link hover */
+            --translate-hover-link: 4px;
+
+            /* Horizontal translation for back button hover (negative = leftward) */
+            --translate-hover-back-button: -3px;
+
+            /* === TYPOGRAPHY - FONTS === */
+            /* Primary font family */
+            --font-family-primary: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
+
+            /* Secondary font family for labels */
+            --font-family-secondary: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+            /* === MOBILE/TABLET BREAKPOINTS === */
+            /* Tablet and mobile breakpoint */
+            --breakpoint-tablet: 768px;
+        }
+
+        /* ============================================
+           GLOBAL STYLES & RESETS
+           ============================================ */
+
+        /* Reset browser defaults and disable text hyphenation globally */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* Disable automatic hyphenation across all browsers */
+            hyphens: none;
+            -webkit-hyphens: none;
+            -moz-hyphens: none;
+            -ms-hyphens: none;
         }
 
+        /* Smooth scrolling for anchor links */
         html {
             scroll-behavior: smooth;
         }
 
+        /* Base page styling: purple/mauve background, white text, scrollable */
         html, body {
             min-height: 100vh;
-            background-color: rgba(180, 100, 150, 0.85);
+            background-color: var(--color-background);
             overflow-y: auto;
-            font-family: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
-            color: rgba(255, 255, 255, 0.95);
+            font-family: var(--font-family-primary);
+            color: var(--color-text-primary);
         }
 
+        /* ============================================
+           LAYOUT STRUCTURE
+           ============================================ */
+
+        /* Main container: centered column with max width */
         .container {
-            max-width: 800px;
+            max-width: var(--max-width-container);
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: var(--padding-container-vertical) var(--padding-container-horizontal);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* ============================================
+           BACK BUTTON
+           ============================================ */
+
+        /* Back button: fixed position, smudge effect */
         .back-button {
             position: fixed;
-            top: 2rem;
-            left: 2rem;
-            color: rgba(255, 255, 255, 0.85);
+            top: var(--position-back-button-top);
+            left: var(--position-back-button-left);
+            color: var(--color-text-link);
             text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
+            font-size: var(--font-size-back-button);
+            font-weight: var(--font-weight-back-button);
+            padding: var(--padding-back-button-vertical) var(--padding-back-button-horizontal);
             border: none;
-            border-radius: 30%;
-            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
-            transition: all 0.3s ease;
-            font-family: 'Roboto Mono', monospace;
-            filter: none;
+            border-radius: var(--border-radius-back-button);
+            background: var(--gradient-smudge-base);
+            transition: all var(--duration-hover-slow) ease;
+            font-family: var(--font-family-primary);
+            filter: none; /* No blur on main element to keep text crisp */
             z-index: 1;
+            white-space: nowrap; /* Prevent wrapping */
         }
 
+        /* Blurred pseudo-element for smudge effect (keeps text crisp) */
         .back-button::before {
             content: '';
             position: absolute;
@@ -64,93 +225,127 @@
             left: 0;
             right: 0;
             bottom: 0;
-            border-radius: 30%;
-            background: var(--smudge-gradient, radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%));
-            filter: blur(var(--smudge-blur, 1.5px));
-            z-index: -1;
+            border-radius: var(--border-radius-back-button);
+            background: var(--gradient-smudge-base);
+            filter: blur(var(--blur-smudge));
+            z-index: -1; /* Behind text */
         }
 
+        /* Hover state: brighten gradient and move left */
         .back-button:hover {
-            background: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
-            color: rgba(255, 255, 255, 0.95);
-            transform: translateX(-3px);
+            background: var(--gradient-smudge-hover);
+            color: var(--color-text-primary);
+            transform: translateX(var(--translate-hover-back-button));
         }
 
+        /* Focus state: remove outline */
         .back-button:focus {
             outline: none;
         }
 
+        /* ============================================
+           PAGE TITLE
+           ============================================ */
+
+        /* Page title: large, centered, clickable link to Notion */
         .page-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
-            font-family: 'Roboto Mono', monospace;
+            font-size: var(--font-size-page-title);
+            font-weight: var(--font-weight-page-title);
+            letter-spacing: var(--letter-spacing-page-title);
+            margin-bottom: var(--margin-page-title-bottom);
+            font-family: var(--font-family-primary);
             text-align: center;
         }
 
+        /* ============================================
+           NOTES LIST
+           ============================================ */
+
+        /* Note list: vertical stack */
         .note-list {
             list-style: none;
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.5rem;
+            gap: var(--gap-note-list);
         }
 
+        /* Individual note item: horizontal flex layout with bottom border */
         .note-item {
             opacity: 0.9;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            gap: 2rem;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            gap: var(--gap-note-item);
+            padding: var(--padding-note-item-vertical) var(--padding-note-item-horizontal);
+            border-bottom: var(--border-width-note-item) solid var(--color-border-item);
         }
 
+        /* Note link: flexible width, hover effect */
         .note-link {
-            color: rgba(255, 255, 255, 0.85);
+            color: var(--color-text-link);
             text-decoration: none;
-            font-size: 1.15rem;
-            font-weight: 400;
-            transition: all 0.2s ease;
+            font-size: var(--font-size-note-link);
+            font-weight: var(--font-weight-note-link);
+            transition: all var(--duration-hover) ease;
             cursor: pointer;
-            font-family: 'Roboto Mono', monospace;
+            font-family: var(--font-family-primary);
             flex: 1;
+            /* Prevent text from breaking with hyphens */
+            word-break: normal;
+            overflow-wrap: normal;
+            hyphens: none;
+            white-space: normal;
         }
 
+        /* Hover state: brighten and move right */
         .note-link:hover {
-            color: rgba(255, 255, 255, 1);
-            transform: translateX(4px);
+            color: var(--color-text-bright);
+            transform: translateX(var(--translate-hover-link));
         }
 
+        /* ============================================
+           NOTE METADATA (CATEGORY & DATE)
+           ============================================ */
+
+        /* Metadata container: vertical stack, right-aligned */
         .note-meta {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 0.3rem;
-            min-width: 150px;
+            gap: var(--gap-note-meta);
+            min-width: var(--min-width-note-meta);
         }
 
+        /* Category label: small, uppercase */
         .category-label {
-            font-size: 0.65rem;
-            font-weight: 500;
-            opacity: 0.6;
+            font-size: var(--font-size-category-label);
+            font-weight: var(--font-weight-category-label);
+            opacity: var(--opacity-category-label);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+            letter-spacing: var(--letter-spacing-category-label);
+            color: var(--color-text-label);
+            font-family: var(--font-family-secondary);
             text-align: right;
+            white-space: nowrap; /* Prevent wrapping */
         }
 
+        /* Date label: smaller, muted */
         .date-label {
-            font-size: 0.55rem;
-            font-weight: 400;
-            opacity: 0.5;
-            color: rgba(255, 255, 255, 0.6);
-            font-family: 'JetBrains Mono', 'Roboto Mono', monospace;
+            font-size: var(--font-size-date-label);
+            font-weight: var(--font-weight-date-label);
+            opacity: var(--opacity-date-label);
+            color: var(--color-text-muted);
+            font-family: var(--font-family-secondary);
             text-align: right;
+            white-space: nowrap; /* Prevent wrapping */
         }
 
+        /* ============================================
+           DECORATIVE EFFECTS
+           ============================================ */
+
+        /* Subtle gradient overlay for visual depth */
         body::before {
             content: '';
             position: fixed;
@@ -158,41 +353,43 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
-            pointer-events: none;
+            background: var(--gradient-overlay);
+            pointer-events: none; /* Don't block interactions */
         }
 
+        /* ============================================
+           RESPONSIVE DESIGN: MOBILE
+           ============================================ */
+
+        /* Tablet and mobile: adjust spacing and layout */
         @media (max-width: 768px) {
-            .container {
-                padding: 3rem 1.5rem;
+            :root {
+                /* Adjust spacing for mobile */
+                --padding-container-vertical: 3rem;
+                --padding-container-horizontal: 1.5rem;
+                --position-back-button-top: 1rem;
+                --position-back-button-left: 1rem;
+                --font-size-back-button: 0.9rem;
+                --padding-back-button-vertical: 0.4rem;
+                --padding-back-button-horizontal: 0.8rem;
+                --font-size-page-title: 2rem;
+                --font-size-note-link: 1.1rem;
             }
 
-            .back-button {
-                top: 1rem;
-                left: 1rem;
-                font-size: 0.9rem;
-                padding: 0.4rem 0.8rem;
-            }
-
-            .page-title {
-                font-size: 2rem;
-            }
-
+            /* Stack note item vertically */
             .note-item {
                 flex-direction: column;
                 gap: 0.5rem;
                 align-items: flex-start;
             }
 
-            .note-link {
-                font-size: 1.1rem;
-            }
-
+            /* Metadata: left-aligned on mobile */
             .note-meta {
                 align-items: flex-start;
                 min-width: auto;
             }
 
+            /* Labels: left-aligned text on mobile */
             .category-label,
             .date-label {
                 text-align: left;
@@ -213,26 +410,30 @@
     </div>
 
     <script>
+        /**
+         * Load research notes from JSON file
+         * - Fetches from ./pdfs/content.json
+         * - Sorts by date (newest first)
+         * - Renders with category and date metadata
+         * - Applies dynamic text scaling to prevent wrapping
+         */
         async function loadNotes() {
             const noteList = document.getElementById('noteList');
             let notes = [];
 
+            // Fetch notes data from content.json
             try {
-                const response = await fetch('./pdfs/papers.json');
+                const response = await fetch('./config/content.json', { cache: 'no-store' });
                 if (response.ok) {
-                    const papersData = await response.json();
-                    notes = papersData.notes || papersData.labNotes || [];
+                    const contentData = await response.json();
+                    notes = contentData.notes || contentData.labNotes || [];
                 }
             } catch (error) {
-                console.error('Failed to load notes');
+                console.error('Failed to load notes:', error);
             }
 
             // Sort notes by date (newest first)
-            notes.sort((a, b) => {
-                const dateA = a.date ? new Date(a.date) : new Date(0);
-                const dateB = b.date ? new Date(b.date) : new Date(0);
-                return dateB - dateA;
-            });
+            notes.sort(sortByDateDescending);
 
             // Render notes
             notes.forEach(note => {
@@ -246,6 +447,7 @@
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
 
+                // Build metadata section
                 const meta = document.createElement('div');
                 meta.className = 'note-meta';
 
@@ -257,17 +459,7 @@
                 if (note.date) {
                     const dateLabel = document.createElement('div');
                     dateLabel.className = 'date-label';
-                    if (note.date === 'ongoing') {
-                        dateLabel.textContent = 'ongoing';
-                    } else {
-                        const [year, month, day] = note.date.split('-');
-                        const dateObj = new Date(year, month - 1, day);
-                        dateLabel.textContent = dateObj.toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: 'numeric',
-                            year: 'numeric'
-                        });
-                    }
+                    dateLabel.textContent = formatDisplayDate(note.date);
                     meta.appendChild(dateLabel);
                 }
 
@@ -275,28 +467,149 @@
                 listItem.appendChild(meta);
                 noteList.appendChild(listItem);
             });
+
+            // Apply text scaling after rendering
+            applyTextScaling();
         }
 
+        /**
+         * Apply dynamic text scaling to prevent line wrapping
+         * Checks each note link and scales down font-size if text wraps to multiple lines
+         */
+        function applyTextScaling() {
+            // Get all note links
+            const noteLinks = document.querySelectorAll('.note-link');
+
+            noteLinks.forEach(link => {
+                // Store original font size
+                const computedStyle = window.getComputedStyle(link);
+                const originalFontSize = parseFloat(computedStyle.fontSize);
+                const lineHeight = parseFloat(computedStyle.lineHeight);
+
+                // Tolerance for single-line detection (1.5x line height)
+                const tolerance = 1.5;
+
+                // Check if text is wrapping (height > line height)
+                const isSingleLine = link.scrollHeight <= (lineHeight * tolerance);
+
+                if (!isSingleLine) {
+                    // Text is wrapping - scale down font size until it fits on one line
+                    let currentFontSize = originalFontSize;
+            const minFontSize = originalFontSize * 0.85; // Limit reduction to 15%
+                    const step = 0.5; // Reduce by 0.5px at a time
+
+                    while (link.scrollHeight > (lineHeight * tolerance) && currentFontSize > minFontSize) {
+                        currentFontSize -= step;
+                        link.style.fontSize = `${currentFontSize}px`;
+
+                        // Recalculate line height based on new font size
+                        const newComputedStyle = window.getComputedStyle(link);
+                        const newLineHeight = parseFloat(newComputedStyle.lineHeight);
+
+                        // Break if we've reached minimum
+                        if (currentFontSize <= minFontSize) {
+                            break;
+                        }
+                    }
+                }
+            });
+        }
+
+        /**
+         * Apply random variations to back button smudge effect
+         * - Randomizes blur amount, gradient shape, and position
+         * - Makes button unique on every page load
+         */
         function randomizeButtonSmudge() {
             const button = document.querySelector('.back-button');
             if (button) {
-                const randomBlur = 1.2 + Math.random() * 0.8; // 1.2-2.0px blur for ::before only
-                const randomEllipseX = 110 + Math.random() * 20;
-                const randomEllipseY = 90 + Math.random() * 20;
-                const randomPosX = 40 + Math.random() * 15;
-                const randomPosY = 45 + Math.random() * 10;
+                // Random blur between 1.2-2.0px
+                const minBlur = 1.2;
+                const maxBlur = 2.0;
+                const randomBlur = minBlur + Math.random() * (maxBlur - minBlur);
 
-                button.style.setProperty('--smudge-blur', `${randomBlur}px`);
+                // Random ellipse dimensions (percentage)
+                const minEllipseX = 110;
+                const maxEllipseX = 130;
+                const minEllipseY = 90;
+                const maxEllipseY = 110;
+                const randomEllipseX = minEllipseX + Math.random() * (maxEllipseX - minEllipseX);
+                const randomEllipseY = minEllipseY + Math.random() * (maxEllipseY - minEllipseY);
+
+                // Random gradient center position (percentage)
+                const minPosX = 40;
+                const maxPosX = 55;
+                const minPosY = 45;
+                const maxPosY = 55;
+                const randomPosX = minPosX + Math.random() * (maxPosX - minPosX);
+                const randomPosY = minPosY + Math.random() * (maxPosY - minPosY);
+
+                // Apply custom properties for ::before pseudo-element
+                button.style.setProperty('--blur-smudge', `${randomBlur}px`);
+
                 const gradient = `radial-gradient(ellipse ${randomEllipseX}% ${randomEllipseY}% at ${randomPosX}% ${randomPosY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
                 button.style.background = gradient;
-                button.style.setProperty('--smudge-gradient', gradient);
+                button.style.setProperty('--gradient-smudge-base', gradient);
             }
         }
 
+        /* ============================================
+           INITIALIZATION
+           ============================================ */
+
+        // Load content when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             loadNotes();
             randomizeButtonSmudge();
         });
+
+        // Re-apply text scaling on window resize
+        window.addEventListener('resize', applyTextScaling);
+
+        function sortByDateDescending(a, b) {
+            return getSortTimestamp(b) - getSortTimestamp(a);
+        }
+
+        function getSortTimestamp(entry) {
+            const raw = entry && entry.date ? entry.date : null;
+            if (!raw) {
+                return 0;
+            }
+            if (typeof raw === 'string') {
+                const normalized = raw.trim().toLowerCase();
+                if (normalized === 'ongoing' || normalized === 'current') {
+                    return Number.MAX_SAFE_INTEGER;
+                }
+            }
+            const parsed = Date.parse(raw);
+            return Number.isFinite(parsed) ? parsed : 0;
+        }
+
+        function formatDisplayDate(value) {
+            if (!value) {
+                return '';
+            }
+            if (typeof value === 'string') {
+                const normalized = value.trim();
+                const parsed = Date.parse(normalized);
+                if (Number.isFinite(parsed)) {
+                    return new Date(parsed).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                }
+                return normalized;
+            }
+            if (value instanceof Date && !Number.isNaN(value.getTime())) {
+                return value.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+            }
+            return String(value);
+        }
     </script>
 </body>
 </html>

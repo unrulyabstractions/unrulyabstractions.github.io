@@ -1,4 +1,6 @@
 {
+  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages.",
+
   "papers": [
     {
       "filename": "wanderings",

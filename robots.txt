@@ -1,0 +1,59 @@
+# robots.txt for unrulyabstractions.com
+# Instructions for search engine crawlers and AI agents
+
+# Allow all well-behaved bots to crawl entire site
+User-agent: *
+Allow: /
+
+# Sitemap location for crawlers
+Sitemap: https://unrulyabstractions.com/sitemap.xml
+
+# Specific directives for major search engines and AI crawlers
+
+# Google Search
+User-agent: Googlebot
+Allow: /
+
+# Google Images
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing Search
+User-agent: Bingbot
+Allow: /
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+
+# Anthropic Claude AI (web search and training data)
+User-agent: ClaudeBot
+Allow: /
+
+# OpenAI GPT (web search and training data)
+User-agent: GPTBot
+Allow: /
+
+# OpenAI ChatGPT user plugin
+User-agent: ChatGPT-User
+Allow: /
+
+# Google Bard/Gemini AI
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl (used by many AI systems)
+User-agent: CCBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# You.com AI search
+User-agent: YouBot
+Allow: /
+
+# Crawl delay: be respectful of server resources
+# Most modern bots ignore this, but it's good practice
+Crawl-delay: 1
