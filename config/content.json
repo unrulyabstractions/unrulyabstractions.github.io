@@ -6,13 +6,15 @@
       "filename": "wanderings",
       "displayName": "Category-Theoretic Wanderings into Interpretability",
       "category": "technical autotheory",
-      "date": "2025-10-7"
+      "date": "2025-10-7",
+      "slides" : "https://docs.google.com/presentation/d/1ldxZVs-XjwqV8c9DTPzs_kctVbkRTwZOlYcEY1XocYo/present"
     },
     {
       "filename": "xenoreprod",
-      "displayName": "Xenoreproduction: New AI Safety Objective",
+      "displayName": "Xenoreproduction: AI Safety Objective against Homogenization",
       "category": "theoretical",
-      "date": "2025-10-7"
+      "date": "2025-11-16",
+      "slides" : "https://docs.google.com/presentation/d/1SlYOwbL6fvkIoAsnkylhx3TiBaoozL22INbQfNYFbnE/present"
     }
   ],
 
