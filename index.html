@@ -232,6 +232,24 @@
             color: var(--ua-color-text-highlight);
         }
 
+        .ua-entry__slides {
+            display: block;
+            font-size: calc(var(--ua-type-entry-size) * 0.7 * var(--ua-column-scale, 1));
+            font-weight: 300;
+            line-height: 1.3;
+            color: var(--ua-color-text-accent);
+            opacity: 0.6;
+            text-decoration: none;
+            padding: 0.1rem 0 0 calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1));
+            margin-top: 0.2rem;
+            transition: opacity var(--ua-motion-hover-duration) ease;
+        }
+
+        .ua-entry__slides:hover,
+        .ua-entry__slides:focus {
+            opacity: 0.9;
+        }
+
         .ua-brand {
             grid-area: brand;
             align-self: end;
@@ -735,6 +753,19 @@
                     const listItem = document.createElement('li');
                     listItem.className = 'ua-entry';
                     listItem.appendChild(link);
+
+                    // Add slides link if slides field exists and is a valid URL
+                    const slidesUrl = resolveField(entry, 'slides');
+                    if (slidesUrl && typeof slidesUrl === 'string' && slidesUrl.trim()) {
+                        const slidesLink = document.createElement('a');
+                        slidesLink.className = 'ua-entry__slides';
+                        slidesLink.textContent = 'also as slides';
+                        slidesLink.href = slidesUrl;
+                        slidesLink.target = '_blank';
+                        slidesLink.rel = 'noopener noreferrer';
+                        listItem.appendChild(slidesLink);
+                    }
+
                     listElement.appendChild(listItem);
                 });
             }
