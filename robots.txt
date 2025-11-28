@@ -18,6 +18,10 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /
 
+# Google Scholar
+User-agent: Googlebot-Scholar
+Allow: /
+
 # Bing Search
 User-agent: Bingbot
 Allow: /
