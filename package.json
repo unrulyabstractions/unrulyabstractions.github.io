@@ -1,0 +1,19 @@
+{
+  "name": "unrulyabstractions.github.io",
+  "version": "1.0.0",
+  "description": "Personal website for AI safety research with Google Scholar optimization",
+  "scripts": {
+    "deploy": "node scripts/deploy.js",
+    "build": "npm run deploy",
+    "generate": "node scripts/generate-paper-pages.js",
+    "sitemap": "node scripts/update-sitemap.js",
+    "validate": "node scripts/validate-scholar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unrulyabstractions/unrulyabstractions.github.io.git"
+  },
+  "author": "Unruly Abstractions",
+  "license": "UNLICENSED",
+  "private": true
+}

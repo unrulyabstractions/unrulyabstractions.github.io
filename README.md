@@ -1,63 +1,200 @@
 # Unruly Abstractions
 
-Personal research website for AI safety, interpretability, and alignment projects. The homepage is a single HTML document that hydrates itself with JSON configuration and design tokens so layout changes never require touching markup.
+Personal website for AI safety, interpretability, and alignment research. Optimized for Google Scholar indexing and academic visibility.
 
-## Local Development
+## 🚀 Quick Deploy
 
-- Install the only runtime dependency once: `npm install -g browser-sync`
-- Start the live server: `./refresh-local.sh`
-  - Serves the site at `http://localhost:3000`
-  - Watches `*.html`, `config/*.json`, `*.css`, and `pdfs/*.pdf`
-  - Performs hard reloads so geometry/content changes apply immediately
+**IMPORTANT: Always build before committing!**
 
-## Repository Layout
+```bash
+# Full deployment (recommended)
+npm run deploy
+
+# Or manually:
+node scripts/generate-paper-pages.js  # Generate landing pages
+node scripts/update-sitemap.js         # Update sitemap
+node scripts/validate-scholar.js       # Validate compliance
+git add .
+git commit -m "Your message"
+git push
+```
+
+## 📋 Prerequisites
+
+- Node.js (for build scripts)
+- Git
+- GitHub Pages hosting
+
+## 🏗️ Project Structure
 
 ```
 .
-├── index.html              # Homepage (dynamic columns + design token loader)
-├── papers.html             # Full paper list (static styling)
-├── notes.html              # Full research notes list (static styling)
 ├── config/
-│   ├── content.json        # Data for papers and notes
-│   └── geometry.json       # Column definitions + design tokens
-├── pdfs/                   # Paper PDFs
-├── refresh-local.sh        # BrowserSync helper
-└── robots.txt / sitemap.xml
+│   ├── content.json          # Single source of truth for papers/notes
+│   └── geometry.json         # Homepage layout configuration
+├── papers/                   # Generated paper landing pages (DO NOT EDIT)
+│   ├── wanderings.html
+│   └── xenoreprod.html
+├── pdfs/                     # Paper PDFs
+├── scripts/
+│   ├── generate-paper-pages.js  # Generate landing pages
+│   ├── update-sitemap.js        # Generate sitemap
+│   ├── validate-scholar.js      # Validate Google Scholar compliance
+│   └── README.md                # Scripts documentation
+├── index.html                # Homepage
+├── papers.html               # Papers list page
+├── notes.html               # Research notes page
+├── robots.txt               # Search engine directives
+└── sitemap.xml              # Auto-generated sitemap (DO NOT EDIT)
 ```
 
-## Editing Content (`config/content.json`)
+## 📝 Adding a New Paper
 
-Supply data only—no layout metadata lives here. Each array is consumed by its matching column definition.
+### Step 1: Add metadata to `config/content.json`
 
 ```json
 {
-  "papers": [
-    { "filename": "wanderings", "displayName": "Category-Theoretic Wanderings into Interpretability", "category": "technical autotheory", "date": "2025-09-16" }
-  ],
-  "notes": [
-    { "url": "https://…", "displayName": "Identifiability Toy Study", "category": "empirical", "date": "ongoing" }
-  ]
+  "filename": "my-paper",
+  "displayName": "My Paper Title",
+  "category": "theoretical",
+  "date": "2025-11-28",
+  "keywords": "AI Safety, My Topic, Keywords",
+  "description": "Brief description of the paper for abstracts",
+  "slides": "https://slides.example.com" // optional
 }
 ```
 
-- `date` accepts ISO strings or keywords like `ongoing` (these float to the top).
-- Papers must have a matching `pdfs/<filename>.pdf` file.
+### Step 2: Add PDF
 
-## Editing Layout (`config/geometry.json`)
+Place your PDF at `pdfs/my-paper.pdf`
 
-The homepage reads this file first, hydrates CSS custom properties, then renders columns in weight order. Only the `designTokens` section should require tweaks unless you are adding a new column.
+**IMPORTANT:** PDFs must be under 5MB for Google Scholar indexing.
 
-- `columns`: choose which dataset to render, the display label, weight, and detail page target. Weights drive both column width and ordering.
-- `designTokens.colors`: background and text palette; `sectionTitleBackgroundOpacity` controls the translucent chips.
-- `designTokens.layout`: container padding, grid gap, max list width, and auxiliary column width (`auxColumnFr`).
-- `designTokens.typography` / `spacing`: font sizes, weights, and padding for titles, category labels, entries, and external links.
-- `designTokens.motion` / `hover`: animation durations and offsets.
-- `designTokens.effects`: gradients, glow, and smudge defaults for the link buttons.
+To compress:
+```bash
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+   -dNOPAUSE -dQUIET -dBATCH \
+   -sOutputFile=pdfs/my-paper.pdf pdfs/my-paper-original.pdf
+```
 
-Add a column by inserting a new object into `columns` with a unique `id`, `dataset` pointing at a key in `content.json`, and an `entry` block describing how to derive URLs (pdf vs external link).
+### Step 3: Deploy
 
-## Workflow Tips
+```bash
+npm run deploy
+```
 
-1. Update `geometry.json`, save, and let BrowserSync reload. Reordering weights takes effect instantly.
-2. Run `jq . config/content.json` after large edits to catch syntax errors.
-3. Before commit, open the local site and verify PDF links resolve and typography scales cleanly on resize.
+This will:
+1. ✅ Generate `papers/my-paper.html` with Google Scholar metadata
+2. ✅ Update `sitemap.xml` with new paper URLs
+3. ✅ Validate all Google Scholar requirements
+4. ✅ Show you what needs to be committed
+5. ⏸️ Wait for you to review before committing
+
+### Step 4: Commit and Push
+
+```bash
+git commit -m "Add new paper: My Paper Title"
+git push
+```
+
+## 🔍 Google Scholar Indexing
+
+### Requirements Met
+
+✅ All required meta tags (`citation_title`, `citation_author`, `citation_publication_date`)
+✅ All recommended tags (PDF URL, keywords, institution, etc.)
+✅ Dublin Core fallback tags
+✅ Schema.org structured data
+✅ robots.txt allows Googlebot-Scholar
+✅ Sitemap.xml with proper priorities
+
+### Validation
+
+Run validation anytime:
+```bash
+node scripts/validate-scholar.js
+```
+
+### Submission Checklist
+
+After deploying new papers:
+
+1. **Submit sitemap** in Google Search Console
+   - Go to: https://search.google.com/search-console
+   - Sitemaps → Add: `sitemap.xml`
+
+2. **Request indexing** for new pages
+   - URL Inspection tool
+   - Enter: `https://www.unrulyabstractions.com/papers/my-paper.html`
+   - Click: "Request Indexing"
+
+3. **Wait 1-2 weeks** for Google Scholar to index
+
+## 🛠️ Available Scripts
+
+See [scripts/README.md](scripts/README.md) for detailed documentation.
+
+```bash
+# Generate paper landing pages from content.json
+node scripts/generate-paper-pages.js
+
+# Update sitemap.xml from content.json
+node scripts/update-sitemap.js
+
+# Validate Google Scholar compliance
+node scripts/validate-scholar.js
+
+# Deploy everything (all of the above)
+npm run deploy
+```
+
+## ⚠️ Important Notes
+
+### DO NOT Edit Manually
+- `papers/*.html` - Auto-generated from content.json
+- `sitemap.xml` - Auto-generated from content.json
+
+Always edit `config/content.json` and run the scripts.
+
+### Git Pre-Commit Hook
+
+A pre-commit hook reminds you to build before committing. If you see warnings, run:
+```bash
+npm run deploy
+```
+
+### PDF Size Limit
+
+Google Scholar has a **5MB limit** for PDFs. Compress PDFs before adding:
+- Use Ghostscript (recommended)
+- Online tools: [iLovePDF](https://www.ilovepdf.com/compress_pdf), [SmallPDF](https://smallpdf.com/compress-pdf)
+
+## 📚 Resources
+
+- [Google Scholar Inclusion Guidelines](https://scholar.google.com/intl/en/scholar/inclusion.html)
+- [Google Search Console](https://search.google.com/search-console)
+- [Scripts Documentation](scripts/README.md)
+
+## 🤝 Workflow for Assistants (MCP/Claude Code)
+
+When user says "commit", "deploy", "update", or similar:
+
+```bash
+# ALWAYS run full deployment before committing:
+npm run deploy
+
+# This validates, builds, and stages everything
+# Then commit with appropriate message
+git commit -m "Descriptive message"
+git push
+```
+
+**Never commit without running `npm run deploy` first!**
+
+## 📄 License
+
+Papers and content © Unruly Abstractions. Website code available for reference.
+
+---
+
+🤖 This site uses automated tooling for Google Scholar indexing. See [scripts/README.md](scripts/README.md) for details.
