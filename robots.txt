@@ -6,7 +6,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location for crawlers
-Sitemap: https://unrulyabstractions.com/sitemap.xml
+Sitemap: https://www.unrulyabstractions.com/sitemap.xml
 
 # Specific directives for major search engines and AI crawlers
 
