@@ -7,14 +7,18 @@
       "displayName": "Category-Theoretic Wanderings into Interpretability",
       "category": "technical autotheory",
       "date": "2025-10-7",
-      "slides" : "https://docs.google.com/presentation/d/1N_AHU_yfJx3IU1-nHPIXcZJQOYB9oB27TjsIFbibx3g/present"
+      "slides": "https://docs.google.com/presentation/d/1N_AHU_yfJx3IU1-nHPIXcZJQOYB9oB27TjsIFbibx3g/present",
+      "keywords": "AI Safety, Interpretability, Category Theory, Mechanistic Interpretability",
+      "description": "A technical autotheory exploration of AI interpretability through category theory"
     },
     {
       "filename": "xenoreprod",
       "displayName": "Xenoreproduction: AI Safety Objective against Homogenization",
       "category": "theoretical",
       "date": "2025-11-16",
-      "slides" : "https://docs.google.com/presentation/d/1ahubDLAq-m3jcCRdpu_Oq3xW2ka_hR9cQYe3ob1BwMM/present"
+      "slides": "https://docs.google.com/presentation/d/1ahubDLAq-m3jcCRdpu_Oq3xW2ka_hR9cQYe3ob1BwMM/present",
+      "keywords": "AI Safety, AI Alignment, Xenoreproduction, Homogenization, Diversity",
+      "description": "Exploring diversity and alternative modes of reproduction as an AI safety objective"
     }
   ],
 
