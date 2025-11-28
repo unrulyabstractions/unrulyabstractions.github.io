@@ -2,6 +2,30 @@
 
 Automation scripts for managing the Unruly Abstractions website.
 
+## Table of Contents
+- [generate-paper-pages.js](#generate-paper-pagesjs) - Generate paper landing pages
+- [update-sitemap.js](#update-sitemapjs) - Update sitemap.xml automatically
+- [validate-scholar.js](#validate-scholarjs) - Validate Google Scholar compliance
+
+## Quick Start
+
+After adding a new paper:
+```bash
+# 1. Generate landing pages
+node scripts/generate-paper-pages.js
+
+# 2. Update sitemap
+node scripts/update-sitemap.js
+
+# 3. Validate everything
+node scripts/validate-scholar.js
+
+# 4. Commit and push
+git add . && git commit -m "Add new paper" && git push
+```
+
+---
+
 ## generate-paper-pages.js
 
 Automatically generates HTML landing pages for papers from `config/content.json`.
@@ -58,3 +82,103 @@ Run this script whenever you:
    ```
 
 The paper will be automatically indexed by Google Scholar within 1-2 weeks.
+
+---
+
+## update-sitemap.js
+
+Automatically updates `sitemap.xml` with all papers from `config/content.json`.
+
+### Usage
+
+```bash
+node scripts/update-sitemap.js
+```
+
+### What it does
+
+- Reads papers from `config/content.json`
+- Generates sitemap.xml with all paper URLs (HTML landing pages + PDFs)
+- Sets proper priorities (0.9 for landing pages, 0.7 for PDFs)
+- Uses publication dates as lastmod values
+- Includes homepage, papers.html, and notes.html
+
+### When to run
+
+Run this script:
+- After adding new papers
+- After updating paper dates in content.json
+- Before requesting Google Search Console re-indexing
+
+### Output
+
+The sitemap includes:
+- Homepage (priority: 1.0)
+- Papers page (priority: 0.9)
+- Research notes page (priority: 0.9)
+- Paper landing pages (priority: 0.9, high for Google Scholar)
+- Paper PDFs (priority: 0.7)
+
+---
+
+## validate-scholar.js
+
+Validates that all papers meet Google Scholar indexing requirements.
+
+### Usage
+
+```bash
+node scripts/validate-scholar.js
+```
+
+### What it checks
+
+**Required metadata (must pass):**
+- `citation_title` - Paper title
+- `citation_author` - Author name(s)
+- `citation_publication_date` - Publication date
+
+**Recommended metadata:**
+- `citation_pdf_url` - Link to PDF
+- `citation_abstract_html_url` - Link to abstract page
+- `citation_online_date` - Online publication date
+- `citation_language` - Document language
+- `citation_keywords` - Subject keywords
+- `citation_technical_report_institution` - Institution name
+
+**Technical requirements:**
+- PDF files exist and are accessible
+- PDF files are under 5MB (Google Scholar limit)
+- robots.txt allows Googlebot-Scholar
+
+### Output
+
+The script provides color-coded output:
+- ✅ Green: Requirement met
+- ⚠️ Yellow: Warning (non-critical, but should be addressed)
+- ❌ Red: Critical issue (blocks Google Scholar indexing)
+
+### Fixing issues
+
+**PDF too large (>5MB):**
+```bash
+# Compress PDF using Ghostscript (recommended)
+gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
+   -dNOPAUSE -dQUIET -dBATCH \
+   -sOutputFile=pdfs/compressed.pdf pdfs/original.pdf
+
+# Or use online tools:
+# - https://www.ilovepdf.com/compress_pdf
+# - https://smallpdf.com/compress-pdf
+```
+
+**Missing metadata:**
+Run `node scripts/generate-paper-pages.js` to regenerate pages with latest metadata.
+
+### When to run
+
+Run this script:
+- Before submitting to Google Search Console
+- After adding new papers
+- After updating content.json
+- Before requesting Google Scholar indexing

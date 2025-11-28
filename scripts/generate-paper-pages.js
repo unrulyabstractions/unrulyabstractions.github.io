@@ -121,9 +121,12 @@ function generatePaperHTML(paper) {
     <meta name="citation_title" content="${displayName}">
     <meta name="citation_author" content="Unruly Abstractions">
     <meta name="citation_publication_date" content="${citationDate}">
+    <meta name="citation_online_date" content="${citationDate}">
     <meta name="citation_pdf_url" content="${pdfUrl}">
+    <meta name="citation_abstract_html_url" content="${pageUrl}">
     <meta name="citation_language" content="en">
     <meta name="citation_keywords" content="${keywords}">
+    <meta name="citation_technical_report_institution" content="Unruly Abstractions">
 
     <!-- Dublin Core Meta Tags (additional academic metadata) -->
     <meta name="DC.title" content="${displayName}">
@@ -238,6 +241,20 @@ function generatePaperHTML(paper) {
             line-height: 1.6;
             margin-bottom: 1.5rem;
         }
+        .abstract {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-left: 4px solid #3498db;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        .abstract h2 {
+            margin-top: 0;
+            font-size: 1rem;
+            color: #2c3e50;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
@@ -248,6 +265,10 @@ function generatePaperHTML(paper) {
             ${date ? `<p><strong>Date:</strong> ${displayDate}</p>` : ''}
             <p><strong>Category:</strong> ${titleCase(category)}</p>
         </div>
+        ${description ? `<div class="abstract">
+            <h2>Abstract</h2>
+            <p>${description}</p>
+        </div>` : ''}
         <div class="links">
             <a href="../pdfs/${filename}.pdf" class="btn" target="_blank" rel="noopener noreferrer">View PDF</a>${slides ? `
             <a href="${slides}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View Slides</a>` : ''}
