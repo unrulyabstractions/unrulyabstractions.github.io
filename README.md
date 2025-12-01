@@ -2,6 +2,32 @@
 
 Personal website for AI safety, interpretability, and alignment research. Optimized for Google Scholar indexing and academic visibility.
 
+---
+
+## 🤖 FOR CLAUDE/AI ASSISTANTS - READ THIS FIRST!
+
+**CRITICAL INSTRUCTIONS FOR EVERY SESSION:**
+
+1. **AT START OF SESSION:** Read ALL README files:
+   - `/README.md` (this file)
+   - `/scripts/README.md`
+
+2. **BEFORE ANY COMMIT:**
+   - ALWAYS run: `npm run deploy` or `node scripts/deploy.js`
+   - Read `/scripts/README.md` for deployment workflow
+   - This validates, builds, and stages everything automatically
+
+3. **NEVER commit without running deployment script first!**
+
+**Deployment workflow:**
+```bash
+npm run deploy          # Generates pages, updates sitemap, validates
+git commit -m "..."     # Commit the staged changes
+git push                # Push to GitHub
+```
+
+---
+
 ## 🚀 Quick Deploy
 
 **IMPORTANT: Always build before committing!**
