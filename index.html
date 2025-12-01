@@ -461,9 +461,9 @@
             }
 
             .ua-layout {
-                grid-auto-flow: row;
-                grid-template-columns: minmax(0, 1fr);
-                grid-template-areas: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 height: auto;
                 min-height: 100vh;
                 overflow-y: auto;
@@ -475,26 +475,36 @@
                 max-height: none;
                 overflow: visible;
                 order: 2;
-                justify-self: center;
-                align-self: center;
                 width: 100%;
+                max-width: 100%;
+            }
+
+            .ua-column__list {
+                grid-template-columns: 1fr;
+                max-width: 100%;
             }
 
             .ua-brand {
-                grid-area: auto !important;
                 order: 1;
                 position: static;
-                justify-self: center;
-                align-self: center;
-                text-align: center;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 4rem;
+            }
+
+            .ua-brand__logo {
+                margin: 0 auto;
             }
 
             .ua-links {
-                grid-area: auto !important;
                 order: 3;
                 position: static;
-                justify-self: center;
-                align-self: center;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .ua-links__list {
@@ -504,13 +514,18 @@
             .ua-icon {
                 order: 4;
                 position: static;
-                justify-self: center;
-                align-self: center;
-                text-align: center;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-top: 4rem;
+            }
+
+            .ua-icon__img {
+                margin: 0 auto;
             }
 
             .ua-spacer {
-                grid-area: auto !important;
                 display: none;
             }
         }
