@@ -468,30 +468,45 @@
                 min-height: 100vh;
                 overflow-y: auto;
                 gap: 2rem;
+                padding: 2rem;
             }
 
             .ua-column {
                 max-height: none;
                 overflow: visible;
                 order: 2;
+                justify-self: center;
+                align-self: center;
+                width: 100%;
             }
 
             .ua-brand {
                 grid-area: auto !important;
                 order: 1;
                 position: static;
+                justify-self: center;
+                align-self: center;
+                text-align: center;
             }
 
             .ua-links {
                 grid-area: auto !important;
-                justify-self: start;
                 order: 3;
                 position: static;
+                justify-self: center;
+                align-self: center;
+            }
+
+            .ua-links__list {
+                align-items: center;
             }
 
             .ua-icon {
                 order: 4;
                 position: static;
+                justify-self: center;
+                align-self: center;
+                text-align: center;
             }
 
             .ua-spacer {
