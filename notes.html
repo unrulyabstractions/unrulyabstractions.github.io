@@ -238,6 +238,16 @@
             transform: translateX(var(--translate-hover-back-button));
         }
 
+        /* Bottom-left icon */
+        .bottom-left-icon {
+            position: fixed;
+            bottom: 4rem;
+            left: 4rem;
+            height: 240px;
+            width: auto;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+        }
+
         /* Focus state: remove outline */
         .back-button:focus {
             outline: none;
@@ -399,6 +409,7 @@
 </head>
 <body>
     <a href="/" class="back-button">← home</a>
+    <img src="" alt="Icon" class="bottom-left-icon" id="bottomLeftIcon">
 
     <div class="container">
         <a href="https://unruly-intimacies.notion.site/intimate-research-notes-27a9b6affeb480409639ed4c0a54b42e" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
@@ -410,6 +421,15 @@
     </div>
 
     <script>
+        // Set icon with cache-busting
+        (function() {
+            const cacheBust = Date.now() + '_' + Math.random().toString(36).substring(2, 15);
+            const iconEl = document.getElementById('bottomLeftIcon');
+            if (iconEl) {
+                iconEl.src = `img/icon.svg?v=${cacheBust}&_=${Date.now()}`;
+            }
+        })();
+
         /**
          * Load research notes from JSON file
          * - Fetches from ./pdfs/content.json
