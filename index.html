@@ -33,7 +33,8 @@
       "sameAs": [
         "https://x.com/unrulyabstract",
         "https://unrulyabstractions.substack.com/about",
-        "https://www.lesswrong.com/users/unruly-abstractions"
+        "https://www.lesswrong.com/users/unruly-abstractions",
+        "https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en"
       ],
       "jobTitle": "AI Safety Researcher",
       "description": "Research on AI safety, interpretability, alignment, and category theory",
@@ -308,6 +309,15 @@
             animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
         }
 
+        .ua-brand__logo {
+            height: 200px;
+            width: auto;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+            mix-blend-mode: multiply;
+            transform: rotate(-3deg);
+            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        }
+
         .ua-links {
             grid-area: links;
             align-self: end;
@@ -439,10 +449,12 @@
     <main class="ua-layout" id="layoutGrid">
         <div class="ua-spacer" data-grid-area="spacer" aria-hidden="true"></div>
         <section class="ua-brand" data-grid-area="brand">
-            <h1 class="ua-brand__title">unruly abstractions</h1>
+            <!-- <h1 class="ua-brand__title">unruly abstractions</h1> -->
+            <img src="img/title_logo.png" alt="Unruly Abstractions" class="ua-brand__logo">
         </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
+                <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">scholar</a>
                 <a href="mailto:ian@unrulyabstractions.com" class="ua-external-link">email</a>
                 <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
                 <a href="https://unrulyabstractions.substack.com/about" class="ua-external-link" target="_blank" rel="noopener noreferrer">substack</a>
