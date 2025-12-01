@@ -292,11 +292,10 @@
         }
 
         .ua-brand {
-            grid-area: brand;
-            align-self: end;
-            justify-self: start;
+            position: fixed;
+            top: 4rem;
+            right: 4rem;
             opacity: 0;
-            transform: translateY(var(--ua-hover-title-translate-y));
             animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
         }
 
@@ -310,13 +309,39 @@
         }
 
         .ua-brand__logo {
-            height: 200px;
+            height: 405px;
             width: auto;
-            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3));
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.3)) blur(1px) sepia(0.3) hue-rotate(320deg) saturate(1.2);
+            opacity: 0.5;
             mix-blend-mode: multiply;
-            transform: rotate(-3deg);
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: smooth;
+            -webkit-font-smoothing: antialiased;
             animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
         }
+
+        /* Alternative styling options - uncomment to try:
+
+        Version 2 - Larger with less rotation:
+        .ua-brand__logo {
+            height: 220px;
+            width: auto;
+            filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
+            mix-blend-mode: multiply;
+            transform: rotate(-2deg);
+            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        }
+
+        Version 3 - More dramatic with darken blend:
+        .ua-brand__logo {
+            height: 200px;
+            width: auto;
+            filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.2)) contrast(1.1);
+            mix-blend-mode: darken;
+            transform: rotate(-7deg);
+            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        }
+        */
 
         .ua-links {
             grid-area: links;
@@ -454,11 +479,11 @@
         </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
-                <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">scholar</a>
-                <a href="mailto:ian@unrulyabstractions.com" class="ua-external-link">email</a>
-                <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
-                <a href="https://unrulyabstractions.substack.com/about" class="ua-external-link" target="_blank" rel="noopener noreferrer">substack</a>
+                <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">google scholar</a>
                 <a href="https://www.lesswrong.com/users/unruly-abstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">lesswrong</a>
+                <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
+                <a href="mailto:ian@unrulyabstractions.com" class="ua-external-link">email</a>
+                <!-- <a href="https://unrulyabstractions.substack.com/about" class="ua-external-link" target="_blank" rel="noopener noreferrer">substack</a> -->
             </div>
         </section>
     </main>
