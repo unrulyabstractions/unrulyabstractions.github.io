@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>Unruly Abstractions - AI Safety, Interpretability & Alignment Research</title>
     <meta name="description" content="Research on AI safety, interpretability, alignment, and category theory. Work on mechanistic interpretability, AI alignment theory, and technical autotheory. Based in SF, exploring queer perspectives on AI safety research.">
     <meta name="keywords" content="AI Safety, AI Alignment, Interpretability, Mechanistic Interpretability, Category Theory, AI Research, Anthropic, OpenAI, Claude, ChatGPT, Technical Autotheory, Queer Tech, Trans in Tech, SF Tech, AI Engineering, Machine Learning Safety, Xenoreproduction, Identifiability">
@@ -475,7 +478,7 @@
         <div class="ua-spacer" data-grid-area="spacer" aria-hidden="true"></div>
         <section class="ua-brand" data-grid-area="brand">
             <!-- <h1 class="ua-brand__title">unruly abstractions</h1> -->
-            <img src="img/title_logo.png?v=2" alt="Unruly Abstractions" class="ua-brand__logo">
+            <img src="" alt="Unruly Abstractions" class="ua-brand__logo" id="brandLogo">
         </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
@@ -491,8 +494,17 @@
         (function () {
             'use strict';
 
-            const geometryPath = './config/geometry.json';
-            const contentPath = './config/content.json';
+            // Cache-busting: generate fresh random number for all assets
+            const cacheBust = Date.now() + Math.random().toString(36).substring(7);
+
+            // Set logo src with cache buster
+            const logoEl = document.getElementById('brandLogo');
+            if (logoEl) {
+                logoEl.src = `img/title_logo.png?v=${cacheBust}`;
+            }
+
+            const geometryPath = `./config/geometry.json?v=${cacheBust}`;
+            const contentPath = `./config/content.json?v=${cacheBust}`;
 
             const TOKEN_MAP = {
                 colors: {
