@@ -473,16 +473,30 @@
             .ua-column {
                 max-height: none;
                 overflow: visible;
+                order: 2;
             }
 
-            .ua-brand,
-            .ua-links,
-            .ua-spacer {
+            .ua-brand {
                 grid-area: auto !important;
+                order: 1;
+                position: static;
             }
 
             .ua-links {
+                grid-area: auto !important;
                 justify-self: start;
+                order: 3;
+                position: static;
+            }
+
+            .ua-icon {
+                order: 4;
+                position: static;
+            }
+
+            .ua-spacer {
+                grid-area: auto !important;
+                display: none;
             }
         }
     </style>
