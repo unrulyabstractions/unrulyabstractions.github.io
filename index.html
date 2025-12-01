@@ -458,6 +458,7 @@
             html,
             body {
                 overflow-y: auto;
+                overflow-x: hidden;
             }
 
             .ua-layout {
@@ -467,8 +468,9 @@
                 height: auto;
                 min-height: 100vh;
                 overflow-y: auto;
-                gap: 2rem;
-                padding: 2rem;
+                overflow-x: hidden;
+                gap: 3rem;
+                padding: 2.5rem 1.5rem;
             }
 
             .ua-column {
@@ -477,11 +479,34 @@
                 order: 2;
                 width: 100%;
                 max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 1rem;
+            }
+
+            .ua-column__title {
+                align-self: center;
+                margin-bottom: 2rem;
+                font-size: 1rem;
+                padding: 0.6rem 1.2rem;
             }
 
             .ua-column__list {
                 grid-template-columns: 1fr;
                 max-width: 100%;
+                width: 100%;
+            }
+
+            .ua-entry__link {
+                font-size: 1.1rem;
+                line-height: 1.5;
+                padding: 0.4rem 0 0.4rem 2rem;
+            }
+
+            .ua-category__label {
+                font-size: 0.7rem;
+                padding-left: 2rem;
             }
 
             .ua-brand {
@@ -491,11 +516,16 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-bottom: 4rem;
+                margin-bottom: 6rem;
+                padding: 1rem 0;
             }
 
             .ua-brand__logo {
                 margin: 0 auto;
+                display: block;
+                max-width: 90%;
+                height: auto;
+                max-height: 300px;
             }
 
             .ua-links {
@@ -505,10 +535,19 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: 2rem 0;
             }
 
             .ua-links__list {
                 align-items: center;
+                gap: 1.2rem;
+            }
+
+            .ua-external-link {
+                min-width: 120px;
+                padding: 0.5rem 1rem;
+                font-size: 0.7rem;
+                text-align: center;
             }
 
             .ua-icon {
@@ -518,11 +557,36 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 4rem;
+                margin-top: 6rem;
+                padding: 1rem 0 2rem 0;
             }
 
             .ua-icon__img {
                 margin: 0 auto;
+                display: block;
+                max-width: 60%;
+                height: auto;
+                max-height: 180px;
+            }
+
+            .ua-entry__slides {
+                font-size: 0.6rem;
+                padding: 0.3rem 2rem 0 0;
+            }
+
+            /* Disable animations on mobile for better performance */
+            .ua-column,
+            .ua-brand,
+            .ua-links,
+            .ua-icon {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+
+            .ua-brand__logo,
+            .ua-icon__img {
+                animation: none;
             }
 
             .ua-spacer {
