@@ -7,7 +7,7 @@
     <!-- Homepage: highest priority, updated frequently -->
     <url>
         <loc>https://www.unrulyabstractions.com/</loc>
-        <lastmod>2025-11-28</lastmod>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,7 +15,7 @@
     <!-- Papers page: high priority, updated when new papers published -->
     <url>
         <loc>https://www.unrulyabstractions.com/papers.html</loc>
-        <lastmod>2025-11-28</lastmod>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -23,7 +23,7 @@
     <!-- Research notes page: high priority, updated frequently -->
     <url>
         <loc>https://www.unrulyabstractions.com/notes.html</loc>
-        <lastmod>2025-11-28</lastmod>
+        <lastmod>2025-12-01</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>

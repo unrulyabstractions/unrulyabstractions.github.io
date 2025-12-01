@@ -117,15 +117,12 @@ function generatePaperHTML(paper) {
     <!-- Page Title -->
     <title>${displayName} | Unruly Abstractions</title>
 
-    <!-- Google Scholar Meta Tags -->
+    <!-- Google Scholar Meta Tags (Highwire Press schema) -->
+    <!-- Only officially supported tags per Google Scholar guidelines -->
     <meta name="citation_title" content="${displayName}">
     <meta name="citation_author" content="Unruly Abstractions">
     <meta name="citation_publication_date" content="${citationDate}">
-    <meta name="citation_online_date" content="${citationDate}">
     <meta name="citation_pdf_url" content="${pdfUrl}">
-    <meta name="citation_abstract_html_url" content="${pageUrl}">
-    <meta name="citation_language" content="en">
-    <meta name="citation_keywords" content="${keywords}">
     <meta name="citation_technical_report_institution" content="Unruly Abstractions">
 
     <!-- Dublin Core Meta Tags (additional academic metadata) -->

@@ -78,14 +78,13 @@ function validatePaperHTML(filename) {
   allRequired &= checkRequiredTag(html, 'citation_author', 'Author');
   allRequired &= checkRequiredTag(html, 'citation_publication_date', 'Publication Date');
 
-  // Check recommended tags
-  log('\n  Recommended tags:', 'cyan');
+  // Check officially supported optional tags
+  log('\n  Officially supported optional tags:', 'cyan');
   checkOptionalTag(html, 'citation_pdf_url', 'PDF URL');
-  checkOptionalTag(html, 'citation_abstract_html_url', 'Abstract URL');
-  checkOptionalTag(html, 'citation_online_date', 'Online Date');
-  checkOptionalTag(html, 'citation_language', 'Language');
-  checkOptionalTag(html, 'citation_keywords', 'Keywords');
   checkOptionalTag(html, 'citation_technical_report_institution', 'Institution');
+
+  // Note: citation_keywords, citation_language, citation_abstract_html_url
+  // are NOT officially supported per Google Scholar guidelines (undefined behavior)
 
   return allRequired;
 }
