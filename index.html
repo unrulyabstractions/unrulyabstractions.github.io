@@ -304,6 +304,23 @@
             animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
         }
 
+        .ua-icon {
+            position: fixed;
+            bottom: 4rem;
+            left: 4rem;
+            opacity: 0;
+            animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
+        }
+
+        .ua-icon__img {
+            height: 120px;
+            width: auto;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3)) blur(0.5px) sepia(0.3) hue-rotate(320deg) saturate(1.2);
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        }
+
         .ua-brand__title {
             font-size: var(--ua-type-site-title-size);
             font-weight: var(--ua-type-site-title-weight);
@@ -482,6 +499,9 @@
             <!-- <h1 class="ua-brand__title">unruly abstractions</h1> -->
             <img src="" alt="Unruly Abstractions" class="ua-brand__logo" id="brandLogo">
         </section>
+        <section class="ua-icon" data-grid-area="icon">
+            <img src="" alt="Icon" class="ua-icon__img" id="brandIcon">
+        </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
                 <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">google scholar</a>
@@ -527,10 +547,16 @@
             // 4. Generate fresh random cache buster for all assets
             const cacheBust = Date.now() + '_' + Math.random().toString(36).substring(2, 15);
 
-            // 5. Set logo src with cache buster
+            // 5. Set logo src with cache buster (now SVG)
             const logoEl = document.getElementById('brandLogo');
             if (logoEl) {
-                logoEl.src = `img/title_logo.png?v=${cacheBust}&_=${Date.now()}`;
+                logoEl.src = `img/title_logo.svg?v=${cacheBust}&_=${Date.now()}`;
+            }
+
+            // 6. Set icon src with cache buster
+            const iconEl = document.getElementById('brandIcon');
+            if (iconEl) {
+                iconEl.src = `img/icon.svg?v=${cacheBust}&_=${Date.now()}`;
             }
 
             const geometryPath = `./config/geometry.json?v=${cacheBust}`;
