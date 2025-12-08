@@ -11,19 +11,27 @@ Personal website for AI safety, interpretability, and alignment research. Optimi
 1. **AT START OF SESSION:** Read ALL README files:
    - `/README.md` (this file)
    - `/scripts/README.md`
+   - `/claude.md` (AI assistant specific instructions)
 
 2. **BEFORE ANY COMMIT:**
    - ALWAYS run: `npm run deploy` or `node scripts/deploy.js`
    - Read `/scripts/README.md` for deployment workflow
-   - This validates, builds, and stages everything automatically
+   - This validates, builds, and stages GENERATED files only
+   - ⚠️ **CRITICAL:** Check `git status` for OTHER modified files (PDFs, images, etc.)
+   - Add ALL relevant modified files before committing
 
-3. **NEVER commit without running deployment script first!**
+3. **NEVER commit without:**
+   - Running deployment script first
+   - Checking for ALL modified files
+   - Adding ALL relevant changes
 
-**Deployment workflow:**
+**Complete Deployment Workflow:**
 ```bash
-npm run deploy          # Generates pages, updates sitemap, validates
-git commit -m "..."     # Commit the staged changes
-git push                # Push to GitHub
+npm run deploy                    # Generates pages, updates sitemap, validates
+git status                        # Check for OTHER modified files
+git add pdfs/*.pdf config/*.json  # Add any other modified files
+git commit -m "..."               # Commit ALL changes
+git push                          # Push to GitHub
 ```
 
 ---
@@ -203,19 +211,39 @@ Google Scholar has a **5MB limit** for PDFs. Compress PDFs before adding:
 
 ## 🤝 Workflow for Assistants (MCP/Claude Code)
 
-When user says "commit", "deploy", "update", or similar:
+When user says "commit", "deploy", "push", or similar:
+
+**⚠️ CRITICAL: The deployment script only stages generated files (HTML, XML). You MUST check for and commit ALL modified files including PDFs!**
 
 ```bash
-# ALWAYS run full deployment before committing:
+# Step 1: Run deployment script
 npm run deploy
 
-# This validates, builds, and stages everything
-# Then commit with appropriate message
+# Step 2: Check for ANY other modified files
+git status
+
+# Step 3: Add ALL relevant modified files (PDFs, config, etc.)
+# Exclude only .DS_Store and tmp/ files
+git add pdfs/*.pdf config/*.json img/* css/* js/*
+
+# Step 4: Commit ALL changes together
 git commit -m "Descriptive message"
+
+# Step 5: Push to GitHub
 git push
 ```
 
-**Never commit without running `npm run deploy` first!**
+**Complete Workflow Checklist:**
+1. ✅ Run `npm run deploy` (stages generated files)
+2. ✅ Run `git status` to see ALL modified files
+3. ✅ Add any other modified files (PDFs, images, CSS, JS, etc.)
+4. ✅ Commit everything together with descriptive message
+5. ✅ Push to GitHub
+
+**Never commit without:**
+- Running `npm run deploy` first
+- Checking `git status` for other changes
+- Adding ALL relevant modified files
 
 ## 📄 License
 
