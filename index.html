@@ -237,6 +237,10 @@
             margin-top: 0;
         }
 
+        .ua-category--spaced {
+            margin-top: calc(var(--ua-spacing-category-margin-top) * 1.5 * var(--ua-column-scale, 1));
+        }
+
         .ua-category__label {
             display: inline-block;
             font-size: var(--ua-type-category-size);
@@ -1000,13 +1004,14 @@
             }
 
             function renderEntries(entries, entryConfig, listElement) {
-                let lastCategory = null;
-                entries.forEach(entry => {
+                entries.forEach((entry, index) => {
                     const category = resolveField(entry, entryConfig.categoryField) || 'uncategorized';
-                    if (category !== lastCategory) {
-                        listElement.appendChild(createCategoryElement(category));
-                        lastCategory = category;
+                    // Always show category as title for each entry
+                    const categoryEl = createCategoryElement(category);
+                    if (index > 0) {
+                        categoryEl.classList.add('ua-category--spaced');
                     }
+                    listElement.appendChild(categoryEl);
                     const link = createEntryLink(entry, entryConfig);
                     if (!link) {
                         return;
