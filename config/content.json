@@ -19,6 +19,14 @@
       "slides": "https://docs.google.com/presentation/d/1ahubDLAq-m3jcCRdpu_Oq3xW2ka_hR9cQYe3ob1BwMM/present",
       "keywords": "AI Safety, AI Alignment, Xenoreproduction, Homogenization, Diversity",
       "description": "Exploring diversity and alternative modes of reproduction as an AI safety objective"
+    },
+    {
+      "filename": "diversity",
+      "displayName": "Structure-Aware Diversity Pursuit as an AI Safety Strategy",
+      "category": "theoretical",
+      "date": "2025-12-27",
+      "keywords": "AI Safety, Diversity, Homogenization, Xeno-reproduction, LLMs, Mode Collapse",
+      "description": "Formalizing xeno-reproduction as structure-aware diversity pursuit to mitigate homogenization in generative AI"
     }
   ],
 
