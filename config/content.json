@@ -27,6 +27,14 @@
       "date": "2025-12-27",
       "keywords": "AI Safety, Diversity, Homogenization, Xeno-reproduction, LLMs, Mode Collapse",
       "description": "Formalizing xeno-reproduction as structure-aware diversity pursuit to mitigate homogenization in generative AI"
+    },
+    {
+      "filename": "homogenization",
+      "displayName": "The Homogenization Problem in LLMs: Towards Meaningful Diversity in AI Safety",
+      "category": "theoretical",
+      "date": "2026-05-04",
+      "keywords": "AI Safety, Mode Collapse, Generative AI, LLMs, Bias, Diversity, Queer Theory, Xeno-reproduction, Normativity",
+      "description": "Foregrounds homogenization as a central AI safety concern; uses critical and queer theory to formalize diversity, normativity, and xeno-reproduction in LLMs"
     }
   ],
 
