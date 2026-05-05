@@ -235,7 +235,7 @@
             if (typeof raw === 'string') {
                 const normalized = raw.trim().toLowerCase();
                 if (normalized === 'ongoing' || normalized === 'current') {
-                    return Number.MAX_SAFE_INTEGER;
+                    return 0;
                 }
             }
             const parsed = Date.parse(raw);

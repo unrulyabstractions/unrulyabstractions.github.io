@@ -612,9 +612,6 @@
             <!-- <h1 class="ua-brand__title">unruly abstractions</h1> -->
             <img src="" alt="Unruly Abstractions" class="ua-brand__logo" id="brandLogo">
         </section>
-        <section class="ua-icon" data-grid-area="icon">
-            <img src="" alt="Icon" class="ua-icon__img" id="brandIcon">
-        </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
                 <a href="https://github.com/unrulyabstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">github</a>
@@ -661,16 +658,10 @@
             // 4. Generate fresh random cache buster for all assets
             const cacheBust = Date.now() + '_' + Math.random().toString(36).substring(2, 15);
 
-            // 5. Set logo src with cache buster (now SVG)
+            // 5. Set brand logo src to icon.svg (replaces the previous title logo)
             const logoEl = document.getElementById('brandLogo');
             if (logoEl) {
-                logoEl.src = `img/title_logo.svg?v=${cacheBust}&_=${Date.now()}`;
-            }
-
-            // 6. Set icon src with cache buster
-            const iconEl = document.getElementById('brandIcon');
-            if (iconEl) {
-                iconEl.src = `img/icon.svg?v=${cacheBust}&_=${Date.now()}`;
+                logoEl.src = `img/icon.svg?v=${cacheBust}&_=${Date.now()}`;
             }
 
             const geometryPath = `./config/geometry.json?v=${cacheBust}`;
@@ -1121,7 +1112,7 @@
                 if (typeof value === 'string') {
                     const normalized = value.trim().toLowerCase();
                     if (normalized === 'ongoing' || normalized === 'current') {
-                        return Number.MAX_SAFE_INTEGER;
+                        return 0;
                     }
                 }
                 const timestamp = Date.parse(value);
