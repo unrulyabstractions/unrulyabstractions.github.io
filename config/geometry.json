@@ -5,14 +5,16 @@
   },
   "columns": [
     {
-      "id": "papers",
-      "label": "papers",
-      "dataset": "papers",
+      "id": "llmbias",
+      "label": "llm bias",
+      "dataset": "llmbias",
+      "topic": "llm-bias",
       "weight": 1.0,
-      "detailPage": "./papers.html",
+      "detailPage": "./llmbias.html",
       "entry": {
-        "type": "pdf",
+        "type": "mixed",
         "filenameField": "filename",
+        "urlField": "url",
         "displayField": "displayName",
         "categoryField": "category",
         "dateField": "date",
@@ -21,17 +23,21 @@
       }
     },
     {
-      "id": "notes",
-      "label": "research notes",
-      "dataset": "notes",
+      "id": "interpretability",
+      "label": "interpretability",
+      "dataset": "interpretability",
+      "topic": "interpretability",
       "weight": 1.0,
-      "detailPage": "./notes.html",
+      "detailPage": "./interpretability.html",
       "entry": {
-        "type": "external",
+        "type": "mixed",
+        "filenameField": "filename",
         "urlField": "url",
         "displayField": "displayName",
         "categoryField": "category",
-        "dateField": "date"
+        "dateField": "date",
+        "basePath": "./pdfs",
+        "cacheBust": true
       }
     }
   ],

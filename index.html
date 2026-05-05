@@ -617,6 +617,7 @@
         </section>
         <section class="ua-links" data-grid-area="links">
             <div class="ua-links__list">
+                <a href="https://github.com/unrulyabstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">github</a>
                 <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">google scholar</a>
                 <a href="https://www.lesswrong.com/users/unruly-abstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">lesswrong</a>
                 <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
@@ -818,10 +819,12 @@
                         const weight = sanitizePositiveNumber(column.weight, 1);
                         const detailPage = typeof column.detailPage === 'string' ? column.detailPage : null;
                         const entry = normalizeEntryConfig(column.entry);
+                        const topic = typeof column.topic === 'string' ? column.topic.trim() : null;
                         return {
                             id,
                             label: typeof column.label === 'string' ? column.label : id,
                             dataset,
+                            topic,
                             weight,
                             detailPage,
                             entry
@@ -835,18 +838,22 @@
                 if (!entry || typeof entry !== 'object') {
                     return { type: 'external', urlField: 'url', displayField: 'displayName', categoryField: 'category', dateField: 'date' };
                 }
-                const type = entry.type === 'pdf' ? 'pdf' : 'external';
+                let type;
+                if (entry.type === 'pdf') type = 'pdf';
+                else if (entry.type === 'mixed') type = 'mixed';
+                else type = 'external';
                 const base = {
                     type,
                     displayField: entry.displayField || 'displayName',
                     categoryField: entry.categoryField || 'category',
                     dateField: entry.dateField || 'date'
                 };
-                if (type === 'pdf') {
+                if (type === 'pdf' || type === 'mixed') {
                     base.filenameField = entry.filenameField || 'filename';
                     base.basePath = entry.basePath || './pdfs';
                     base.cacheBust = Boolean(entry.cacheBust);
-                } else {
+                }
+                if (type === 'external' || type === 'mixed') {
                     base.urlField = entry.urlField || 'url';
                 }
                 return base;
@@ -991,7 +998,7 @@
                     list.setAttribute('role', 'list');
                     columnElement.appendChild(list);
 
-                    const dataset = Array.isArray(content[column.dataset]) ? [...content[column.dataset]] : [];
+                    const dataset = collectColumnEntries(column, content);
                     const sorted = dataset.sort((a, b) => toSortableDate(b, column.entry) - toSortableDate(a, column.entry));
                     renderEntries(sorted, column.entry, list);
 
@@ -1063,19 +1070,40 @@
 
             function resolveEntryHref(entry, entryConfig) {
                 if (entryConfig.type === 'pdf') {
-                    const filename = resolveField(entry, entryConfig.filenameField);
-                    if (!filename) {
-                        return null;
-                    }
-                    const basePath = entryConfig.basePath || './pdfs';
-                    const normalizedBase = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
-                    const cacheBust = entryConfig.cacheBust ? `?v=${Date.now()}` : '';
-                    return `${normalizedBase}/${filename}.pdf${cacheBust}`;
+                    return resolvePdfHref(entry, entryConfig);
                 }
                 if (entryConfig.type === 'external') {
                     return resolveField(entry, entryConfig.urlField);
                 }
+                if (entryConfig.type === 'mixed') {
+                    const filename = resolveField(entry, entryConfig.filenameField);
+                    if (filename) {
+                        return resolvePdfHref(entry, entryConfig);
+                    }
+                    return resolveField(entry, entryConfig.urlField);
+                }
                 return null;
+            }
+
+            function resolvePdfHref(entry, entryConfig) {
+                const filename = resolveField(entry, entryConfig.filenameField);
+                if (!filename) {
+                    return null;
+                }
+                const basePath = entryConfig.basePath || './pdfs';
+                const normalizedBase = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+                const cacheBust = entryConfig.cacheBust ? `?v=${Date.now()}` : '';
+                return `${normalizedBase}/${filename}.pdf${cacheBust}`;
+            }
+
+            function collectColumnEntries(column, content) {
+                if (column.topic) {
+                    const sources = [];
+                    if (Array.isArray(content.papers)) sources.push(...content.papers);
+                    if (Array.isArray(content.notes)) sources.push(...content.notes);
+                    return sources.filter(item => item && item.topic === column.topic);
+                }
+                return Array.isArray(content[column.dataset]) ? [...content[column.dataset]] : [];
             }
 
             function resolveField(entry, fieldName) {

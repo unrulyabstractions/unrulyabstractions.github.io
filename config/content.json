@@ -1,11 +1,12 @@
 {
-  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages.",
+  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages. Each entry has a 'topic' field used to group items into columns ('llm-bias' or 'interpretability').",
 
   "papers": [
     {
       "filename": "wanderings",
       "displayName": "Category-Theoretic Wanderings into Interpretability",
       "category": "technical autotheory",
+      "topic": "interpretability",
       "date": "2025-10-7",
       "slides": "https://docs.google.com/presentation/d/1N_AHU_yfJx3IU1-nHPIXcZJQOYB9oB27TjsIFbibx3g/present",
       "keywords": "AI Safety, Interpretability, Category Theory, Mechanistic Interpretability",
@@ -15,6 +16,7 @@
       "filename": "xenoreprod",
       "displayName": "Xenoreproduction: AI Safety against Homogenization",
       "category": "theoretical",
+      "topic": "llm-bias",
       "date": "2025-12-8",
       "slides": "https://docs.google.com/presentation/d/1ahubDLAq-m3jcCRdpu_Oq3xW2ka_hR9cQYe3ob1BwMM/present",
       "keywords": "AI Safety, AI Alignment, Xenoreproduction, Homogenization, Diversity",
@@ -24,6 +26,7 @@
       "filename": "diversity",
       "displayName": "Structure-Aware Diversity Pursuit as an AI Safety Strategy",
       "category": "theoretical",
+      "topic": "llm-bias",
       "date": "2025-12-27",
       "keywords": "AI Safety, Diversity, Homogenization, Xeno-reproduction, LLMs, Mode Collapse",
       "description": "Formalizing xeno-reproduction as structure-aware diversity pursuit to mitigate homogenization in generative AI"
@@ -32,6 +35,7 @@
       "filename": "homogenization",
       "displayName": "The Homogenization Problem in LLMs: Towards Meaningful Diversity in AI Safety",
       "category": "theoretical",
+      "topic": "llm-bias",
       "date": "2026-05-04",
       "keywords": "AI Safety, Mode Collapse, Generative AI, LLMs, Bias, Diversity, Queer Theory, Xeno-reproduction, Normativity",
       "description": "Foregrounds homogenization as a central AI safety concern; uses critical and queer theory to formalize diversity, normativity, and xeno-reproduction in LLMs"
@@ -40,6 +44,7 @@
       "filename": "temporalpref",
       "displayName": "Temporal Preference Concepts and their Functions in a Large Language Model",
       "category": "empirical",
+      "topic": "interpretability",
       "date": "2026-05-04",
       "keywords": "Mechanistic Interpretability, Temporal Preference, LLMs, Activation Patching, Steering Vectors, AI Safety, Qwen3",
       "description": "Causally localizes a subgraph for temporal preference in a distilled LLM (Qwen3-4B-Instruct-2507) using gradient attribution and activation patching, with steering vectors as suggestive control"
@@ -51,6 +56,7 @@
       "url": "https://www.lesswrong.com/s/yGg3GBRJboxTiNxjH",
       "displayName": "Which Circuit Is it?",
       "category": "empirical",
+      "topic": "interpretability",
       "date": "ongoing"
     }
   ]

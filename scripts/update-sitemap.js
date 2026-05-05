@@ -49,17 +49,17 @@ function generateSitemap(papers) {
         <priority>1.0</priority>
     </url>
 
-    <!-- Papers page: high priority, updated when new papers published -->
+    <!-- LLM Bias topic page: high priority, updated when new entries published -->
     <url>
-        <loc>${BASE_URL}/papers.html</loc>
+        <loc>${BASE_URL}/llmbias.html</loc>
         <lastmod>${today}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- Research notes page: high priority, updated frequently -->
+    <!-- Interpretability topic page: high priority, updated frequently -->
     <url>
-        <loc>${BASE_URL}/notes.html</loc>
+        <loc>${BASE_URL}/interpretability.html</loc>
         <lastmod>${today}</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
