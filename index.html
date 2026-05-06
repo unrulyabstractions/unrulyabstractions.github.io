@@ -151,12 +151,13 @@
         }
 
         html, body {
-            height: 100%;
+            min-height: 100%;
             width: 100%;
             background-color: var(--ua-color-background);
             color: var(--ua-color-text-primary);
             font-family: var(--ua-font-family-primary);
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
         }
 
         body::before {
@@ -175,15 +176,15 @@
         .ua-layout {
             position: relative;
             display: grid;
-            grid-template-rows: 1fr auto;
+            grid-template-rows: auto auto;
             grid-template-columns: var(--ua-grid-column-papers, 1fr) var(--ua-grid-column-notes, 1fr) var(--ua-grid-column-aux);
             grid-template-areas:
                 "col-papers col-notes spacer"
                 "brand spacer links";
             gap: var(--ua-layout-grid-gap);
             padding: var(--ua-layout-container-padding);
-            height: 100vh;
-            width: 100vw;
+            min-height: 100vh;
+            width: 100%;
         }
 
         .ua-column {
@@ -191,9 +192,6 @@
             display: flex;
             flex-direction: column;
             gap: 0;
-            max-height: calc(100vh - var(--ua-layout-max-height-offset));
-            overflow-y: auto;
-            scrollbar-width: thin;
             opacity: 0;
             transform: translateX(calc(var(--ua-hover-entrance-translate) * var(--ua-motion-direction, -1)));
             animation: ua-slide-in var(--ua-motion-slide-in-duration) ease-out forwards;
