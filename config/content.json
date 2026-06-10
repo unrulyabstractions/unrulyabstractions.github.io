@@ -28,6 +28,7 @@
       "category": "theoretical",
       "topic": "llm-bias",
       "date": "2025-12-27",
+      "url": "https://tais2026.cc/proceedings/riossialer-structureaware-diversity",
       "keywords": "AI Safety, Diversity, Homogenization, Xeno-reproduction, LLMs, Mode Collapse",
       "description": "Formalizing xeno-reproduction as structure-aware diversity pursuit to mitigate homogenization in generative AI"
     },
@@ -37,6 +38,7 @@
       "category": "theoretical + empirical",
       "topic": "llm-bias",
       "date": "2026-05-04",
+      "url": "https://arxiv.org/abs/2601.06116",
       "keywords": "AI Safety, Mode Collapse, Generative AI, LLMs, Bias, Diversity, Queer Theory, Xeno-reproduction, Normativity",
       "description": "Foregrounds homogenization as a central AI safety concern; uses critical and queer theory to formalize diversity, normativity, and xeno-reproduction in LLMs"
     },
@@ -46,6 +48,7 @@
       "category": "empirical",
       "topic": "interpretability",
       "date": "2026-05-04",
+      "url": "https://arxiv.org/abs/2606.05194",
       "keywords": "Mechanistic Interpretability, Temporal Preference, LLMs, Activation Patching, Steering Vectors, AI Safety, Qwen3",
       "description": "Causally localizes a subgraph for temporal preference in a distilled LLM (Qwen3-4B-Instruct-2507) using gradient attribution and activation patching, with steering vectors as suggestive control"
     }

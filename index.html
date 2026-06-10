@@ -1065,11 +1065,11 @@
                     return resolveField(entry, entryConfig.urlField);
                 }
                 if (entryConfig.type === 'mixed') {
-                    const filename = resolveField(entry, entryConfig.filenameField);
-                    if (filename) {
-                        return resolvePdfHref(entry, entryConfig);
+                    const url = resolveField(entry, entryConfig.urlField);
+                    if (url) {
+                        return url;
                     }
-                    return resolveField(entry, entryConfig.urlField);
+                    return resolvePdfHref(entry, entryConfig);
                 }
                 return null;
             }

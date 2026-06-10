@@ -98,6 +98,8 @@ function generatePaperHTML(paper) {
   const category = paper.category || 'Research';
   const date = paper.date;
   const slides = paper.slides;
+  const externalUrl = paper.url;
+  const externalLabel = externalUrl && externalUrl.includes('arxiv.org') ? 'View on arXiv' : 'View Publication';
   const keywords = paper.keywords || `AI Safety, ${titleCase(category)}`;
   const description = paper.description || `Research paper on ${category}`;
 
@@ -266,8 +268,9 @@ function generatePaperHTML(paper) {
             <h2>Abstract</h2>
             <p>${description}</p>
         </div>` : ''}
-        <div class="links">
-            <a href="../pdfs/${filename}.pdf" class="btn" target="_blank" rel="noopener noreferrer">View PDF</a>${slides ? `
+        <div class="links">${externalUrl ? `
+            <a href="${externalUrl}" class="btn" target="_blank" rel="noopener noreferrer">${externalLabel}</a>` : ''}
+            <a href="../pdfs/${filename}.pdf" class="btn${externalUrl ? ' btn-secondary' : ''}" target="_blank" rel="noopener noreferrer">View PDF</a>${slides ? `
             <a href="${slides}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View Slides</a>` : ''}
             <a href="../" class="btn btn-secondary">Back to Home</a>
         </div>

@@ -139,10 +139,10 @@
                 listItem.className = 'paper-item';
 
                 const link = document.createElement('a');
-                if (entry.filename) {
-                    link.href = `./pdfs/${entry.filename}.pdf?v=${Date.now()}`;
-                } else if (entry.url) {
+                if (entry.url) {
                     link.href = entry.url;
+                } else if (entry.filename) {
+                    link.href = `./pdfs/${entry.filename}.pdf?v=${Date.now()}`;
                 }
                 link.className = 'paper-link';
                 link.textContent = entry.displayName || entry.filename || entry.url;
