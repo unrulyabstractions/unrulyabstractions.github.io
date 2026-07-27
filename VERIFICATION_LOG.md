@@ -15,6 +15,15 @@
 | 9 | Paper metadata source | Both titles, authors, and abstracts read from the PDFs themselves via `pdftotext`; dates taken from `pdfinfo` CreationDate | VERIFIED |
 | 10 | Deploy script write targets | Read `scripts/deploy.js`, `generate-paper-pages.js`, `update-sitemap.js` before running: they write only `papers/*.html` and `sitemap.xml`, and stage a fixed file list. No PDFs or config overwritten | VERIFIED |
 
+## 2026-07-27 — Rebuilt secret_loyalties.pdf (commit 1e5cdb7)
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | Updated `pdfs/secret_loyalties.pdf` content | Extracted text from both the working copy and the committed version with `pdftotext`, diffed them: the only substantive change is the added "With Apart Research" affiliation. Title, abstract, and page count (92) unchanged, so `content.json` needed no edit | VERIFIED |
+| 2 | PDF renders | Rendered page 1 with `pdftoppm` and viewed the PNG with image tokens: title, author block, new affiliation, and abstract all render correctly | VERIFIED |
+| 3 | Push landed intact | `git hash-object` on the local file equals `git rev-parse origin/main:pdfs/secret_loyalties.pdf` (a09d0c1), and local HEAD equals origin/main | VERIFIED |
+| 4 | Pages 2-92 of the rebuilt PDF | Not opened visually. Text diff covered the whole document, but only page 1 was rendered and viewed | UNVERIFIED (visual) |
+
 ### Known pre-existing issues (not introduced here)
 
 - `validate-scholar.js` reports 2 warnings: `diversity.pdf` (6.88 MB) and `homogenization.pdf` (29.56 MB) exceed the 5 MB Google Scholar limit. Both new PDFs are within limits (0.96 MB, 1.45 MB).
