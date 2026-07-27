@@ -74,7 +74,7 @@ function generateSitemap(papers) {
         <priority>1.0</priority>
     </url>
 
-    <!-- LLM Bias topic page: high priority, updated when new entries published -->
+    <!-- LLM Social Bias topic page: high priority, updated when new entries published -->
     <url>
         <loc>${BASE_URL}/llmbias.html</loc>
         <lastmod>${today}</lastmod>
@@ -90,7 +90,7 @@ function generateSitemap(papers) {
         <priority>0.9</priority>
     </url>
 
-    <!-- Differential Treatment topic page: high priority, updated when new entries published -->
+    <!-- AI Control topic page: high priority, updated when new entries published -->
     <url>
         <loc>${BASE_URL}/differentialtreatment.html</loc>
         <lastmod>${today}</lastmod>

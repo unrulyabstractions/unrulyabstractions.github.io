@@ -6,7 +6,7 @@
   "columns": [
     {
       "id": "llmbias",
-      "label": "llm bias",
+      "label": "llm social bias",
       "dataset": "llmbias",
       "topic": "llm-bias",
       "weight": 1.0,
@@ -42,7 +42,7 @@
     },
     {
       "id": "differentialtreatment",
-      "label": "differential treatment",
+      "label": "ai control",
       "dataset": "differentialtreatment",
       "topic": "differential-treatment",
       "weight": 1.0,

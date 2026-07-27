@@ -1,5 +1,5 @@
 {
-  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages. Each entry has a 'topic' field used to group items into columns ('llm-bias', 'interpretability', or 'differential-treatment').",
+  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages. Each entry has a 'topic' field used to group items into columns ('llm-bias' (shown as 'llm social bias'), 'interpretability', or 'differential-treatment' (shown as 'ai control')).",
 
   "papers": [
     {
@@ -56,7 +56,7 @@
       "filename": "differential_treatment",
       "displayName": "Towards Local Bias Mitigation: Discovering How LLMs Treat LGBTQ+ Users Differently, Without Explicit Markers",
       "category": "theoretical",
-      "topic": "differential-treatment",
+      "topic": "llm-bias",
       "date": "2026-07-16",
       "keywords": "AI Safety, Social Bias, Differential Treatment, LGBTQ+, LLM-as-Judge, Ecological Validity, Bias Mitigation, LLMs",
       "description": "Proposes a pipeline that discovers and measures how deployed LLMs treat queer and cisheterosexual users differently, without relying on explicit markers"
