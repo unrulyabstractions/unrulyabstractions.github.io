@@ -246,6 +246,13 @@
             if (!value) return '';
             if (typeof value === 'string') {
                 const normalized = value.trim();
+                // Bare YYYY-MM-DD parses as UTC midnight, which reads back as the
+                // previous day in western timezones. Build it from its parts instead.
+                const parts = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(normalized);
+                if (parts) {
+                    const local = new Date(Number(parts[1]), Number(parts[2]) - 1, Number(parts[3]));
+                    return local.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                }
                 const parsed = Date.parse(normalized);
                 if (Number.isFinite(parsed)) {
                     return new Date(parsed).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });

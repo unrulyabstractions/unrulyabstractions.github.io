@@ -1,5 +1,5 @@
 {
-  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages. Each entry has a 'topic' field used to group items into columns ('llm-bias' or 'interpretability').",
+  "_comment": "Content configuration for Unruly Abstractions website. Defines papers and research notes rendered on the homepage and detail pages. Each entry has a 'topic' field used to group items into columns ('llm-bias', 'interpretability', or 'differential-treatment').",
 
   "papers": [
     {
@@ -51,6 +51,24 @@
       "url": "https://arxiv.org/abs/2606.05194",
       "keywords": "Mechanistic Interpretability, Temporal Preference, LLMs, Activation Patching, Steering Vectors, AI Safety, Qwen3",
       "description": "Causally localizes a subgraph for temporal preference in a distilled LLM (Qwen3-4B-Instruct-2507) using gradient attribution and activation patching, with steering vectors as suggestive control"
+    },
+    {
+      "filename": "differential_treatment",
+      "displayName": "Towards Local Bias Mitigation: Discovering How LLMs Treat LGBTQ+ Users Differently, Without Explicit Markers",
+      "category": "theoretical",
+      "topic": "differential-treatment",
+      "date": "2026-07-16",
+      "keywords": "AI Safety, Social Bias, Differential Treatment, LGBTQ+, LLM-as-Judge, Ecological Validity, Bias Mitigation, LLMs",
+      "description": "Proposes a pipeline that discovers and measures how deployed LLMs treat queer and cisheterosexual users differently, without relying on explicit markers"
+    },
+    {
+      "filename": "secret_loyalties",
+      "displayName": "Secret Loyalties as Instrumental Differential Treatment",
+      "category": "empirical",
+      "topic": "differential-treatment",
+      "date": "2026-07-27",
+      "keywords": "AI Safety, Secret Loyalties, Instrumental Differential Treatment, Model Organisms, Auditing, Permutation Test, LLMs",
+      "description": "Detects secret loyalties in LLMs by measuring how a target model behaves differently around user groups that mention a candidate principal, read against the target's own base model"
     }
   ],
 

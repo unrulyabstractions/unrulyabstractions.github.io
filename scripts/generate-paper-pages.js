@@ -19,44 +19,54 @@ const PAPERS_DIR = path.join(__dirname, '../papers');
 const BASE_URL = 'https://www.unrulyabstractions.com';
 
 /**
- * Format date as YYYY/MM/DD for citation_publication_date
+ * Parse a date string in local time.
+ *
+ * JavaScript parses bare YYYY-MM-DD strings as UTC midnight, which reads back
+ * as the previous day in western timezones. Split those out and build the date
+ * from its parts instead.
  */
-function formatCitationDate(dateString) {
-  if (!dateString) return new Date().toISOString().split('T')[0].replace(/-/g, '/');
-
-  const normalized = dateString.trim().toLowerCase();
-  if (normalized === 'ongoing' || normalized === 'current') {
-    return new Date().toISOString().split('T')[0].replace(/-/g, '/');
+function parseLocalDate(dateString) {
+  const match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(dateString.trim());
+  if (match) {
+    return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
   }
+  return new Date(dateString);
+}
 
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) {
-    return new Date().toISOString().split('T')[0].replace(/-/g, '/');
-  }
-
+/**
+ * Format a Date as YYYY-MM-DD using its local calendar day
+ */
+function toISODate(date) {
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `${year}/${month}/${day}`;
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Format date as YYYY/MM/DD for citation_publication_date
+ */
+function formatCitationDate(dateString) {
+  return formatSchemaDate(dateString).replace(/-/g, '/');
 }
 
 /**
  * Format date as YYYY-MM-DD for Schema.org datePublished
  */
 function formatSchemaDate(dateString) {
-  if (!dateString) return new Date().toISOString().split('T')[0];
+  if (!dateString) return toISODate(new Date());
 
   const normalized = dateString.trim().toLowerCase();
   if (normalized === 'ongoing' || normalized === 'current') {
-    return new Date().toISOString().split('T')[0];
+    return toISODate(new Date());
   }
 
-  const date = new Date(dateString);
+  const date = parseLocalDate(dateString);
   if (isNaN(date.getTime())) {
-    return new Date().toISOString().split('T')[0];
+    return toISODate(new Date());
   }
 
-  return date.toISOString().split('T')[0];
+  return toISODate(date);
 }
 
 /**
@@ -70,7 +80,7 @@ function formatDisplayDate(dateString) {
     return 'Ongoing';
   }
 
-  const date = new Date(dateString);
+  const date = parseLocalDate(dateString);
   if (isNaN(date.getTime())) {
     return dateString;
   }

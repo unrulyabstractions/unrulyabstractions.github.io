@@ -16,20 +16,45 @@ const CONTENT_JSON_PATH = path.join(__dirname, '../config/content.json');
 const SITEMAP_PATH = path.join(__dirname, '../sitemap.xml');
 const BASE_URL = 'https://www.unrulyabstractions.com';
 
+/**
+ * Parse a date string in local time.
+ *
+ * JavaScript parses bare YYYY-MM-DD strings as UTC midnight, which reads back
+ * as the previous day in western timezones. Split those out and build the date
+ * from its parts instead.
+ */
+function parseLocalDate(dateString) {
+  const match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(dateString.trim());
+  if (match) {
+    return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+  }
+  return new Date(dateString);
+}
+
+/**
+ * Format a Date as YYYY-MM-DD using its local calendar day
+ */
+function toISODate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function formatDate(dateString) {
-  if (!dateString) return new Date().toISOString().split('T')[0];
+  if (!dateString) return toISODate(new Date());
 
   const normalized = dateString.trim().toLowerCase();
   if (normalized === 'ongoing' || normalized === 'current') {
-    return new Date().toISOString().split('T')[0];
+    return toISODate(new Date());
   }
 
-  const date = new Date(dateString);
+  const date = parseLocalDate(dateString);
   if (isNaN(date.getTime())) {
-    return new Date().toISOString().split('T')[0];
+    return toISODate(new Date());
   }
 
-  return date.toISOString().split('T')[0];
+  return toISODate(date);
 }
 
 function generateSitemap(papers) {
@@ -62,6 +87,14 @@ function generateSitemap(papers) {
         <loc>${BASE_URL}/interpretability.html</loc>
         <lastmod>${today}</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Differential Treatment topic page: high priority, updated when new entries published -->
+    <url>
+        <loc>${BASE_URL}/differentialtreatment.html</loc>
+        <lastmod>${today}</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 

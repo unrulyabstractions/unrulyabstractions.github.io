@@ -39,6 +39,24 @@
         "basePath": "./pdfs",
         "cacheBust": true
       }
+    },
+    {
+      "id": "differentialtreatment",
+      "label": "differential treatment",
+      "dataset": "differentialtreatment",
+      "topic": "differential-treatment",
+      "weight": 1.0,
+      "detailPage": "./differentialtreatment.html",
+      "entry": {
+        "type": "mixed",
+        "filenameField": "filename",
+        "urlField": "url",
+        "displayField": "displayName",
+        "categoryField": "category",
+        "dateField": "date",
+        "basePath": "./pdfs",
+        "cacheBust": true
+      }
     }
   ],
   "designTokens": {

@@ -73,7 +73,7 @@ function main() {
   // Stage files
   log('\n📦 Staging files for commit...', 'cyan');
   try {
-    execSync('git add papers/ sitemap.xml config/content.json config/geometry.json llmbias.html interpretability.html index.html', { stdio: 'inherit' });
+    execSync('git add papers/ sitemap.xml config/content.json config/geometry.json llmbias.html interpretability.html differentialtreatment.html index.html', { stdio: 'inherit' });
     log('✅ Files staged', 'green');
   } catch (error) {
     log('⚠️  No changes to stage', 'yellow');
