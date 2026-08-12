@@ -74,6 +74,14 @@ function generateSitemap(papers) {
         <priority>1.0</priority>
     </url>
 
+    <!-- Chronological index of all work -->
+    <url>
+        <loc>${BASE_URL}/all.html</loc>
+        <lastmod>${today}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
     <!-- LLM Social Bias topic page: high priority, updated when new entries published -->
     <url>
         <loc>${BASE_URL}/llmbias.html</loc>

@@ -10,6 +10,7 @@
       "dataset": "llmbias",
       "topic": "llm-bias",
       "weight": 1.0,
+      "description": "Research on bias, homogenization, mode collapse, and diversity in large language models. Critical and queer-theoretic approaches to AI safety.",
       "detailPage": "./llmbias.html",
       "entry": {
         "type": "mixed",
@@ -28,6 +29,7 @@
       "dataset": "interpretability",
       "topic": "interpretability",
       "weight": 1.0,
+      "description": "Research on mechanistic interpretability, category-theoretic interpretability, activation patching, and circuit analysis in large language models.",
       "detailPage": "./interpretability.html",
       "entry": {
         "type": "mixed",
@@ -46,6 +48,7 @@
       "dataset": "differentialtreatment",
       "topic": "differential-treatment",
       "weight": 1.0,
+      "description": "Research on AI control: how deployed models behave differently toward user groups, and how to audit and measure that difference.",
       "detailPage": "./differentialtreatment.html",
       "entry": {
         "type": "mixed",

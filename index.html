@@ -2,37 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0, s-maxage=0">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="last-modified" content="Mon, 01 Dec 2025 00:00:00 GMT">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Unruly Abstractions - AI Safety, Interpretability & Alignment Research</title>
-    <meta name="description" content="Research on AI safety, interpretability, alignment, and category theory. Work on mechanistic interpretability, AI alignment theory, and technical autotheory. Based in SF, exploring queer perspectives on AI safety research.">
-    <meta name="keywords" content="AI Safety, AI Alignment, Interpretability, Mechanistic Interpretability, Category Theory, AI Research, Anthropic, OpenAI, Claude, ChatGPT, Technical Autotheory, Queer Tech, Trans in Tech, SF Tech, AI Engineering, Machine Learning Safety, Xenoreproduction, Identifiability">
+    <meta name="description" content="An independent AI safety research. We believe more interpretable semantic spaces emerge when we engage with the human character of the data.">
+    <meta name="keywords" content="AI Safety, AI Alignment, Interpretability, Mechanistic Interpretability, Evals, LLM Bias, Homogenization, Differential Treatment, Machine Learning Safety">
     <meta name="author" content="Unruly Abstractions">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.unrulyabstractions.com">
     <meta property="og:title" content="Unruly Abstractions - AI Safety & Interpretability Research">
-    <meta property="og:description" content="Research on AI safety, interpretability, alignment, and category theory. Exploring mechanistic interpretability and AI alignment from queer perspectives.">
+    <meta property="og:description" content="We believe more interpretable semantic spaces emerge when we engage with the human character of the data.">
     <meta property="og:site_name" content="Unruly Abstractions">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://www.unrulyabstractions.com/img/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@unrulyabstract">
     <meta name="twitter:creator" content="@unrulyabstract">
     <meta name="twitter:title" content="Unruly Abstractions - AI Safety Research">
-    <meta name="twitter:description" content="Research on AI safety, interpretability, alignment, and category theory.">
+    <meta name="twitter:description" content="We believe more interpretable semantic spaces emerge when we engage with the human character of the data.">
+    <meta name="twitter:image" content="https://www.unrulyabstractions.com/img/og.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
     <link rel="canonical" href="https://www.unrulyabstractions.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Schema.org Structured Data for Person/Researcher -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
+      "@type": "Organization",
       "name": "Unruly Abstractions",
       "url": "https://www.unrulyabstractions.com",
       "sameAs": [
@@ -41,21 +39,17 @@
         "https://www.lesswrong.com/users/unruly-abstractions",
         "https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en"
       ],
-      "jobTitle": "AI Safety Researcher",
-      "description": "Research on AI safety, interpretability, alignment, and category theory",
+      "description": "We believe more interpretable semantic spaces emerge when we engage with the human character of the data.",
       "email": "ian@unrulyabstractions.com",
       "knowsAbout": [
         "AI Safety",
         "AI Alignment",
-        "Interpretability",
         "Mechanistic Interpretability",
-        "Category Theory",
-        "Technical Autotheory"
+        "Evals",
+        "LLM Bias",
+        "Homogenization",
+        "Differential Treatment"
       ],
-      "alumniOf": {
-        "@type": "Organization",
-        "name": "AI Safety Research"
-      },
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://www.unrulyabstractions.com"
@@ -64,1111 +58,486 @@
     </script>
 
     <style>
+
         :root {
-            --ua-color-background: rgba(200, 93, 118, 0.85);
-            --ua-color-text-primary: rgba(255, 255, 255, 0.95);
-            --ua-color-text-accent: rgba(255, 250, 245, 1);
-            --ua-color-text-highlight: rgba(255, 255, 255, 1);
-            --ua-color-text-dark: rgba(0, 0, 0, 1);
-            --ua-color-text-muted: rgba(255, 250, 245, 0.7);
-            --ua-color-category-border: rgba(255, 255, 255, 0.2);
-            --ua-color-section-title-bg-opacity: 0.25;
-
-            --ua-font-family-primary: 'Roboto Mono', 'Atkinson Hyperlegible', monospace;
-            --ua-font-family-secondary: 'JetBrains Mono', 'Roboto Mono', monospace;
-
-            --ua-layout-container-padding: 4rem;
-            --ua-layout-grid-gap: 3rem;
-            --ua-layout-max-height-offset: 12rem;
-            --ua-layout-list-max-width: 76%;
-            --ua-layout-column-min-width: 160px;
-
-            --ua-grid-column-aux: 1fr;
-
-            --ua-type-site-title-size: 3.8rem;
-            --ua-type-site-title-weight: 700;
-            --ua-type-site-title-letter-spacing: 2.5px;
-            --ua-type-section-title-size: 0.85rem;
-            --ua-type-section-title-weight: 600;
-            --ua-type-section-title-letter-spacing: 2px;
-            --ua-type-category-size: 0.6rem;
-            --ua-type-category-weight: 500;
-            --ua-type-category-letter-spacing: 1.2px;
-            --ua-type-category-opacity: 0.5;
-            --ua-type-entry-size: 1.05rem;
-            --ua-type-entry-weight: 400;
-            --ua-type-entry-line-height: 1.4;
-            --ua-type-external-size: 0.595rem;
-            --ua-type-external-weight: 400;
-            --ua-type-external-letter-spacing: 0.35px;
-
-            --ua-spacing-section-title-padding-y: 0.5rem;
-            --ua-spacing-section-title-padding-x: 1rem;
-            --ua-spacing-section-title-margin-bottom: 3rem;
-            --ua-spacing-category-indent: 2.5em;
-            --ua-spacing-category-padding-bottom: 0.15rem;
-            --ua-spacing-category-margin-top: 2rem;
-            --ua-spacing-category-margin-bottom: 0.45rem;
-            --ua-spacing-entry-padding-y: 0.15rem;
-            --ua-spacing-external-padding-y: 0.28rem;
-            --ua-spacing-external-padding-x: 0.63rem;
-            --ua-spacing-external-gap: 1rem;
-
-            --ua-motion-slide-in-duration: 0.8s;
-            --ua-motion-slide-in-slow-duration: 1.2s;
-            --ua-motion-hover-duration: 0.2s;
-            --ua-motion-hover-slow-duration: 0.4s;
-            --ua-motion-float-duration: 6s;
-            --ua-motion-float-delay: 2s;
-            --ua-motion-column-delay-step: 0.2s;
-            --ua-motion-title-delay: 0.8s;
-            --ua-motion-links-delay: 1.2s;
-
-            --ua-hover-link-translate: 4px;
-            --ua-hover-external-translate-y: -2px;
-            --ua-hover-external-scale: 1.03;
-            --ua-hover-title-translate-y: -8px;
-            --ua-hover-entrance-translate: 20px;
-
-            --ua-effect-title-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            --ua-effect-gradient-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.08) 100%);
-            --ua-effect-smudge-base: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%);
-            --ua-effect-smudge-hover: radial-gradient(ellipse 120% 100% at 45% 50%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.14) 20%, rgba(255, 255, 255, 0.06) 40%, rgba(255, 255, 255, 0.02) 60%, rgba(255, 255, 255, 0) 75%);
-            --ua-effect-smudge-blur: 1.5px;
-
-            --ua-column-scale: 1;
+            --ua-paper: #F7F8FC;
+            --ua-panel: #FFFFFF;
+            --ua-ink: #17171E;
+            --ua-ink-soft: #3D3E4A;
+            --ua-ink-faint: #6E7080;
+            --ua-accent: #4E5BD8;
+            --ua-accent-ink: #3D48B4;
+            --ua-line: #DCDFEC;
+            --ua-bar: #191A22;
+            --ua-rose-ink: #B0566F;
+            --ua-rose-wash: #FAEDF2;
+            --ua-peri-ink: #3D48B4;
+            --ua-peri-wash: #EBEDFB;
+            --ua-peach-ink: #B06032;
+            --ua-peach-wash: #FBF0E7;
+            --ua-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            --ua-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            --ua-mono: 'Roboto Mono', monospace;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            hyphens: none;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         html, body {
             min-height: 100%;
-            width: 100%;
-            background-color: var(--ua-color-background);
-            color: var(--ua-color-text-primary);
-            font-family: var(--ua-font-family-primary);
-            overflow-x: hidden;
-            overflow-y: auto;
+            background-color: var(--ua-paper);
+            color: var(--ua-ink);
+            font-family: var(--ua-body);
+            -webkit-font-smoothing: antialiased;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            background: var(--ua-effect-gradient-overlay);
-            opacity: 1;
+        ::selection { background: var(--ua-rose-ink); color: #fff; }
+
+        a { color: inherit; }
+
+        a:focus-visible {
+            outline: 2px solid var(--ua-accent);
+            outline-offset: 2px;
+            border-radius: 2px;
         }
 
-        a {
-            color: inherit;
-        }
-
-        .ua-layout {
-            position: relative;
-            display: grid;
-            grid-template-rows: auto auto;
-            grid-template-columns: var(--ua-grid-column-papers, 1fr) var(--ua-grid-column-notes, 1fr) var(--ua-grid-column-aux);
-            grid-template-areas:
-                "col-papers col-notes spacer"
-                "brand spacer links";
-            gap: var(--ua-layout-grid-gap);
-            padding: var(--ua-layout-container-padding);
-            min-height: 100vh;
-            width: 100%;
-        }
-
-        .ua-column {
-            grid-area: auto;
+        .ua-topbar {
+            background: var(--ua-bar);
+            color: rgba(255, 255, 255, 0.92);
+            font-family: var(--ua-mono);
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
             display: flex;
-            flex-direction: column;
-            gap: 0;
-            opacity: 0;
-            transform: translateX(calc(var(--ua-hover-entrance-translate) * var(--ua-motion-direction, -1)));
-            animation: ua-slide-in var(--ua-motion-slide-in-duration) ease-out forwards;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem 1.5rem;
         }
 
-        .ua-column--from-right {
-            --ua-motion-direction: 1;
-        }
+        .ua-topbar a { color: inherit; text-decoration: none; }
+        .ua-topbar a:hover { color: #fff; }
 
-        .ua-column__title {
-            display: inline-flex;
+        .ua-thumb {
+            flex-shrink: 0;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: var(--ua-type-section-title-size);
-            font-weight: var(--ua-type-section-title-weight);
-            letter-spacing: var(--ua-type-section-title-letter-spacing);
-            text-transform: uppercase;
-            padding: var(--ua-spacing-section-title-padding-y) calc(var(--ua-spacing-section-title-padding-x) * var(--ua-column-scale, 1));
-            margin-bottom: var(--ua-spacing-section-title-margin-bottom);
-            border-radius: 4px;
-            text-decoration: none;
-            color: var(--ua-color-text-dark);
-            background: rgba(255, 255, 255, var(--ua-color-section-title-bg-opacity));
-            white-space: nowrap;
         }
 
-        .ua-column__list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(var(--ua-layout-column-min-width), 1fr));
-            gap: var(--ua-spacing-entry-padding-y) var(--ua-layout-grid-gap);
-            max-width: calc(var(--ua-layout-list-max-width) * var(--ua-column-scale, 1));
+        .ua-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 62%, transparent 96%);
+            mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, #000 62%, transparent 96%);
         }
 
-        .ua-category {
-            margin-top: calc(var(--ua-spacing-category-margin-top) * var(--ua-column-scale, 1));
-            margin-bottom: calc(var(--ua-spacing-category-margin-bottom) * var(--ua-column-scale, 1));
+        .ua-thumb--empty {
+            font-family: var(--ua-mono);
+            font-size: 0.7rem;
+            background: radial-gradient(ellipse at center, var(--t-wash, var(--ua-peri-wash)) 55%, transparent 90%);
+            color: var(--t-ink, var(--ua-accent-ink));
+            border-radius: 12px;
         }
 
-        .ua-category:first-of-type {
-            margin-top: 0;
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+            html { scroll-behavior: auto; }
         }
 
-        .ua-category--spaced {
-            margin-top: calc(var(--ua-spacing-category-margin-top) * 1.5 * var(--ua-column-scale, 1));
+        .ua-hero {
+            background:
+                linear-gradient(180deg, rgba(247, 248, 252, 0) 0%, rgba(247, 248, 252, 0) 55%, var(--ua-paper) 100%),
+                linear-gradient(120deg, var(--ua-rose-wash) 0%, var(--ua-peri-wash) 68%, var(--ua-peach-wash) 100%);
         }
 
-        .ua-category__label {
-            display: inline-block;
-            font-size: var(--ua-type-category-size);
-            font-weight: var(--ua-type-category-weight);
-            letter-spacing: var(--ua-type-category-letter-spacing);
-            opacity: var(--ua-type-category-opacity);
-            color: var(--ua-color-text-muted);
-            border-bottom: 1px solid var(--ua-color-category-border);
-            padding-bottom: var(--ua-spacing-category-padding-bottom);
-            padding-left: calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1));
-            text-transform: uppercase;
-            white-space: nowrap;
+        .ua-hero__inner {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 3.2rem 2rem 2.6rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
         }
 
-        .ua-entry {
-            opacity: 1;
-        }
+        .ua-hero__text { flex: 1; min-width: 0; }
 
-        .ua-entry__link {
-            display: block;
-            font-size: calc(var(--ua-type-entry-size) * var(--ua-column-scale, 1));
-            font-weight: var(--ua-type-entry-weight);
-            line-height: var(--ua-type-entry-line-height);
-            color: var(--ua-color-text-accent);
-            text-decoration: none;
-            padding: calc(var(--ua-spacing-entry-padding-y) * var(--ua-column-scale, 1)) 0 calc(var(--ua-spacing-entry-padding-y) * var(--ua-column-scale, 1)) calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1));
-            transition: transform var(--ua-motion-hover-duration) ease, color var(--ua-motion-hover-duration) ease;
-            border-radius: 4px;
-        }
-
-        .ua-entry__link:hover,
-        .ua-entry__link:focus {
-            transform: translateX(var(--ua-hover-link-translate));
-            color: var(--ua-color-text-highlight);
-        }
-
-        .ua-entry__slides {
-            display: block;
-            font-size: calc(var(--ua-type-entry-size) * 0.5 * var(--ua-column-scale, 1));
-            font-weight: 400;
-            line-height: 1.2;
-            color: rgba(255, 190, 140, 0.75);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            padding: 0.25rem calc(var(--ua-spacing-category-indent) * var(--ua-column-scale, 1)) 0 0;
-            margin-top: 0.3rem;
-            text-align: right;
-            font-family: 'Roboto Mono', monospace;
-            transition: color var(--ua-motion-hover-duration) ease, opacity var(--ua-motion-hover-duration) ease;
-            opacity: 0.7;
-        }
-
-        .ua-entry__slides:hover,
-        .ua-entry__slides:focus {
-            opacity: 1;
-            color: rgba(255, 210, 160, 0.95);
-        }
-
-        .ua-brand {
-            position: fixed;
-            top: 4rem;
-            right: 4rem;
-            opacity: 0;
-            animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
-        }
-
-        .ua-icon {
-            position: fixed;
-            bottom: 4rem;
-            left: 4rem;
-            opacity: 0;
-            animation: ua-slide-up var(--ua-motion-slide-in-slow-duration) ease-out var(--ua-motion-title-delay) forwards;
-        }
-
-        .ua-icon__img {
-            height: 240px;
-            width: auto;
-            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
-            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
-        }
-
-        .ua-brand__title {
-            font-size: var(--ua-type-site-title-size);
-            font-weight: var(--ua-type-site-title-weight);
-            letter-spacing: var(--ua-type-site-title-letter-spacing);
+        .ua-hero__name {
+            font-family: var(--ua-display);
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.05;
             text-transform: lowercase;
-            text-shadow: var(--ua-effect-title-shadow);
-            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
         }
 
-        .ua-brand__logo {
-            height: 180px;
-            width: auto;
-            filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.25));
-            image-rendering: crisp-edges;
-            shape-rendering: crispEdges;
-            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        .ua-hero__interests {
+            margin-top: 0.6rem;
+            font-family: var(--ua-mono);
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: var(--ua-accent-ink);
         }
 
-        /* Alternative styling options - uncomment to try:
-
-        Version 2 - Larger with less rotation:
-        .ua-brand__logo {
-            height: 220px;
-            width: auto;
-            filter: drop-shadow(0 0 35px rgba(255, 255, 255, 0.4));
-            mix-blend-mode: multiply;
-            transform: rotate(-2deg);
-            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
+        .ua-hero__statement {
+            margin-top: 0.85rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--ua-ink-soft);
+            max-width: 36rem;
         }
 
-        Version 3 - More dramatic with darken blend:
-        .ua-brand__logo {
-            height: 200px;
-            width: auto;
-            filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.2)) contrast(1.1);
-            mix-blend-mode: darken;
-            transform: rotate(-7deg);
-            animation: ua-float var(--ua-motion-float-duration) ease-in-out var(--ua-motion-float-delay) infinite alternate;
-        }
-        */
+        .ua-hero__statement strong { display: block; color: var(--ua-ink); font-weight: 600; margin-bottom: 0.3rem; }
 
-        .ua-links {
-            grid-area: links;
-            align-self: end;
-            justify-self: end;
-            opacity: 0;
-            transform: translateX(var(--ua-hover-entrance-translate));
-            animation: ua-slide-in-right var(--ua-motion-slide-in-duration) ease-out var(--ua-motion-links-delay) forwards;
-        }
-
-        .ua-links__list {
+        .ua-hero__links {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: var(--ua-spacing-external-gap);
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.4rem;
         }
 
-        .ua-external-link {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--ua-spacing-external-padding-y) var(--ua-spacing-external-padding-x);
-            border-radius: 30%;
-            font-size: var(--ua-type-external-size);
-            font-weight: var(--ua-type-external-weight);
-            letter-spacing: var(--ua-type-external-letter-spacing);
-            color: var(--ua-color-text-accent);
+        .ua-chip {
+            font-family: var(--ua-mono);
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+            color: var(--ua-ink-soft);
             text-decoration: none;
-            background: var(--ua-effect-smudge-base);
-            transition: transform var(--ua-motion-hover-slow-duration) ease, background var(--ua-motion-hover-slow-duration) ease;
+            padding: 0.32rem 0.75rem;
+            border: 1px solid rgba(23, 23, 30, 0.18);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.65);
+            transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+            white-space: nowrap;
         }
 
-        .ua-external-link::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            border-radius: 30%;
-            background: var(--ua-effect-smudge-base);
-            filter: blur(var(--ua-effect-smudge-blur));
-            z-index: -1;
+        .ua-chip:hover { border-color: var(--ua-accent); color: var(--ua-accent-ink); background: #fff; }
+
+        .ua-hero__logo {
+            height: 118px;
+            width: auto;
+            flex-shrink: 0;
         }
 
-        .ua-external-link:hover,
-        .ua-external-link:focus {
-            transform: translateY(var(--ua-hover-external-translate-y)) scale(var(--ua-hover-external-scale));
-            background: var(--ua-effect-smudge-hover);
+        .ua-page {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem 3rem;
         }
 
-        .ua-spacer {
-            grid-area: spacer;
+        .ua-thread {
+            display: grid;
+            grid-template-columns: 290px 1fr;
+            gap: 3rem;
+            padding: 2.3rem 0;
+            border-top: 1px solid var(--ua-line);
         }
 
-        @keyframes ua-slide-in {
-            from {
-                opacity: 0;
-                transform: translateX(calc(var(--ua-hover-entrance-translate) * var(--ua-motion-direction, -1)));
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .ua-thread:first-of-type { border-top: none; }
+
+        .ua-thread--rose  { --t-ink: var(--ua-rose-ink);  --t-wash: var(--ua-rose-wash); }
+        .ua-thread--peri  { --t-ink: var(--ua-peri-ink);  --t-wash: var(--ua-peri-wash); }
+        .ua-thread--peach { --t-ink: var(--ua-peach-ink); --t-wash: var(--ua-peach-wash); }
+
+        .ua-thread__eyebrow {
+            font-family: var(--ua-mono);
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: var(--ua-ink-faint);
         }
 
-        @keyframes ua-slide-in-right {
-            from {
-                opacity: 0;
-                transform: translateX(var(--ua-hover-entrance-translate));
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .ua-thread__num {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: var(--t-ink);
+            background: var(--t-wash);
+            border-radius: 5px;
+            padding: 0.12rem 0.4rem;
+            margin-right: 0.35rem;
         }
 
-        @keyframes ua-slide-up {
-            from {
-                opacity: 0;
-                transform: translateY(var(--ua-hover-title-translate-y));
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .ua-thread__title {
+            font-family: var(--ua-display);
+            font-size: 1.55rem;
+            font-weight: 600;
+            letter-spacing: -0.2px;
+            text-transform: lowercase;
+            margin-top: 0.6rem;
         }
 
-        @keyframes ua-float {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(var(--ua-hover-title-translate-y));
-            }
+        .ua-thread__narrative {
+            margin-top: 0.7rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--ua-ink-soft);
         }
 
-        @media (max-width: 1024px) {
-            html,
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
+        .ua-thread__list { display: flex; flex-direction: column; }
 
-            .ua-layout {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: auto;
-                min-height: 100vh;
-                overflow-y: auto;
-                overflow-x: hidden;
-                gap: 3rem;
-                padding: 2.5rem 1.5rem;
-            }
+        .ua-row {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 1.3rem;
+            padding: 0.8rem 0.8rem;
+            margin: 0 -0.8rem;
+            border-radius: 12px;
+            border-top: 1px solid var(--ua-line);
+            transition: background 0.15s ease;
+        }
 
-            .ua-column {
-                max-height: none;
-                overflow: visible;
-                order: 2;
-                width: 100%;
-                max-width: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding: 0 1rem;
-                margin-bottom: 6rem;
-            }
+        .ua-row:first-child { border-top: none; }
 
-            .ua-column:last-of-type {
-                margin-bottom: 0;
-            }
+        .ua-row:hover { background: var(--t-wash); }
 
-            .ua-column__title {
-                align-self: center;
-                margin-bottom: 2rem;
-                font-size: 1rem;
-                padding: 0.6rem 1.2rem;
-            }
+        .ua-row:hover + .ua-row { border-top-color: transparent; }
 
-            .ua-column__list {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                width: 100%;
-            }
+        .ua-row .ua-thumb { width: 138px; height: 88px; }
 
-            .ua-entry__link {
-                font-size: 1.1rem;
-                line-height: 1.5;
-                padding: 0.4rem 0 0.4rem 2rem;
-            }
+        .ua-row:hover .ua-thumb img { -webkit-mask-image: none; mask-image: none; }
 
-            .ua-category__label {
-                font-size: 0.7rem;
-                padding-left: 2rem;
-            }
+        .ua-row__body { flex: 1; min-width: 0; }
 
-            .ua-brand {
-                order: 1;
-                position: static;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-bottom: 8rem;
-                padding: 8rem 0 3rem 0;
-            }
+        .ua-row__title {
+            display: block;
+            font-family: var(--ua-body);
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5;
+            color: var(--ua-ink);
+            text-decoration: none;
+        }
 
-            .ua-brand__logo {
-                margin: 0 auto;
-                display: block;
-                max-width: 50%;
-                height: auto;
-                max-height: 150px;
-            }
+        .ua-row__title:hover { color: var(--t-ink); }
 
-            .ua-links {
-                order: 3;
-                position: static;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 4rem 0;
-                margin: 2rem 0;
-            }
+        .ua-row__meta {
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            font-family: var(--ua-mono);
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
 
-            .ua-links__list {
-                align-items: center;
-                gap: 1.5rem;
-            }
+        .ua-row__venue {
+            color: var(--t-ink);
+            background: var(--t-wash);
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
 
-            .ua-external-link {
-                min-width: 120px;
-                padding: 0.8rem 1.2rem;
-                font-size: 0.7rem;
-                text-align: center;
-            }
+        .ua-row__date { margin-left: 0.35rem; }
 
-            .ua-icon {
-                order: 4;
-                position: static;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin-top: 8rem;
-                padding: 3rem 0 4rem 0;
-            }
+        .ua-row__date { color: var(--ua-ink-faint); }
 
-            .ua-icon__img {
-                margin: 0 auto;
-                display: block;
-                max-width: 60%;
-                height: auto;
-                max-height: 180px;
-            }
+        .ua-footer {
+            border-top: 2px solid var(--ua-ink);
+            padding-top: 1.4rem;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+        }
 
-            .ua-entry__slides {
-                font-size: 0.6rem;
-                padding: 0.3rem 2rem 0 0;
-            }
+        .ua-footer__all {
+            font-family: var(--ua-mono);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+            color: var(--ua-ink);
+            text-decoration: none;
+        }
 
-            /* Disable animations on mobile for better performance */
-            .ua-column,
-            .ua-brand,
-            .ua-links,
-            .ua-icon {
-                animation: none;
-                opacity: 1;
-                transform: none;
-            }
+        .ua-footer__all:hover { color: var(--ua-rose-ink); }
 
-            .ua-brand__logo,
-            .ua-icon__img {
-                animation: none;
-            }
+        .ua-footer__archive {
+            font-family: var(--ua-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.5px;
+            color: var(--ua-ink-faint);
+        }
 
-            .ua-spacer {
-                display: none;
-            }
+        .ua-footer__archive a { color: var(--ua-ink-soft); text-decoration: none; border-bottom: 1px solid var(--ua-line); }
+
+        .ua-footer__archive a:hover { color: var(--ua-rose-ink); border-bottom-color: var(--ua-rose-ink); }
+
+        @media (max-width: 880px) {
+            .ua-hero__inner { flex-direction: column-reverse; gap: 1.4rem; padding: 2.2rem 1.2rem 2rem; }
+
+            .ua-hero__logo { height: 84px; }
+
+            .ua-hero__name { font-size: 2.1rem; }
+
+            .ua-page { padding: 0.6rem 1.2rem 2.5rem; }
+
+            .ua-thread { grid-template-columns: 1fr; gap: 1.4rem; padding: 1.8rem 0; }
+
+            .ua-row { align-items: flex-start; }
+
+            .ua-row .ua-thumb { width: 96px; height: 68px; }
+
+            .ua-row__meta { flex-wrap: wrap; }
+
+            .ua-footer { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <main class="ua-layout" id="layoutGrid">
-        <div class="ua-spacer" data-grid-area="spacer" aria-hidden="true"></div>
-        <section class="ua-brand" data-grid-area="brand">
-            <!-- <h1 class="ua-brand__title">unruly abstractions</h1> -->
-            <img src="" alt="Unruly Abstractions" class="ua-brand__logo" id="brandLogo">
-        </section>
-        <section class="ua-links" data-grid-area="links">
-            <div class="ua-links__list">
-                <a href="https://github.com/unrulyabstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">github</a>
-                <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-external-link" target="_blank" rel="noopener noreferrer">google scholar</a>
-                <a href="https://www.lesswrong.com/users/unruly-abstractions" class="ua-external-link" target="_blank" rel="noopener noreferrer">lesswrong</a>
-                <a href="https://x.com/unrulyabstract" class="ua-external-link" target="_blank" rel="noopener noreferrer">twitter</a>
-                <a href="mailto:ian@unrulyabstractions.com" class="ua-external-link">email</a>
-                <a href="contact/resume.pdf" class="ua-external-link" target="_blank" rel="noopener noreferrer">resume</a>
-                <a href="contact/card.pdf" class="ua-external-link" target="_blank" rel="noopener noreferrer">contact card</a>
-                <!-- <a href="https://unrulyabstractions.substack.com/about" class="ua-external-link" target="_blank" rel="noopener noreferrer">substack</a> -->
+    <div class="ua-topbar">
+        <span>▪ AI safety · alignment research</span>
+        <a href="https://www.unrulyabstractions.com">unrulyabstractions.com</a>
+    </div>
+    <header class="ua-hero">
+        <div class="ua-hero__inner">
+            <div class="ua-hero__text">
+                <h1 class="ua-hero__name">unruly abstractions</h1>
+                <p class="ua-hero__interests">interpretability · evals · llm bias</p>
+                <p class="ua-hero__statement"><strong>An independent AI safety research.</strong>We believe more interpretable semantic spaces emerge when we engage with the human character of the data.</p>
+                <nav class="ua-hero__links" aria-label="External profiles">
+                    <a href="https://github.com/unrulyabstractions" class="ua-chip" target="_blank" rel="noopener noreferrer">github</a>
+                    <a href="https://scholar.google.com/citations?user=9T_3YJcAAAAJ&hl=en" class="ua-chip" target="_blank" rel="noopener noreferrer">google scholar</a>
+                    <a href="https://www.lesswrong.com/users/unruly-abstractions" class="ua-chip" target="_blank" rel="noopener noreferrer">lesswrong</a>
+                    <a href="https://x.com/unrulyabstract" class="ua-chip" target="_blank" rel="noopener noreferrer">twitter</a>
+                    <a href="mailto:ian@unrulyabstractions.com" class="ua-chip">email</a>
+                    <a href="contact/resume.pdf" class="ua-chip" target="_blank" rel="noopener noreferrer">resume</a>
+                    <a href="contact/card.pdf" class="ua-chip" target="_blank" rel="noopener noreferrer">contact card</a>
+                </nav>
             </div>
+            <img src="img/icon.svg" alt="Unruly Abstractions logo" class="ua-hero__logo">
+        </div>
+    </header>
+    <div class="ua-page">
+        <main class="ua-threads">
+        <section class="ua-thread ua-thread--rose" aria-labelledby="thread-differential-treatment">
+            <div class="ua-thread__intro">
+                <div class="ua-thread__eyebrow"><span class="ua-thread__num">01</span></div>
+                <h2 class="ua-thread__title" id="thread-differential-treatment">differential treatment</h2>
+                <p class="ua-thread__narrative">A model can treat two groups of people differently without explicit markers. We build audits that detect this differential treatment in deployed models and in models with secret loyalties.</p>
+            </div>
+            <ol class="ua-thread__list" role="list">
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/differential_treatment.html" tabindex="-1" aria-hidden="true"><img src="img/figs/differential_treatment.png?v=73f2669d" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/differential_treatment.html">Towards Local Bias Mitigation: Discovering How LLMs Treat LGBTQ+ Users Differently, Without Explicit Markers</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Queer in AI @ IJCAI</span><span class="ua-row__date">Aug 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="https://apartresearch.com/project/secret-loyalties-as-instrumental-differential-treatment-3vdm" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="img/figs/secret_loyalties.png?v=3b3a2c61" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="https://apartresearch.com/project/secret-loyalties-as-instrumental-differential-treatment-3vdm" target="_blank" rel="noopener noreferrer">Secret Loyalties as Instrumental Differential Treatment</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Apart Research</span><span class="ua-row__date">Jul 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="https://docs.google.com/presentation/d/16xi-NnrYlmT4VAWDZnRrcf7iYBbTqKwPvZzkESJPlTo/present" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="img/figs/human-loyalties.png?v=c2a8b7aa" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="https://docs.google.com/presentation/d/16xi-NnrYlmT4VAWDZnRrcf7iYBbTqKwPvZzkESJPlTo/present" target="_blank" rel="noopener noreferrer">Can Humans Detect Secret Loyalties in LLMs?</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">BlueDot Hackathon 2026</span><span class="ua-row__date">Jul 2026</span></div>
+                    </div>
+                </li>
+            </ol>
         </section>
-    </main>
-    <script>
-        (function () {
-            'use strict';
+        <section class="ua-thread ua-thread--peri" aria-labelledby="thread-meaningful-diversity">
+            <div class="ua-thread__intro">
+                <div class="ua-thread__eyebrow"><span class="ua-thread__num">02</span></div>
+                <h2 class="ua-thread__title" id="thread-meaningful-diversity">meaningful diversity</h2>
+                <p class="ua-thread__narrative">Generative models amplify the biases in their training data and collapse toward typical outputs. We treat this homogenization as an AI safety problem and formalize what meaningful diversity requires.</p>
+            </div>
+            <ol class="ua-thread__list" role="list">
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/homogenization.html" tabindex="-1" aria-hidden="true"><img src="img/figs/homogenization.png?v=aaee3bae" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/homogenization.html">The Homogenization Problem in LLMs: Towards Meaningful Diversity in AI Safety</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Pluralistic Alignment @ ICML</span><span class="ua-row__venue">Culture x AI @ ICML</span><span class="ua-row__date">Jul 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="https://apartresearch.com/project/the-shapes-of-bias-in-spanishprompted-llms-and-the-debiasing-prompt-scaffolds-zm7h" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="img/figs/spanish-bias.png?v=a62c656a" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="https://apartresearch.com/project/the-shapes-of-bias-in-spanishprompted-llms-and-the-debiasing-prompt-scaffolds-zm7h" target="_blank" rel="noopener noreferrer">The Shapes of Bias in Spanish-Prompted LLMs and the Debiasing Prompt Scaffolds</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Apart Research</span><span class="ua-row__venue">Honorable Mention</span><span class="ua-row__date">Jun 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/diversity.html" tabindex="-1" aria-hidden="true"><img src="img/figs/diversity.png?v=99d6f15d" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/diversity.html">Structure-Aware Diversity Pursuit as an AI Safety Strategy</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">TAIS 2026</span><span class="ua-row__date">May 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/xenoreprod.html" tabindex="-1" aria-hidden="true"><img src="img/figs/xenoreprod.png?v=30375bff" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/xenoreprod.html">Xenoreproduction: AI Safety against Homogenization</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Queer in AI @ EurIPS</span><span class="ua-row__date">Dec 2025</span></div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+        <section class="ua-thread ua-thread--peach" aria-labelledby="thread-circuits-and-concepts">
+            <div class="ua-thread__intro">
+                <div class="ua-thread__eyebrow"><span class="ua-thread__num">03</span></div>
+                <h2 class="ua-thread__title" id="thread-circuits-and-concepts">circuits and concepts</h2>
+                <p class="ua-thread__narrative">We localize concepts inside language models and measure their function in behavior. Our evidence comes from activation patching, steering, and toy models small enough to catalog exhaustively.</p>
+            </div>
+            <ol class="ua-thread__list" role="list">
+                <li class="ua-row">
+                    <a class="ua-thumb" href="https://www.lesswrong.com/posts/HooBYPCkMDGjktcLA/persona-corruption-and-role-miscasting-in-emergent" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="img/figs/persona.png?v=73856d8d" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="https://www.lesswrong.com/posts/HooBYPCkMDGjktcLA/persona-corruption-and-role-miscasting-in-emergent" target="_blank" rel="noopener noreferrer">Persona Corruption and Role Miscasting in Emergent Misalignment</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">BlueDot</span><span class="ua-row__venue">LessWrong</span><span class="ua-row__date">Aug 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/temporalpref.html" tabindex="-1" aria-hidden="true"><img src="img/figs/temporalpref.png?v=5e61c90b" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/temporalpref.html">Temporal Preference Concepts and their Functions in a Large Language Model</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">AISC</span><span class="ua-row__venue">SPAR</span><span class="ua-row__date">May 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="https://www.lesswrong.com/s/yGg3GBRJboxTiNxjH" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><img src="img/figs/which-circuit.png?v=6d1b8698" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="https://www.lesswrong.com/s/yGg3GBRJboxTiNxjH" target="_blank" rel="noopener noreferrer">Which Circuit Is it?</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Groundless</span><span class="ua-row__venue">LessWrong</span><span class="ua-row__date">Mar 2026</span></div>
+                    </div>
+                </li>
+                <li class="ua-row">
+                    <a class="ua-thumb" href="papers/wanderings.html" tabindex="-1" aria-hidden="true"><img src="img/figs/wanderings.png?v=4ecae0cd" alt="" loading="lazy"></a>
+                    <div class="ua-row__body">
+                        <a class="ua-row__title" href="papers/wanderings.html">Category-Theoretic Wanderings into Interpretability</a>
+                        <div class="ua-row__meta"><span class="ua-row__venue">Queer in AI @ EurIPS</span><span class="ua-row__date">Dec 2025</span></div>
+                    </div>
+                </li>
+            </ol>
+        </section>
+        </main>
 
-            // ULTRA AGGRESSIVE CACHE BUSTING
-
-            // 1. Prevent back/forward cache
-            window.addEventListener('pageshow', function(event) {
-                if (event.persisted) {
-                    window.location.reload();
-                }
-            });
-
-            // 2. Clear URL cache buster and add new one if needed
-            if (window.location.search && !window.location.search.includes('_cb=')) {
-                const newUrl = window.location.pathname + '?_cb=' + Date.now();
-                window.history.replaceState({}, '', newUrl);
-            }
-
-            // 3. Disable browser cache for fetch requests
-            if (window.fetch) {
-                const originalFetch = window.fetch;
-                window.fetch = function(...args) {
-                    if (typeof args[0] === 'string') {
-                        args[0] = args[0] + (args[0].includes('?') ? '&' : '?') + '_=' + Date.now() + Math.random();
-                    }
-                    if (!args[1]) args[1] = {};
-                    args[1].cache = 'no-store';
-                    return originalFetch.apply(this, args);
-                };
-            }
-
-            // 4. Generate fresh random cache buster for all assets
-            const cacheBust = Date.now() + '_' + Math.random().toString(36).substring(2, 15);
-
-            // 5. Set brand logo src to icon.svg (replaces the previous title logo)
-            const logoEl = document.getElementById('brandLogo');
-            if (logoEl) {
-                logoEl.src = `img/icon.svg?v=${cacheBust}&_=${Date.now()}`;
-            }
-
-            const geometryPath = `./config/geometry.json?v=${cacheBust}`;
-            const contentPath = `./config/content.json?v=${cacheBust}`;
-
-            const TOKEN_MAP = {
-                colors: {
-                    background: { var: '--ua-color-background' },
-                    textPrimary: { var: '--ua-color-text-primary' },
-                    textAccent: { var: '--ua-color-text-accent' },
-                    textHighlight: { var: '--ua-color-text-highlight' },
-                    textDark: { var: '--ua-color-text-dark' },
-                    textMuted: { var: '--ua-color-text-muted' },
-                    categoryBorder: { var: '--ua-color-category-border' },
-                    sectionTitleBackgroundOpacity: { var: '--ua-color-section-title-bg-opacity' }
-                },
-                layout: {
-                    containerPaddingRem: { var: '--ua-layout-container-padding', unit: 'rem' },
-                    gridGapRem: { var: '--ua-layout-grid-gap', unit: 'rem' },
-                    maxHeightOffsetRem: { var: '--ua-layout-max-height-offset', unit: 'rem' },
-                    maxListWidthPercent: { var: '--ua-layout-list-max-width', unit: 'percent' },
-                    minColumnWidthPx: { var: '--ua-layout-column-min-width', unit: 'px' },
-                    auxColumnFr: { var: '--ua-grid-column-aux', unit: 'fr' }
-                },
-                typography: {
-                    siteTitle: {
-                        fontSizeRem: { var: '--ua-type-site-title-size', unit: 'rem' },
-                        fontWeight: { var: '--ua-type-site-title-weight' },
-                        letterSpacingPx: { var: '--ua-type-site-title-letter-spacing', unit: 'px' }
-                    },
-                    sectionTitle: {
-                        fontSizeRem: { var: '--ua-type-section-title-size', unit: 'rem' },
-                        fontWeight: { var: '--ua-type-section-title-weight' },
-                        letterSpacingPx: { var: '--ua-type-section-title-letter-spacing', unit: 'px' }
-                    },
-                    categoryLabel: {
-                        fontSizeRem: { var: '--ua-type-category-size', unit: 'rem' },
-                        fontWeight: { var: '--ua-type-category-weight' },
-                        letterSpacingPx: { var: '--ua-type-category-letter-spacing', unit: 'px' },
-                        opacity: { var: '--ua-type-category-opacity' }
-                    },
-                    entryLink: {
-                        fontSizeRem: { var: '--ua-type-entry-size', unit: 'rem' },
-                        fontWeight: { var: '--ua-type-entry-weight' },
-                        lineHeight: { var: '--ua-type-entry-line-height' }
-                    },
-                    externalLink: {
-                        fontSizeRem: { var: '--ua-type-external-size', unit: 'rem' },
-                        fontWeight: { var: '--ua-type-external-weight' },
-                        letterSpacingPx: { var: '--ua-type-external-letter-spacing', unit: 'px' }
-                    }
-                },
-                spacing: {
-                    sectionTitlePaddingVerticalRem: { var: '--ua-spacing-section-title-padding-y', unit: 'rem' },
-                    sectionTitlePaddingHorizontalRem: { var: '--ua-spacing-section-title-padding-x', unit: 'rem' },
-                    sectionTitleMarginBottomRem: { var: '--ua-spacing-section-title-margin-bottom', unit: 'rem' },
-                    categoryIndentEm: { var: '--ua-spacing-category-indent', unit: 'em' },
-                    categoryPaddingBottomRem: { var: '--ua-spacing-category-padding-bottom', unit: 'rem' },
-                    categoryMarginTopRem: { var: '--ua-spacing-category-margin-top', unit: 'rem' },
-                    categoryMarginBottomRem: { var: '--ua-spacing-category-margin-bottom', unit: 'rem' },
-                    entryPaddingVerticalRem: { var: '--ua-spacing-entry-padding-y', unit: 'rem' },
-                    externalLinkPaddingVerticalRem: { var: '--ua-spacing-external-padding-y', unit: 'rem' },
-                    externalLinkPaddingHorizontalRem: { var: '--ua-spacing-external-padding-x', unit: 'rem' },
-                    externalLinkGapRem: { var: '--ua-spacing-external-gap', unit: 'rem' }
-                },
-                motion: {
-                    slideInDurationSec: { var: '--ua-motion-slide-in-duration', unit: 's' },
-                    slideInSlowDurationSec: { var: '--ua-motion-slide-in-slow-duration', unit: 's' },
-                    hoverDurationSec: { var: '--ua-motion-hover-duration', unit: 's' },
-                    hoverSlowDurationSec: { var: '--ua-motion-hover-slow-duration', unit: 's' },
-                    floatDurationSec: { var: '--ua-motion-float-duration', unit: 's' },
-                    floatDelaySec: { var: '--ua-motion-float-delay', unit: 's' },
-                    columnDelayStepSec: { var: '--ua-motion-column-delay-step', unit: 's' },
-                    titleDelaySec: { var: '--ua-motion-title-delay', unit: 's' },
-                    linksDelaySec: { var: '--ua-motion-links-delay', unit: 's' }
-                },
-                hover: {
-                    linkTranslatePx: { var: '--ua-hover-link-translate', unit: 'px' },
-                    externalLinkTranslateYPx: { var: '--ua-hover-external-translate-y', unit: 'px' },
-                    externalLinkScale: { var: '--ua-hover-external-scale' },
-                    titleTranslateYPx: { var: '--ua-hover-title-translate-y', unit: 'px' },
-                    entranceTranslatePx: { var: '--ua-hover-entrance-translate', unit: 'px' }
-                },
-                effects: {
-                    titleShadow: { var: '--ua-effect-title-shadow' },
-                    gradientOverlay: { var: '--ua-effect-gradient-overlay' },
-                    smudgeBase: { var: '--ua-effect-smudge-base' },
-                    smudgeHover: { var: '--ua-effect-smudge-hover' },
-                    smudgeBlurPx: { var: '--ua-effect-smudge-blur', unit: 'px' }
-                }
-            };
-
-            document.addEventListener('DOMContentLoaded', () => {
-                bootstrap().catch(error => {
-                    console.error('Failed to initialize homepage:', error);
-                });
-            });
-
-            async function bootstrap() {
-                const [geometry, content] = await Promise.all([
-                    fetchJson(geometryPath),
-                    fetchJson(contentPath)
-                ]);
-
-                const designTokens = geometry.designTokens || {};
-                const columns = normalizeColumns(geometry.columns);
-
-                applyDesignTokens(designTokens);
-                buildLayout(columns, designTokens.motion);
-                renderColumns(columns, content, designTokens.motion);
-                applyTextScaling();
-                window.addEventListener('resize', applyTextScaling);
-                window.setTimeout(randomizeButtonSmudge, 1600);
-            }
-
-            async function fetchJson(path) {
-                const response = await fetch(path, {
-                    cache: 'no-store',
-                    headers: {
-                        'Cache-Control': 'no-cache, no-store, must-revalidate',
-                        'Pragma': 'no-cache',
-                        'Expires': '0'
-                    }
-                });
-                if (!response.ok) {
-                    throw new Error(`Unable to load ${path}: ${response.status} ${response.statusText}`);
-                }
-                return response.json();
-            }
-
-            function normalizeColumns(input) {
-                if (!Array.isArray(input)) {
-                    return [];
-                }
-
-                return input
-                    .map(column => {
-                        if (!column || typeof column !== 'object') {
-                            return null;
-                        }
-                        const id = typeof column.id === 'string' ? column.id.trim() : '';
-                        const dataset = typeof column.dataset === 'string' ? column.dataset.trim() : id;
-                        if (!id || !dataset) {
-                            return null;
-                        }
-                        const weight = sanitizePositiveNumber(column.weight, 1);
-                        const detailPage = typeof column.detailPage === 'string' ? column.detailPage : null;
-                        const entry = normalizeEntryConfig(column.entry);
-                        const topic = typeof column.topic === 'string' ? column.topic.trim() : null;
-                        return {
-                            id,
-                            label: typeof column.label === 'string' ? column.label : id,
-                            dataset,
-                            topic,
-                            weight,
-                            detailPage,
-                            entry
-                        };
-                    })
-                    .filter(Boolean)
-                    .sort((a, b) => b.weight - a.weight);
-            }
-
-            function normalizeEntryConfig(entry) {
-                if (!entry || typeof entry !== 'object') {
-                    return { type: 'external', urlField: 'url', displayField: 'displayName', categoryField: 'category', dateField: 'date' };
-                }
-                let type;
-                if (entry.type === 'pdf') type = 'pdf';
-                else if (entry.type === 'mixed') type = 'mixed';
-                else type = 'external';
-                const base = {
-                    type,
-                    displayField: entry.displayField || 'displayName',
-                    categoryField: entry.categoryField || 'category',
-                    dateField: entry.dateField || 'date'
-                };
-                if (type === 'pdf' || type === 'mixed') {
-                    base.filenameField = entry.filenameField || 'filename';
-                    base.basePath = entry.basePath || './pdfs';
-                    base.cacheBust = Boolean(entry.cacheBust);
-                }
-                if (type === 'external' || type === 'mixed') {
-                    base.urlField = entry.urlField || 'url';
-                }
-                return base;
-            }
-
-            function applyDesignTokens(tokens) {
-                const root = document.documentElement;
-                Object.entries(TOKEN_MAP).forEach(([groupName, groupMap]) => {
-                    const groupValue = tokens[groupName];
-                    if (!groupValue) {
-                        return;
-                    }
-                    applyTokenGroup(root, groupValue, groupMap);
-                });
-            }
-
-            function applyTokenGroup(root, value, map) {
-                Object.entries(map).forEach(([key, descriptor]) => {
-                    const tokenValue = value[key];
-                    if (tokenValue == null) {
-                        return;
-                    }
-                    if (descriptor.var) {
-                        const formatted = formatTokenValue(tokenValue, descriptor.unit);
-                        root.style.setProperty(descriptor.var, formatted);
-                    } else {
-                        applyTokenGroup(root, tokenValue, descriptor);
-                    }
-                });
-            }
-
-            function formatTokenValue(value, unit) {
-                if (unit === 'percent') {
-                    return `${value}%`;
-                }
-                if (unit === 'rem' || unit === 'px' || unit === 'em' || unit === 'fr' || unit === 's') {
-                    return `${value}${unit}`;
-                }
-                return String(value);
-            }
-
-            function buildLayout(columns, motionTokens = {}) {
-                const layoutGrid = document.getElementById('layoutGrid');
-                if (!layoutGrid) {
-                    return;
-                }
-
-                const root = document.documentElement;
-                const spacer = layoutGrid.querySelector('[data-grid-area="spacer"]');
-                const columnAreas = [];
-                const templateColumns = [];
-
-                const baseWeight = columns.length > 0 ? columns[0].weight : 1;
-                const safeBase = baseWeight > 0 ? baseWeight : 1;
-
-                columns.forEach((column, index) => {
-                    const weight = Math.max(column.weight, 0);
-                    const areaName = `col${index + 1}`;
-                    const frValue = weight > 0 ? weight : 0.0001;
-                    const rawScale = weight > 0 ? weight / safeBase : 0;
-                    const scale = Math.max(rawScale, 0.25);
-                    columnAreas.push(areaName);
-                    templateColumns.push(`var(--ua-grid-column-${column.id}, 1fr)`);
-                    root.style.setProperty(`--ua-grid-column-${column.id}`, `${frValue}fr`);
-                    root.style.setProperty(`--ua-weight-${column.id}`, weight.toString());
-                    root.style.setProperty(`--ua-scale-${column.id}`, scale.toString());
-                    column._grid = { areaName, scale };
-                    column._animationDelay = computeColumnDelay(index, motionTokens.columnDelayStepSec);
-                    column._fromRight = index % 2 === 1;
-                });
-
-                templateColumns.push('var(--ua-grid-column-aux, 1fr)');
-                if (templateColumns.length > 0) {
-                    layoutGrid.style.gridTemplateColumns = templateColumns.join(' ');
-                }
-
-                if (columnAreas.length > 0) {
-                    const topRow = `${columnAreas.join(' ')} spacer`;
-                    const secondRowAreas = [
-                        'brand',
-                        ...Array(Math.max(columnAreas.length - 1, 0)).fill('spacer'),
-                        'links'
-                    ];
-                    // Align brand to first column and links to last column by applying explicit column indices
-                    const brandColumnIndex = 1;
-                    const linksColumnIndex = Math.max(columnAreas.length + 1, 2);
-                    layoutGrid.style.gridTemplateAreas = `"${topRow}" "${secondRowAreas.join(' ')}"`;
-                    const brandSection = layoutGrid.querySelector('[data-grid-area="brand"]');
-                    if (brandSection) {
-                        brandSection.style.gridColumn = brandColumnIndex.toString();
-                    }
-                    const linksSection = layoutGrid.querySelector('[data-grid-area="links"]');
-                    if (linksSection) {
-                        linksSection.style.gridColumn = linksColumnIndex.toString();
-                    }
-                }
-
-                if (spacer) {
-                    layoutGrid.appendChild(spacer);
-                }
-            }
-
-            function computeColumnDelay(index, step) {
-                const numericStep = sanitizePositiveNumber(step, 0.2);
-                return index * numericStep;
-            }
-
-            function renderColumns(columns, content, motionTokens = {}) {
-                const layoutGrid = document.getElementById('layoutGrid');
-                if (!layoutGrid) {
-                    return;
-                }
-
-                const spacer = layoutGrid.querySelector('[data-grid-area="spacer"]');
-                const columnDelayStep = sanitizePositiveNumber(motionTokens.columnDelayStepSec, 0.2);
-
-                columns.forEach((column, index) => {
-                    const columnElement = document.createElement('section');
-                    columnElement.className = 'ua-column';
-                    columnElement.dataset.columnId = column.id;
-                    columnElement.style.gridArea = column._grid.areaName;
-                    columnElement.style.gridRow = '1';
-                    columnElement.style.gridColumn = (index + 1).toString();
-                    columnElement.style.setProperty('--ua-column-scale', column._grid.scale.toString());
-                    columnElement.style.animationDelay = `${columnDelayStep * index}s`;
-                    if (column._fromRight) {
-                        columnElement.classList.add('ua-column--from-right');
-                    }
-
-                    const titleLink = document.createElement('a');
-                    titleLink.className = 'ua-column__title';
-                    titleLink.textContent = column.label;
-                    if (column.detailPage) {
-                        titleLink.href = column.detailPage;
-                    } else {
-                        titleLink.href = '#';
-                    }
-                    columnElement.appendChild(titleLink);
-
-                    const list = document.createElement('ul');
-                    list.className = 'ua-column__list';
-                    list.setAttribute('role', 'list');
-                    columnElement.appendChild(list);
-
-                    const dataset = collectColumnEntries(column, content);
-                    const sorted = dataset.sort((a, b) => toSortableDate(b, column.entry) - toSortableDate(a, column.entry));
-                    renderEntries(sorted, column.entry, list);
-
-                    if (spacer) {
-                        layoutGrid.insertBefore(columnElement, spacer);
-                    } else {
-                        layoutGrid.appendChild(columnElement);
-                    }
-                });
-            }
-
-            function renderEntries(entries, entryConfig, listElement) {
-                entries.forEach((entry, index) => {
-                    const category = resolveField(entry, entryConfig.categoryField) || 'uncategorized';
-                    // Always show category as title for each entry
-                    const categoryEl = createCategoryElement(category);
-                    if (index > 0) {
-                        categoryEl.classList.add('ua-category--spaced');
-                    }
-                    listElement.appendChild(categoryEl);
-                    const link = createEntryLink(entry, entryConfig);
-                    if (!link) {
-                        return;
-                    }
-                    const listItem = document.createElement('li');
-                    listItem.className = 'ua-entry';
-                    listItem.appendChild(link);
-
-                    // Add slides link if slides field exists and is a valid URL
-                    const slidesUrl = resolveField(entry, 'slides');
-                    if (slidesUrl && typeof slidesUrl === 'string' && slidesUrl.trim()) {
-                        const slidesLink = document.createElement('a');
-                        slidesLink.className = 'ua-entry__slides';
-                        slidesLink.textContent = 'also as slides';
-                        slidesLink.href = slidesUrl;
-                        slidesLink.target = '_blank';
-                        slidesLink.rel = 'noopener noreferrer';
-                        listItem.appendChild(slidesLink);
-                    }
-
-                    listElement.appendChild(listItem);
-                });
-            }
-
-            function createCategoryElement(label) {
-                const item = document.createElement('li');
-                item.className = 'ua-category';
-                const span = document.createElement('div');
-                span.className = 'ua-category__label';
-                span.textContent = label;
-                item.appendChild(span);
-                return item;
-            }
-
-            function createEntryLink(entry, entryConfig) {
-                const display = resolveField(entry, entryConfig.displayField) || resolveField(entry, entryConfig.filenameField) || resolveField(entry, entryConfig.urlField) || 'Untitled';
-                const href = resolveEntryHref(entry, entryConfig);
-                if (!href) {
-                    return null;
-                }
-                const link = document.createElement('a');
-                link.className = 'ua-entry__link';
-                link.textContent = display;
-                link.href = href;
-                link.target = '_blank';
-                link.rel = 'noopener noreferrer';
-                return link;
-            }
-
-            function resolveEntryHref(entry, entryConfig) {
-                if (entryConfig.type === 'pdf') {
-                    return resolvePdfHref(entry, entryConfig);
-                }
-                if (entryConfig.type === 'external') {
-                    return resolveField(entry, entryConfig.urlField);
-                }
-                if (entryConfig.type === 'mixed') {
-                    const url = resolveField(entry, entryConfig.urlField);
-                    if (url) {
-                        return url;
-                    }
-                    return resolvePdfHref(entry, entryConfig);
-                }
-                return null;
-            }
-
-            function resolvePdfHref(entry, entryConfig) {
-                const filename = resolveField(entry, entryConfig.filenameField);
-                if (!filename) {
-                    return null;
-                }
-                const basePath = entryConfig.basePath || './pdfs';
-                const normalizedBase = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
-                const cacheBust = entryConfig.cacheBust ? `?v=${Date.now()}` : '';
-                return `${normalizedBase}/${filename}.pdf${cacheBust}`;
-            }
-
-            function collectColumnEntries(column, content) {
-                if (column.topic) {
-                    const sources = [];
-                    if (Array.isArray(content.papers)) sources.push(...content.papers);
-                    if (Array.isArray(content.notes)) sources.push(...content.notes);
-                    return sources.filter(item => item && item.topic === column.topic);
-                }
-                return Array.isArray(content[column.dataset]) ? [...content[column.dataset]] : [];
-            }
-
-            function resolveField(entry, fieldName) {
-                if (!entry || typeof entry !== 'object' || !fieldName) {
-                    return null;
-                }
-                return entry[fieldName] || null;
-            }
-
-            function toSortableDate(entry, entryConfig) {
-                const value = resolveField(entry, entryConfig.dateField);
-                if (!value) {
-                    return 0;
-                }
-                if (typeof value === 'string') {
-                    const normalized = value.trim().toLowerCase();
-                    if (normalized === 'ongoing' || normalized === 'current') {
-                        return 0;
-                    }
-                }
-                const timestamp = Date.parse(value);
-                return Number.isFinite(timestamp) ? timestamp : 0;
-            }
-
-            function applyTextScaling() {
-                const links = document.querySelectorAll('.ua-entry__link');
-                links.forEach(link => {
-                    link.style.fontSize = '';
-                    const computed = window.getComputedStyle(link);
-                    const originalFontSize = parseFloat(computed.fontSize);
-                    const lineHeight = parseFloat(computed.lineHeight);
-                    if (!originalFontSize || !lineHeight) {
-                        return;
-                    }
-                    const tolerance = lineHeight * 1.2;
-                    if (link.scrollHeight <= tolerance) {
-                        return;
-                    }
-                    let currentSize = originalFontSize;
-                    const minSize = originalFontSize * 0.85;
-                    while (link.scrollHeight > tolerance && currentSize > minSize) {
-                        currentSize -= 0.5;
-                        link.style.fontSize = `${currentSize}px`;
-                    }
-                });
-            }
-
-            function randomizeButtonSmudge() {
-                const links = document.querySelectorAll('.ua-external-link');
-                links.forEach(link => {
-                    const blur = randomBetween(1.2, 2.0);
-                    const ellipseX = randomBetween(110, 130);
-                    const ellipseY = randomBetween(90, 110);
-                    const posX = randomBetween(40, 55);
-                    const posY = randomBetween(45, 55);
-                    const gradient = `radial-gradient(ellipse ${ellipseX}% ${ellipseY}% at ${posX}% ${posY}%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.10) 20%, rgba(255, 255, 255, 0.04) 40%, rgba(255, 255, 255, 0.01) 60%, rgba(255, 255, 255, 0) 75%)`;
-                    link.style.setProperty('--ua-effect-smudge-blur', `${blur}px`);
-                    link.style.background = gradient;
-                    link.style.setProperty('--ua-effect-smudge-base', gradient);
-                });
-            }
-
-            function randomBetween(min, max) {
-                return min + Math.random() * (max - min);
-            }
-
-            function sanitizePositiveNumber(value, fallback) {
-                const numeric = Number.parseFloat(value);
-                if (!Number.isFinite(numeric) || numeric <= 0) {
-                    return fallback;
-                }
-                return numeric;
-            }
-        })();
-    </script>
+        <footer class="ua-footer">
+            <a href="all.html" class="ua-footer__all">all work, chronologically →</a>
+            <span class="ua-footer__archive">archive by topic:
+                <a href="llmbias.html">llm social bias</a> ·
+                <a href="interpretability.html">interpretability</a> ·
+                <a href="differentialtreatment.html">ai control</a>
+            </span>
+        </footer>
+    </div>
 </body>
 </html>

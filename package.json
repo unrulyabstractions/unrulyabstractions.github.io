@@ -6,8 +6,10 @@
     "deploy": "node scripts/deploy.js",
     "build": "npm run deploy",
     "generate": "node scripts/generate-paper-pages.js",
+    "homepage": "node scripts/generate-homepage.js",
     "sitemap": "node scripts/update-sitemap.js",
-    "validate": "node scripts/validate-scholar.js"
+    "validate": "node scripts/validate-scholar.js",
+    "sync-lesswrong": "node scripts/sync-lesswrong.js"
   },
   "repository": {
     "type": "git",

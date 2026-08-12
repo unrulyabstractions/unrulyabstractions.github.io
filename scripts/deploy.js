@@ -50,21 +50,29 @@ function main() {
   // Step 1: Generate paper pages
   if (!runCommand(
     `node ${path.join(scriptsDir, 'generate-paper-pages.js')}`,
-    '📄 Step 1/3: Generating paper landing pages'
+    '📄 Step 1/4: Generating paper landing pages'
   )) {
     process.exit(1);
   }
 
-  // Step 2: Update sitemap
+  // Step 2: Generate homepage and chronological index
+  if (!runCommand(
+    `node ${path.join(scriptsDir, 'generate-homepage.js')}`,
+    '🏠 Step 2/4: Generating index.html and all.html'
+  )) {
+    process.exit(1);
+  }
+
+  // Step 3: Update sitemap
   if (!runCommand(
     `node ${path.join(scriptsDir, 'update-sitemap.js')}`,
-    '🗺️  Step 2/3: Updating sitemap.xml'
+    '🗺️  Step 3/4: Updating sitemap.xml'
   )) {
     process.exit(1);
   }
 
-  // Step 3: Validate
-  log('\n🔍 Step 3/3: Validating Google Scholar compliance', 'cyan');
+  // Step 4: Validate
+  log('\n🔍 Step 4/4: Validating Google Scholar compliance', 'cyan');
   const validateResult = runCommand(
     `node ${path.join(scriptsDir, 'validate-scholar.js')}`,
     ''
@@ -73,7 +81,7 @@ function main() {
   // Stage files
   log('\n📦 Staging files for commit...', 'cyan');
   try {
-    execSync('git add papers/ sitemap.xml config/content.json config/geometry.json llmbias.html interpretability.html differentialtreatment.html index.html', { stdio: 'inherit' });
+    execSync('git add papers/ sitemap.xml config/content.json config/geometry.json llmbias.html interpretability.html differentialtreatment.html index.html all.html', { stdio: 'inherit' });
     log('✅ Files staged', 'green');
   } catch (error) {
     log('⚠️  No changes to stage', 'yellow');

@@ -12,6 +12,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const { execSync } = require('child_process');
 
 // Configuration
 const CONTENT_JSON_PATH = path.join(__dirname, '../config/content.json');
@@ -26,11 +28,20 @@ const BASE_URL = 'https://www.unrulyabstractions.com';
  * from its parts instead.
  */
 function parseLocalDate(dateString) {
+  const ym = /^(\d{4})-(\d{1,2})$/.exec(dateString.trim());
+  if (ym) {
+    return new Date(Number(ym[1]), Number(ym[2]) - 1, 1);
+  }
   const match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(dateString.trim());
   if (match) {
     return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
   }
   return new Date(dateString);
+}
+
+/** A date like "2026-05" names only the publication month. */
+function isMonthOnly(dateString) {
+  return typeof dateString === 'string' && /^\d{4}-\d{1,2}$/.test(dateString.trim());
 }
 
 /**
@@ -66,6 +77,10 @@ function formatSchemaDate(dateString) {
     return toISODate(new Date());
   }
 
+  if (isMonthOnly(dateString)) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+  }
+
   return toISODate(date);
 }
 
@@ -85,11 +100,50 @@ function formatDisplayDate(dateString) {
     return dateString;
   }
 
+  if (isMonthOnly(dateString)) {
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+  }
+
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
   });
+}
+
+/**
+ * Average the figure's color and soften it toward white, so each landing
+ * page gets a pastel background tint drawn from its own figure. Falls back
+ * to the site's periwinkle wash if ImageMagick is unavailable.
+ */
+function pastelTint(imagePath) {
+  try {
+    const out = execSync(
+      `magick "${path.join(__dirname, '..', imagePath)}" -resize 1x1! txt:-`,
+      { encoding: 'utf8' }
+    );
+    const match = /#([0-9A-Fa-f]{6})/.exec(out);
+    if (!match) return '#EBEDFB';
+    const rgb = [0, 1, 2].map(i => parseInt(match[1].slice(i * 2, i * 2 + 2), 16));
+    const soft = rgb.map(v => Math.round(v + (255 - v) * 0.72));
+    return `#${soft.map(v => v.toString(16).padStart(2, '0')).join('')}`;
+  } catch {
+    return '#EBEDFB';
+  }
+}
+
+/**
+ * Append a short content hash to an image URL so browsers refetch when the
+ * file changes. Same content keeps the same URL, so builds stay stable.
+ */
+function versionedImage(imagePath) {
+  try {
+    const file = fs.readFileSync(path.join(__dirname, '..', imagePath));
+    const hash = crypto.createHash('md5').update(file).digest('hex').slice(0, 8);
+    return `${imagePath}?v=${hash}`;
+  } catch {
+    return imagePath;
+  }
 }
 
 /**
@@ -109,7 +163,20 @@ function generatePaperHTML(paper) {
   const date = paper.date;
   const slides = paper.slides;
   const externalUrl = paper.url;
-  const externalLabel = externalUrl && externalUrl.includes('arxiv.org') ? 'View on arXiv' : 'View Publication';
+  const onArxiv = Boolean(externalUrl && externalUrl.includes('arxiv.org'));
+  const externalLabel = !externalUrl
+    ? 'View Publication'
+    : onArxiv
+      ? 'View on arXiv'
+      : externalUrl.includes('queerinai.com')
+        ? 'View in Workshop'
+        : externalUrl.includes('tais')
+          ? 'View in Proceedings'
+          : externalUrl.includes('apartresearch.com')
+            ? 'View Project'
+            : 'View Publication';
+  const tint = paper.image ? pastelTint(paper.image) : '#EBEDFB';
+  const venueTags = Array.isArray(paper.venue) ? paper.venue : paper.venue ? [paper.venue] : [];
   const keywords = paper.keywords || `AI Safety, ${titleCase(category)}`;
   const description = paper.description || `Research paper on ${category}`;
 
@@ -132,14 +199,14 @@ function generatePaperHTML(paper) {
     <!-- Google Scholar Meta Tags (Highwire Press schema) -->
     <!-- Only officially supported tags per Google Scholar guidelines -->
     <meta name="citation_title" content="${displayName}">
-    <meta name="citation_author" content="Unruly Abstractions">
+    <meta name="citation_author" content="Ian Rios-Sialer">
     <meta name="citation_publication_date" content="${citationDate}">
     <meta name="citation_pdf_url" content="${pdfUrl}">
     <meta name="citation_technical_report_institution" content="Unruly Abstractions">
 
     <!-- Dublin Core Meta Tags (additional academic metadata) -->
     <meta name="DC.title" content="${displayName}">
-    <meta name="DC.creator" content="Unruly Abstractions">
+    <meta name="DC.creator" content="Ian Rios-Sialer">
     <meta name="DC.date" content="${schemaDate}">
     <meta name="DC.type" content="Text">
     <meta name="DC.format" content="application/pdf">
@@ -178,7 +245,8 @@ function generatePaperHTML(paper) {
       "name": "${displayName}",
       "author": {
         "@type": "Person",
-        "name": "Unruly Abstractions",
+        "name": "Ian Rios-Sialer",
+        "alternateName": "Unruly Abstractions",
         "url": "${BASE_URL}"
       },
       "datePublished": "${schemaDate}",
@@ -198,91 +266,75 @@ function generatePaperHTML(paper) {
     }
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f5f5f5;
-            color: #333;
+        :root {
+            --ua-paper: #F7F8FC;
+            --ua-panel: #FFFFFF;
+            --ua-ink: #17171E;
+            --ua-ink-soft: #3D3E4A;
+            --ua-ink-faint: #6E7080;
+            --ua-accent: #4E5BD8;
+            --ua-accent-ink: #3D48B4;
+            --ua-line: #DCDFEC;
+            --ua-bar: #191A22;
+            --ua-display: 'Space Grotesk', 'Helvetica Neue', Arial, sans-serif;
+            --ua-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+            --ua-mono: 'Roboto Mono', monospace;
         }
-        .paper-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-        }
-        .meta {
-            color: #7f8c8d;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-        .links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-        .btn:hover {
-            background: #2980b9;
-        }
-        .btn-secondary {
-            background: #95a5a6;
-        }
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        .description {
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-        .abstract {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-left: 4px solid #3498db;
-            margin: 1.5rem 0;
-            border-radius: 4px;
-        }
-        .abstract h2 {
-            margin-top: 0;
-            font-size: 1rem;
-            color: #2c3e50;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { min-height: 100%; background: var(--ua-paper); }
+        body { min-height: 100vh; background: linear-gradient(180deg, #FFFFFF 0%, ${tint} 42%, var(--ua-paper) 88%); color: var(--ua-ink); font-family: var(--ua-body); -webkit-font-smoothing: antialiased; }
+        ::selection { background: var(--ua-accent); color: #fff; }
+        a:focus-visible { outline: 2px solid var(--ua-accent); outline-offset: 2px; border-radius: 2px; }
+        .ua-topbar { background: var(--ua-bar); color: rgba(255,255,255,0.92); font-family: var(--ua-mono); font-size: 0.62rem; font-weight: 500; letter-spacing: 1.6px; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.5rem 1.5rem; }
+        .ua-topbar a { color: inherit; text-decoration: none; }
+        .ua-topbar a:hover { color: #fff; }
+        .container { max-width: 760px; margin: 0 auto; padding: 3rem 1.4rem 3.5rem; }
+        .crumb { font-family: var(--ua-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ua-ink-faint); text-decoration: none; }
+        .crumb:hover { color: var(--ua-accent-ink); }
+        h1 { font-family: var(--ua-display); font-size: 1.9rem; font-weight: 700; letter-spacing: -0.3px; line-height: 1.25; margin: 0.9rem 0 0.9rem; }
+        .meta { display: flex; flex-wrap: wrap; gap: 0.9rem; font-family: var(--ua-mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.8px; text-transform: uppercase; color: var(--ua-ink-faint); margin-bottom: 1.6rem; }
+        .meta .venue { color: var(--ua-accent-ink); background: rgba(78, 91, 216, 0.1); padding: 0.1rem 0.5rem; border-radius: 4px; }
+        .figure { margin: 1.4rem 0 1.6rem; }
+        .figure img { width: 100%; height: auto; max-height: 420px; object-fit: contain; display: block; -webkit-mask-image: radial-gradient(ellipse 98% 98% at 50% 50%, #000 58%, transparent 97%); mask-image: radial-gradient(ellipse 98% 98% at 50% 50%, #000 58%, transparent 97%); }
+        .abstract { margin-bottom: 1.8rem; }
+        .abstract h2 { font-family: var(--ua-mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ua-ink-faint); margin-bottom: 0.6rem; }
+        .abstract p { font-size: 0.98rem; line-height: 1.7; color: var(--ua-ink-soft); max-width: 42rem; }
+        .links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .btn { font-family: var(--ua-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.6px; text-transform: uppercase; text-decoration: none; padding: 0.45rem 1rem; border-radius: 999px; border: 1px solid var(--ua-accent); color: var(--ua-accent-ink); background: var(--ua-panel); transition: background 0.15s ease, color 0.15s ease; }
+        .btn-primary { background: var(--ua-accent); border-color: var(--ua-accent); color: #fff; }
+        .btn:hover { background: var(--ua-accent-ink); border-color: var(--ua-accent-ink); color: #fff; }
+        .btn-plain { border-color: var(--ua-line); color: var(--ua-ink-soft); }
     </style>
 </head>
 <body>
-    <div class="paper-container">
+    <div class="ua-topbar">
+        <span>▪ AI safety · alignment research</span>
+        <a href="${BASE_URL}">unrulyabstractions.com</a>
+    </div>
+    <div class="container">
+        <a href="../" class="crumb">← unruly abstractions</a>
         <h1>${displayName}</h1>
         <div class="meta">
-            <p><strong>Author:</strong> Unruly Abstractions</p>
-            ${date ? `<p><strong>Date:</strong> ${displayDate}</p>` : ''}
-            <p><strong>Category:</strong> ${titleCase(category)}</p>
+            <span>Unruly Abstractions</span>${date ? `
+            <span>${displayDate}</span>` : ''}
+            <span>${titleCase(category)}</span>${venueTags.map(v => `
+            <span class="venue">${v}</span>`).join('')}
         </div>
-        ${description ? `<div class="abstract">
+        ${paper.image ? `<div class="figure"><img src="../${versionedImage(paper.image)}" alt="Figure from ${displayName}"></div>
+        ` : ''}${description ? `<div class="abstract">
             <h2>Abstract</h2>
             <p>${description}</p>
         </div>` : ''}
-        <div class="links">${externalUrl ? `
-            <a href="${externalUrl}" class="btn" target="_blank" rel="noopener noreferrer">${externalLabel}</a>` : ''}
-            <a href="../pdfs/${filename}.pdf" class="btn${externalUrl ? ' btn-secondary' : ''}" target="_blank" rel="noopener noreferrer">View PDF</a>${slides ? `
-            <a href="${slides}" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">View Slides</a>` : ''}
-            <a href="../" class="btn btn-secondary">Back to Home</a>
+        <div class="links">${onArxiv || paper.noPdf ? `
+            <a href="${externalUrl}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">${externalLabel}</a>` : `
+            <a href="${paper.pdfUrl || `../pdfs/${filename}.pdf`}" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View PDF</a>${externalUrl ? `
+            <a href="${externalUrl}" class="btn" target="_blank" rel="noopener noreferrer">${externalLabel}</a>` : ''}`}${slides ? `
+            <a href="${slides}" class="btn" target="_blank" rel="noopener noreferrer">View Slides</a>` : ''}
+            <a href="../" class="btn btn-plain">Back to Home</a>
         </div>
     </div>
 </body>
