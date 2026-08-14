@@ -3,29 +3,17 @@
   "about": {
     "name": "unruly abstractions",
     "interests": "interpretability · evals · llm bias",
-    "tagline": "An independent AI safety research.",
+    "tagline": "Independent AI safety research.",
     "credo": "We believe more interpretable semantic spaces emerge when we engage with the human character of the data."
   },
   "threads": [
     {
       "id": "differential-treatment",
-      "title": "differential treatment",
+      "title": "evaluations, auditing and monitoring",
       "narrative": "A model can treat two groups of people differently without explicit markers. We build audits that detect this differential treatment in deployed models and in models with secret loyalties.",
       "items": [
-        "differential_treatment",
         "secret_loyalties",
         "human-detect-secret-loyalties"
-      ]
-    },
-    {
-      "id": "meaningful-diversity",
-      "title": "meaningful diversity",
-      "narrative": "Generative models amplify the biases in their training data and collapse toward typical outputs. We treat this homogenization as an AI safety problem and formalize what meaningful diversity requires.",
-      "items": [
-        "homogenization",
-        "spanish-bias",
-        "diversity",
-        "xenoreprod"
       ]
     },
     {
@@ -37,6 +25,18 @@
         "temporalpref",
         "which-circuit",
         "wanderings"
+      ]
+    },
+    {
+      "id": "meaningful-diversity",
+      "title": "meaningful diversity",
+      "narrative": "Generative models amplify the biases in their training data and collapse toward typical outputs. We treat this homogenization as an AI safety problem and formalize what meaningful diversity requires.",
+      "items": [
+        "differential_treatment",
+        "homogenization",
+        "spanish-bias",
+        "diversity",
+        "xenoreprod"
       ]
     }
   ],

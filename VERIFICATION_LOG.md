@@ -220,3 +220,23 @@ Changes: papers flagged `noPdf` now link their titles straight to the external u
 | 3 | Landing page buttons | Grepped all five affected pages: View in Workshop (wanderings, xenoreprod, differential_treatment), View in Proceedings (diversity), View Project (secret_loyalties, primary) | VERIFIED |
 | 4 | Deploy | `npm run deploy` ran clean | VERIFIED |
 | 5 | Visual re-check after these link changes | Text-level greps only; pages not re-screenshotted (markup structure unchanged) | UNVERIFIED (visual) |
+
+## 2026-08-12 — Shipped: commit f28db87 pushed and live
+
+Deployment: commit f28db87 (40 files, +3851/−2430) pushed to origin/main; only .DS_Store deliberately left uncommitted.
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | Push landed | `git rev-parse HEAD origin/main` identical; working tree clean apart from .DS_Store | VERIFIED |
+| 2 | Live homepage | Polled https://www.unrulyabstractions.com until the new markup appeared (~20s), then screenshotted the live site at 2000px and viewed with image tokens: full redesign serving correctly, all threads, figures, tags, and dates present | VERIFIED |
+| 3 | Live subpages and assets | curl 200 for all.html, a landing page, og.png, a figs image, and all three topic pages | VERIFIED |
+| 4 | Live mobile rendering | Not separately re-checked against production (locally verified earlier; same static files) | UNVERIFIED |
+
+## 2026-08-12 — Thread rename/reorder, LGBTQ+ paper move, tagline trim
+
+Changes: tagline "Independent AI safety research."; thread 01 renamed "evaluations, auditing and monitoring" (holds Secret Loyalties and the BlueDot hackathon eval); "Towards Local Bias Mitigation" moved into meaningful diversity (first, Aug 2026); thread order now evaluations → circuits and concepts → meaningful diversity.
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | Homepage at 2000px | Screenshotted and viewed with image tokens: all four changes render correctly; only index.html changed among pages (list pages sort by date/topic, unaffected) | VERIFIED |
+| 2 | Live after push | See next entry | — |
