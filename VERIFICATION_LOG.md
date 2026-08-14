@@ -239,4 +239,4 @@ Changes: tagline "Independent AI safety research."; thread 01 renamed "evaluatio
 | # | Output | How verified | Result |
 |---|--------|--------------|--------|
 | 1 | Homepage at 2000px | Screenshotted and viewed with image tokens: all four changes render correctly; only index.html changed among pages (list pages sort by date/topic, unaffected) | VERIFIED |
-| 2 | Live after push | See next entry | — |
+| 2 | Live after push | Commit 501fab7 pushed (HEAD == origin/main); curled the live homepage: new thread title and tagline both present on first check | VERIFIED |
