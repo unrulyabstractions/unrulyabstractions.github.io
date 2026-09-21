@@ -21,6 +21,7 @@
       "title": "circuits and concepts",
       "narrative": "We localize concepts inside language models and measure their function in behavior. Our evidence comes from activation patching, steering, and toy models small enough to catalog exhaustively.",
       "items": [
+        "weirdchat-identity-steering",
         "persona-emergent-misalignment",
         "temporalpref",
         "which-circuit",
@@ -174,6 +175,20 @@
         "BlueDot",
         "LessWrong"
       ]
+    },
+    {
+      "id": "weirdchat-identity-steering",
+      "url": "https://apartresearch.com/project/steering-identity-with-weirdchat-contrastive-directions-induce-disidentification-but-not-introspection-yt9t",
+      "displayName": "Steering Identity with WeirdChat: Contrastive Directions Induce Disidentification but not Introspection",
+      "category": "empirical",
+      "topic": "interpretability",
+      "date": "2026-08-17",
+      "venue": [
+        "Apart Research",
+        "Digital Minds Sprint"
+      ],
+      "description": "Steers Qwen3.6-27B to disidentify with being an AI assistant along contrastive behaviour directions, then shows the model cannot introspectively detect the steering",
+      "image": "img/figs/weirdchat.png"
     },
     {
       "id": "spanish-bias",

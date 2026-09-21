@@ -240,3 +240,13 @@ Changes: tagline "Independent AI safety research."; thread 01 renamed "evaluatio
 |---|--------|--------------|--------|
 | 1 | Homepage at 2000px | Screenshotted and viewed with image tokens: all four changes render correctly; only index.html changed among pages (list pages sort by date/topic, unaffected) | VERIFIED |
 | 2 | Live after push | Commit 501fab7 pushed (HEAD == origin/main); curled the live homepage: new thread title and tagline both present on first check | VERIFIED |
+
+## 2026-09-21 — Add WeirdChat identity-steering Apart project
+
+Changes: new note "Steering Identity with WeirdChat" (Apart Research, Digital Minds Sprint, Aug 2026) first in circuits and concepts; card image `img/figs/weirdchat.png` cropped from Figure 2 of the submitted PDF.
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | img/figs/weirdchat.png | Viewed with image tokens: full Figure 2, no clipping, 1600x785 | VERIFIED |
+| 2 | Homepage at 2000px | Screenshotted and viewed: card first in thread 02 with title, both venue badges, Aug 2026, thumbnail | VERIFIED |
+| 3 | all.html, interpretability.html | grep shows the entry in both; not screenshotted | UNVERIFIED (render) |
