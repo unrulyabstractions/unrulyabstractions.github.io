@@ -187,6 +187,17 @@ function generatePaperHTML(paper) {
   const pdfUrl = `${BASE_URL}/pdfs/${filename}.pdf`;
   const pageUrl = `${BASE_URL}/papers/${filename}.html`;
 
+  // Co-authored papers list every author in "authors"; the default is sole authorship.
+  const authors = paper.authors || ['Ian Rios-Sialer'];
+  const byline = paper.authors ? authors.join(', ') : 'Unruly Abstractions';
+  const citationAuthors = authors.map(a => `    <meta name="citation_author" content="${a}">`).join('\n');
+  const dcCreators = authors.map(a => `    <meta name="DC.creator" content="${a}">`).join('\n');
+  const coauthorsSchema = authors.slice(1).map(a => `,
+        {
+          "@type": "Person",
+          "name": "${a}"
+        }`).join('');
+
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -199,14 +210,14 @@ function generatePaperHTML(paper) {
     <!-- Google Scholar Meta Tags (Highwire Press schema) -->
     <!-- Only officially supported tags per Google Scholar guidelines -->
     <meta name="citation_title" content="${displayName}">
-    <meta name="citation_author" content="Ian Rios-Sialer">
+${citationAuthors}
     <meta name="citation_publication_date" content="${citationDate}">
     <meta name="citation_pdf_url" content="${pdfUrl}">
     <meta name="citation_technical_report_institution" content="Unruly Abstractions">
 
     <!-- Dublin Core Meta Tags (additional academic metadata) -->
     <meta name="DC.title" content="${displayName}">
-    <meta name="DC.creator" content="Ian Rios-Sialer">
+${dcCreators}
     <meta name="DC.date" content="${schemaDate}">
     <meta name="DC.type" content="Text">
     <meta name="DC.format" content="application/pdf">
@@ -243,12 +254,12 @@ function generatePaperHTML(paper) {
       "@type": "ScholarlyArticle",
       "headline": "${displayName}",
       "name": "${displayName}",
-      "author": {
+      "author": ${authors.length > 1 ? '[' : ''}{
         "@type": "Person",
         "name": "Ian Rios-Sialer",
         "alternateName": "Unruly Abstractions",
         "url": "${BASE_URL}"
-      },
+      }${coauthorsSchema}${authors.length > 1 ? ']' : ''},
       "datePublished": "${schemaDate}",
       "description": "${description}",
       "keywords": "${keywords}",
@@ -319,7 +330,7 @@ function generatePaperHTML(paper) {
         <a href="../" class="crumb">← unruly abstractions</a>
         <h1>${displayName}</h1>
         <div class="meta">
-            <span>Unruly Abstractions</span>${date ? `
+            <span>${byline}</span>${date ? `
             <span>${displayDate}</span>` : ''}
             <span>${titleCase(category)}</span>${venueTags.map(v => `
             <span class="venue">${v}</span>`).join('')}

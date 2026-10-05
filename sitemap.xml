@@ -7,7 +7,7 @@
     <!-- Homepage: highest priority, updated frequently -->
     <url>
         <loc>https://www.unrulyabstractions.com/</loc>
-        <lastmod>2026-09-21</lastmod>
+        <lastmod>2026-10-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,7 +15,7 @@
     <!-- Chronological index of all work -->
     <url>
         <loc>https://www.unrulyabstractions.com/all.html</loc>
-        <lastmod>2026-09-21</lastmod>
+        <lastmod>2026-10-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -23,7 +23,7 @@
     <!-- LLM Social Bias topic page: high priority, updated when new entries published -->
     <url>
         <loc>https://www.unrulyabstractions.com/llmbias.html</loc>
-        <lastmod>2026-09-21</lastmod>
+        <lastmod>2026-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -31,7 +31,7 @@
     <!-- Interpretability topic page: high priority, updated frequently -->
     <url>
         <loc>https://www.unrulyabstractions.com/interpretability.html</loc>
-        <lastmod>2026-09-21</lastmod>
+        <lastmod>2026-10-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -39,12 +39,26 @@
     <!-- AI Control topic page: high priority, updated when new entries published -->
     <url>
         <loc>https://www.unrulyabstractions.com/differentialtreatment.html</loc>
-        <lastmod>2026-09-21</lastmod>
+        <lastmod>2026-10-05</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <!-- Individual paper landing pages: high priority for Google Scholar -->
+    <url>
+        <loc>https://www.unrulyabstractions.com/papers/breaking_character.html</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.unrulyabstractions.com/papers/instrumental_differential_treatment.html</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.9</priority>
+    </url>
+
     <url>
         <loc>https://www.unrulyabstractions.com/papers/differential_treatment.html</loc>
         <lastmod>2026-07-31</lastmod>
@@ -95,6 +109,20 @@
     </url>
 
     <!-- Individual papers (PDFs): medium priority, static content -->
+    <url>
+        <loc>https://www.unrulyabstractions.com/pdfs/breaking_character.pdf</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.unrulyabstractions.com/pdfs/instrumental_differential_treatment.pdf</loc>
+        <lastmod>2026-10-04</lastmod>
+        <changefreq>never</changefreq>
+        <priority>0.7</priority>
+    </url>
+
     <url>
         <loc>https://www.unrulyabstractions.com/pdfs/differential_treatment.pdf</loc>
         <lastmod>2026-07-31</lastmod>

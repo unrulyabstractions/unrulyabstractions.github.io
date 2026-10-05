@@ -250,3 +250,31 @@ Changes: new note "Steering Identity with WeirdChat" (Apart Research, Digital Mi
 | 1 | img/figs/weirdchat.png | Viewed with image tokens: full Figure 2, no clipping, 1600x785 | VERIFIED |
 | 2 | Homepage at 2000px | Screenshotted and viewed: card first in thread 02 with title, both venue badges, Aug 2026, thumbnail | VERIFIED |
 | 3 | all.html, interpretability.html | grep shows the entry in both; not screenshotted | UNVERIFIED (render) |
+
+## 2026-10-04 — Add "Breaking Character" persona/EMA paper
+
+Changes: new paper `breaking_character` (preprint badge, Oct 2026) first in circuits and concepts. PDF is the named preprint build (`\paperversion{preprint}`, compiled from a scratch copy of `persona_misalign/src`; the paper repo is untouched), ghostscript /ebook at 220ppi, JPEG q90, to 4.1MB. The review build was not used because its footer forbids public sharing. Card image `img/figs/breaking_character.png` cropped from Figure 1. The LessWrong note stays.
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | pdfs/breaking_character.pdf | pdftotext page 1: title, named author block, no anonymity footer; 27 pages; 4,321,767 bytes; text identical to the first compression; page 13 at 200dpi compared side by side, sharper than the 150ppi /ebook default the verifier flagged | VERIFIED |
+| 2 | img/figs/breaking_character.png | Viewed with image tokens: full Figure 1 (a)-(d), no clipping, 1600x1090 | VERIFIED |
+| 3 | Homepage at 2000px | Screenshotted and viewed: card first in thread 02, preprint badge, Oct 2026, thumbnail | VERIFIED |
+| 4 | papers/breaking_character.html | Screenshotted and viewed; citation_title/author/date/pdf_url tags present | VERIFIED |
+| 5 | all.html, interpretability.html, sitemap.xml | grep shows the entry in each; render check delegated to verifier agent | see below |
+
+## 2026-10-04 — Add "Discovering Instrumental Differential Treatment" (IASEAI version)
+
+Changes: new paper `instrumental_differential_treatment` (preprint badge, Oct 2026), first in evaluations, auditing and monitoring. PDF is the named preprint build of `papers/idt/iaseai` (both authors, no anonymity footer; built from a scratch copy, paper repo untouched). Kept uncompressed at 5.16MB because ghostscript grew it to 7.3MB (all-vector figures). Existing `pdfs/idt.pdf` and its supplement are untouched. `generate-paper-pages.js` gains an optional `authors` list so Scholar tags name Eli Wang; papers without it render as before.
+
+| # | Output | How verified | Result |
+|---|--------|--------------|--------|
+| 1 | pdfs/instrumental_differential_treatment.pdf | cmp against the scratch build; pdftotext diff vs the review build shows only the author block, footer and a float moving; 0 "anonymi" matches; 33 pages | VERIFIED |
+| 2 | img/figs/instrumental_differential_treatment.png | Viewed: full Figure 1, four panels, no clipping, 1600x828 | VERIFIED |
+| 3 | Homepage at 2000px | Screenshotted and viewed: card first in thread 01, preprint badge, Oct 2026 | VERIFIED |
+| 4 | papers/instrumental_differential_treatment.html | Screenshotted: byline "Ian Rios-Sialer, Eli Wang"; two citation_author and DC.creator tags; JSON-LD parses with two authors | VERIFIED |
+| 5 | Existing landing pages | Regenerated with the new generator; git shows none of them changed | VERIFIED |
+| 6 | differentialtreatment.html, all.html | not screenshotted by me; delegated to verifier agent | see below |
+
+Verifier agent (Breaking Character): items 1-4 VERIFIED (PDF text vs review build, card PNG, content.json, generated pages and all.html/interpretability.html screenshots). It flagged the softer 150ppi rasters, so the PDF was replaced by the 220ppi build above.
+Verifier agent (IDT): items 1-5 VERIFIED (PDF text vs review build, card PNG, generator rerun in a copy leaves all 7 existing landing pages byte-identical, content.json, differentialtreatment.html and all.html screenshots). Known limit: the JSON-LD first author stays hardcoded as Ian Rios-Sialer.

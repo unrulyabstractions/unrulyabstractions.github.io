@@ -12,6 +12,7 @@
       "title": "evaluations, auditing and monitoring",
       "narrative": "A model can treat two groups of people differently without explicit markers. We build audits that detect this differential treatment in deployed models and in models with secret loyalties.",
       "items": [
+        "instrumental_differential_treatment",
         "secret_loyalties",
         "human-detect-secret-loyalties"
       ]
@@ -21,6 +22,7 @@
       "title": "circuits and concepts",
       "narrative": "We localize concepts inside language models and measure their function in behavior. Our evidence comes from activation patching, steering, and toy models small enough to catalog exhaustively.",
       "items": [
+        "breaking_character",
         "weirdchat-identity-steering",
         "persona-emergent-misalignment",
         "temporalpref",
@@ -145,6 +147,30 @@
       "description": "Detects secret loyalties in LLMs by measuring how a target model behaves differently around user groups that mention a candidate principal, read against the target's own base model",
       "image": "img/figs/secret_loyalties.png",
       "noPdf": true
+    },
+    {
+      "filename": "breaking_character",
+      "displayName": "Breaking Character: Tracking Emergent Misalignment through Persona Space",
+      "category": "empirical",
+      "topic": "interpretability",
+      "date": "2026-10-04",
+      "keywords": "AI Safety, Emergent Misalignment, Persona Features, Assistant Axis, Fine-Tuning, Activation Steering, Model Organisms, LLMs",
+      "description": "Tracks how narrow fine-tuning transforms the persona cloud and assistant axis, and shows that misalignment rises as the assistant detaches from the cast in Qwen LoRA model organisms",
+      "image": "img/figs/breaking_character.png"
+    },
+    {
+      "filename": "instrumental_differential_treatment",
+      "displayName": "Discovering Instrumental Differential Treatment in Language Models",
+      "authors": [
+        "Ian Rios-Sialer",
+        "Eli Wang"
+      ],
+      "category": "theoretical + empirical",
+      "topic": "differential-treatment",
+      "date": "2026-10-04",
+      "keywords": "AI Safety, Instrumental Differential Treatment, Secret Loyalties, Manipulation, Model Organisms, Auditing, Helper LLMs, LLMs",
+      "description": "Formalizes instrumental differential treatment and gives a pipeline in which helper LLMs propose user groups, probing prompts and judges, then recover the groups a target model treats differently and the behaviors that separate them",
+      "image": "img/figs/instrumental_differential_treatment.png"
     }
   ],
   "notes": [
