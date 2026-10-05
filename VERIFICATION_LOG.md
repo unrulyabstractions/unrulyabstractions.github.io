@@ -278,3 +278,4 @@ Changes: new paper `instrumental_differential_treatment` (preprint badge, Oct 20
 
 Verifier agent (Breaking Character): items 1-4 VERIFIED (PDF text vs review build, card PNG, content.json, generated pages and all.html/interpretability.html screenshots). It flagged the softer 150ppi rasters, so the PDF was replaced by the 220ppi build above.
 Verifier agent (IDT): items 1-5 VERIFIED (PDF text vs review build, card PNG, generator rerun in a copy leaves all 7 existing landing pages byte-identical, content.json, differentialtreatment.html and all.html screenshots). Known limit: the JSON-LD first author stays hardcoded as Ian Rios-Sialer.
+Live after push: commit a3cd1e1 (HEAD == origin/main). curl of the live site: both cards on index.html; both landing pages, PDFs and PNGs return 200 with byte sizes equal to the local files; live IDT page carries both citation_author tags. VERIFIED
